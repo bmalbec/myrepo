@@ -12,7 +12,7 @@ from shutil import copyfile
 #set freq to 1000Hz
 #pwm.set_pwm_freq(1000)
 
-ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0.15)
+ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 time.sleep(1)
 #ser.flushInput() ser.flushOutput()
 count = 0
