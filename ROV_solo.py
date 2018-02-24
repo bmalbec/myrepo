@@ -29,6 +29,9 @@ old_max = 1
 new_min = 500
 new_max = 1000
 
+ceiling = new_max
+floor = new_min
+
 temp = new_min
 new_max = (new_max-new_min)/2
 new_min = 0
@@ -211,30 +214,30 @@ while True:
 				motor5 -= descendval
 				motor6 -= descendval
 
-		if motor1>1000:
-			motor1=1000
-		if motor1<500:
-			motor1=500
-		if motor1>1000:
-			motor1=1000
-		if motor2<500:
-			motor2=500
-		if motor3>1000:
-			motor3=1000
-		if motor3<500:
-			motor3=500
-		if motor4>1000:
-			motor4=1000
-		if motor4<500:
-			motor4=500
-		if motor5>1000:
-			motor5=1000
-		if motor5<500:
-			motor5=500
-		if motor6>1000:
-			motor6=1000
-		if motor6<500:
-			motor6=500
+		if motor1>ceiling:
+			motor1=ceiling
+		if motor1<floor:
+			motor1=floor
+		if motor1>ceiling:
+			motor1=ceiling
+		if motor2<floor:
+			motor2=floor
+		if motor3>ceiling:
+			motor3=ceiling
+		if motor3<floor:
+			motor3=floor
+		if motor4>ceiling:
+			motor4=ceiling
+		if motor4<floor:
+			motor4=floor
+		if motor5>ceiling:
+			motor5=ceiling
+		if motor5<floor:
+			motor5=floor
+		if motor6>ceiling:
+			motor6=ceiling
+		if motor6<floor:
+			motor6=floor
 
 
 #		pwm.set_pwm(0,0,motor1)
