@@ -145,7 +145,8 @@ class US2066Base(object):
 	def write(self, argument):
     		parsed_string = parse_string(argument)
     		for i in range (0, len(parsed_string)):
-        		self.data(parsed_string[i])
+        		data = ROM_A_Switch(parsed_string[i])
+			self.data(data)
 
 
 disp = US2066Base(0x3C)
