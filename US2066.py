@@ -183,7 +183,12 @@ class US2066Base(object):
     		parsed_string = parse_string(argument)
     		for i in range (0, len(parsed_string)):
         		data = ROM_A_Switch(parsed_string[i])
-			self.data(data)
+			if i == 20:
+				self.command(0x40)
+				time.sleep(0.01)
+				self.data(data)
+			else:
+				self.data(data)
 
 
 disp = US2066Base(0x3C)
@@ -196,6 +201,6 @@ time.sleep(0.01)
 
 disp.command(0x01)
 time.sleep(0.001)
-disp.write("IT WORKS")
+disp.write("IT WORKS! NOW I Am Testing The Carriage Return")
 disp.command(0xA0)
 
