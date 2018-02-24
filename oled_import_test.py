@@ -1,4 +1,4 @@
-import US2066.py
+import US2066
 
 disp = US2066Base(0x3C)
 
