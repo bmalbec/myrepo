@@ -13,7 +13,7 @@ from shutil import copyfile
 #pwm.set_pwm_freq(1000)
 
 ser = serial.Serial('/dev/ttyUSB0', 38400, timeout=0.15)
-time.sleep(5)
+time.sleep(1)
 #ser.flushInput() ser.flushOutput()
 count = 0
 ####	backup .xml files	############
@@ -68,7 +68,7 @@ while True:
 	###		################################################
 
 		myfile.close()
-		time.sleep(0.001)
+		time.sleep(0.01)
 		tree = ET.parse('testfile4.xml')
 		root = tree.getroot()
 	#	print(float(root[0][0].text))
@@ -79,6 +79,10 @@ while True:
 		ly = float(root[0][1].text)
 		rx = float(root[0][2].text)
 		ry = float(root[0][3].text)
+		d_left = int(root[0][4].text)
+		d_right = int(root[0][5].text)
+		d_up = int(root[0][6].text)
+		d_down = int(root[0][7].text)
 		newValueLX=int(((lx-old_min)*new_range)/old_range)+new_min
 		newValueLY=int(((ly-old_min)*new_range)/old_range)+new_min
 		newValueRX=int(((rx-old_min)*new_range)/old_range)+new_min
@@ -251,6 +255,11 @@ while True:
 		print "5: %i" % motor5
 		print "6: %i" % motor6
 
+		print "BUTTONS:"
+		print "D-Pad Left: %i" % d_left
+		print "D-Pad Right: %i" % d_right
+		print "D-Pad Up: %i" % d_up
+		print "D-Pad Down: %i" % d_down
 		print '\n'
 	###############################################################################
 	except ET.ParseError:
