@@ -17,14 +17,17 @@ while (True):
   rawTemp = ADC.read(tempPin)
   time.sleep(2)
   
+  scaledTemp = rawTemp * 10e6
+  intTemp = int(scaledTemp)
+  
   tempData = ET.Element('data')
   tempItem = ET.SubElement(tempData, 'temp')
   tempItem1 = ET.SubElement(tempItem, 'item')
   tempItem1.set('name','Temperature')
-  tempItem1.text = rawTemp
+  tempItem1.text = intTemp
   
   tempXML = ET.tostring(tempData)
   ser.write(tempXML)
   ser.write('\n')
   
-  print("Wrote ", rawTemp, " to UART\n")
+  print("Wrote ", intTemp, " to UART\n")
