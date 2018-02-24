@@ -9,4 +9,6 @@ time.sleep(0.01)
 
 disp.command(0x01)
 time.sleep(0.001)
-disp.write("Hello World!!")
+#disp.write("Hello World!!")
+userinput = input("Write Something")
+disp.write(userinput)
