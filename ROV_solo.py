@@ -255,3 +255,9 @@ while True:
 	###############################################################################
 	except ET.ParseError:
 		print "I crashed, oops"
+#		pwm.set_pwm(0,0,motor1)
+#		pwm.set_pwm(0,0,motor2)
+#		pwm.set_pwm(0,0,motor3)
+#		pwm.set_pwm(0,0,motor4)
+#		pwm.set_pwm(0,0,motor5)
+#		pwm.set_pwm(0,0,motor6)
