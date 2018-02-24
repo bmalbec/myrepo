@@ -11,14 +11,15 @@ import signal
 #from xmodem import XMODEM
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
-from std_msgs.msg import String, Char, Float64
+from std_msgs.msg import String, Char, Float64, Int32
 #from Axes.msg import axes
 
 #axesArray = []
 axesArray = [1.0,1.0,1.0,1.0]
+buttonArray = [1.0, 1.0, 1.0, 1.0]
 count=4
 
-ser = serial.Serial('/dev/ttyO4', 38400)
+ser = serial.Serial('/dev/ttyUSB0', 38400)
 while True:
 	def callback(data):
 
@@ -42,7 +43,7 @@ while True:
 		#axesArray[3]=data.axes[3]
 		#axesArray[4]=data.axes[4]
 		axesArray = [1.0,1.0,1.0,1.0]
-
+		buttonArray = [1.0, 1.0, 1.0, 1.0]
 ####	Method 1 (which works totally fine)	###########################
 
 		axesArray.insert(0,data.axes[0])
@@ -50,6 +51,12 @@ while True:
 		axesArray.insert(2,data.axes[3])
 		axesArray.insert(3,data.axes[4])
 		axesArray=axesArray[:-4]
+
+		buttonArray.insert(0,data.buttons[11])
+		buttonArray.insert(1,data.buttons[12])
+		buttonArray.insert(2,data.buttons[13])
+		buttonArray.insert(3,data.buttons[14])
+		buttonArray=buttonArray[:-4]
 #################################################
 
 
@@ -91,14 +98,27 @@ while True:
 		xitem2 = ET.SubElement(xitems, 'item')
 		xitem3 = ET.SubElement(xitems, 'item')
 		xitem4 = ET.SubElement(xitems, 'item')
+		xitem5 = ET.SubElement(xitems, 'item')
+		xitem6 = ET.SubElement(xitems, 'item')
+		xitem7 = ET.SubElement(xitems, 'item')
+		xitem8 = ET.SubElement(xitems, 'item')
 		xitem1.set('name','Left_X')
 		xitem2.set('name','Left_Y')
 		xitem3.set('name','Right_X')
 		xitem4.set('name','Right_Y')
+		xitem5.set('name','D_Left')
+		xitem6.set('name','D_Right')
+		xitem7.set('name','D_Up')
+		xitem8.set('name','D_Down')
 		xitem1.text = str(axesArray[0])
 		xitem2.text = str(axesArray[1])
 		xitem3.text = str(axesArray[2])
 		xitem4.text = str(axesArray[3])
+		xitem5.text = str(buttonArray[0])
+		xitem6.text = str(buttonArray[1])
+		xitem7.text = str(buttonArray[2])
+		xitem8.text = str(buttonArray[3])
+
 
 
 
@@ -126,7 +146,10 @@ while True:
 
 
 #	print test
+		print "AXES:"
 		print axesArray
+		print "BUTTONS:"
+		print buttonArray
 
 
 
