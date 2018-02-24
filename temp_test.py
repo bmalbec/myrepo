@@ -1,11 +1,10 @@
 import Adafruit_BBIO.ADC as ADC
 import time
-import sys
 import serial
 import struct
 import xml.etree.ElementTree as ET
 import math
-import signal
+
 
 tempPin = "AIN1"
 
@@ -28,4 +27,4 @@ while (True):
     ser.write(tempXML)
     ser.write('\n')
   
-  print("Wrote ", rawTemp, " to UART\n"
+  print("Wrote ", rawTemp, " to UART\n")
