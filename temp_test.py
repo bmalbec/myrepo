@@ -7,3 +7,4 @@ ADC.setup()
 time.sleep(0.01)
 while (True):
   print(ADC.read(tempPin))
+  time.sleep(2)
