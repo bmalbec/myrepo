@@ -195,12 +195,10 @@ disp = US2066Base(0x3C)
 
 disp.begin()
 
-text1 = ["h","e","l","l","o"]
-
 time.sleep(0.01)
 
 disp.command(0x01)
 time.sleep(0.001)
-disp.write("IT WORKS! NOW I Am Testing The Carriage Return")
+disp.write("Hello World!")
 disp.command(0xA0)
 
