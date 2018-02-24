@@ -1,4 +1,4 @@
-import US2066.US2066Base as DISP
+from US2066 import US2066Base as DISP
 
 disp = DISP(0x3C)
 
