@@ -146,7 +146,7 @@ class US2066Base(object):
     		parsed_string = parse_string(argument)
     		for i in range (0, len(parsed_string)):
         		data = ROM_A_Switch(parsed_string[i])
-			self.data(data)
+			self.data(hex(data))
 
 
 disp = US2066Base(0x3C)
