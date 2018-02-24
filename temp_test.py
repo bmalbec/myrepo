@@ -18,13 +18,13 @@ while (True):
   time.sleep(2)
   
   tempData = ET.Element('data')
-    tempItem = ET.SubElement(tempData, 'temp')
-    tempItem1 = ET.SubElement(tempItem, 'item')
-    tempItem1.set('name','Temperature')
-    tempItem1.text = rawTemp
+  tempItem = ET.SubElement(tempData, 'temp')
+  tempItem1 = ET.SubElement(tempItem, 'item')
+  tempItem1.set('name','Temperature')
+  tempItem1.text = rawTemp
   
   tempXML = ET.tostring(tempData)
-    ser.write(tempXML)
-    ser.write('\n')
+  ser.write(tempXML)
+  ser.write('\n')
   
   print("Wrote ", rawTemp, " to UART\n")
