@@ -11,6 +11,61 @@ ENTRY_MODE_SET_CURSOR_RIGHT_SHIFT = 0x06
 ENTRY_MODE_SET_CURSOR_LEFT_NOSHIFT = 0x04
 ENTRY_MODE_SET_CURSOR_LEFT_SHIFT = 0x05
 
+#ROM_A Ref
+def ROM_A_Switch(argument):
+	ROM_A_Switcher = {
+		" ":0x0F,
+		"0":0x20,
+		"1":0x21,
+		"2":0x22,
+		"3":0x23,
+		"4":0x24,
+		"5":0x25,
+		"6":0x26,
+		"7":0x27,
+		"8":0x28,
+		"9":0x29,
+		":":0x2A,
+		";":0x2B,
+		"<":0x2C,
+		"=":0x2D,
+		">":0x2E,
+		"?":0x2F,
+		"|":0x30,
+		"A":0x31,
+		"B":0x32,
+		"C":0x33,
+		"D":0x34,
+		"E":0x35,
+		"F":0x36,
+		"G":0x37,
+		"H":0x38,
+		"I":0x39,
+		"J":0x3A,
+		"K":0x3B,
+		"L":0x3C,
+		"M":0x3D,
+		"N":0x3E,
+		"O":0x3F,
+		"P":0x40,
+		"Q":0x41,
+		"R":0x42,
+		"S":0x43,
+		"T":0x44,
+		"U":0x45,
+		"V":0x46,
+		"W":0x47,
+		"X":0x48,
+		"Y":0x49,
+		"Z":0x4A
+		
+	}
+	return ROM_A_Switcher.get(argument)
+
+def parse_string(string):
+    parse = list(string)
+    return parse
+
 class US2066Base(object):
 	"Base class for US2066 based OLED"
 
@@ -86,6 +141,11 @@ class US2066Base(object):
 		self.command(0x01)  #clear display
 		self.command(0x80)  #set DDRAM address to 0x00
 		time.sleep(.1)
+	
+	def write(self, argument):
+    		parsed_string = parse_string(argument)
+    		for i in range (0, len(parsed_string)):
+        		self.data(parsed_string[i])
 
 
 disp = US2066Base(0x3C)
@@ -98,16 +158,6 @@ time.sleep(0.01)
 
 disp.command(0x01)
 time.sleep(0.001)
-disp.data(0x49)
-disp.data(0x54)
-disp.data(0x0F)
-disp.data(0x57)
-disp.data(0x4F)
-disp.data(0x52)
-disp.data(0x4B)
-disp.data(0x53)
-disp.data(0x21)
+disp.write("IT WORKS")
 disp.command(0xA0)
-disp.data(0x49)
-disp.data(0x93)
-disp.data(0x55)
+
