@@ -90,9 +90,9 @@ while True:
 		motor5=stopped
 		motor6=stopped
 
-		comparison = threshold/2
-		compare_range = threshold - comparison
-		print "\t\tTHRESHOLD %i" % compare_range
+#		comparison = threshold/2
+#		compare_range = threshold - comparison
+#		print "\t\tTHRESHOLD %i" % compare_range
 
 		if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
 			print "\t\tSTOPPED"
