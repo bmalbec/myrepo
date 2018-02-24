@@ -1,3 +1,4 @@
+import time
 from US2066 import US2066Base as DISP
 
 disp = DISP(0x3C)
