@@ -184,7 +184,7 @@ class US2066Base(object):
     		for i in range (0, len(parsed_string)):
         		data = ROM_A_Switch(parsed_string[i])
 			if i == 20:
-				self.command(0x40)
+				self.command(0xA0)
 				time.sleep(0.01)
 				self.data(data)
 			else:
