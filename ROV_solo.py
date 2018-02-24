@@ -218,8 +218,8 @@ while True:
 			motor1=ceiling
 		if motor1<floor:
 			motor1=floor
-		if motor1>ceiling:
-			motor1=ceiling
+		if motor2>ceiling:
+			motor2=ceiling
 		if motor2<floor:
 			motor2=floor
 		if motor3>ceiling:
