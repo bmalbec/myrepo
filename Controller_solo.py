@@ -84,19 +84,22 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Create the arrays that will be sent over the serial port, populate them with arbitrary data	#####
 #axesArray = [1.0,1.0,1.0,1.0]
 #buttonArray = [1.0, 1.0, 1.0, 1.0]
+axesArray = []
+buttonArray = []
 
 #####	Define the serial port and baud rate	#####
 ser = serial.Serial('/dev/ttyO4', 38400)
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 #while True:
-def callback(data):
 
+#def callback(data):
+def callback(data,axesArray,buttonArray):
 	#axesArray = [1.0,1.0,1.0,1.0]
 	#buttonArray = [1.0, 1.0, 1.0, 1.0]
 	
-	axesArray = []
-	buttonArray = []
+	#axesArray = []
+	#buttonArray = []
 	
 	#####	Fill axesArray with the left analog stick's x & y axes, as well as the right analog stick's x & y axes, then cut off the arbitrary data	#####
 	axesArray.insert(0,data.axes[0])
@@ -170,8 +173,10 @@ def readXbox():
 	rospy.init_node('readXbox',anonymous=False)
 	
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####
-	rospy.Subscriber("joy",Joy,callback)
-
+	#rospy.Subscriber("joy",Joy,callback)
+	testStuff = rospy.Subscriber("joy",Joy)
+	callback(testStuff,axesArray,buttonArray)
+	
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
