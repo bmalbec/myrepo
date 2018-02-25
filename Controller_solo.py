@@ -43,10 +43,10 @@ def read_temp(tempOldSerialData):
 	if not tempSerialData:
 		tempSerialData = tempOldSerialData
 
-		tempXmlData.write(tempSerialData)
+	tempXmlData.write(tempSerialData)
 
-		tempXmlData.close()
-		time.sleep(0.01)
+	tempXmlData.close()
+	time.sleep(0.01)
 		
 	tempXmlTree = ET.parse("temp_xml_data.xml")
 	tempXmlRoot = tempXmlTree.getroot()
@@ -65,8 +65,11 @@ oled_init(disp)
 time.sleep(0.001)
 
 tempOldSerialInit = open("temp_xml_template.xml", 'r')
+time.sleep(0.01)
 tempOldSerialData = tempOldSerialInit.read()
+time.sleep(0.01)
 tempOldSerialInit.close()
+time.sleep(0.01)
 
 #axesArray = []
 axesArray = [1.0,1.0,1.0,1.0]
@@ -74,6 +77,7 @@ buttonArray = [1.0, 1.0, 1.0, 1.0]
 count=4
 
 ser = serial.Serial('/dev/ttyO4', 38400)
+
 while True:
 	def callback(data):
 
@@ -206,8 +210,9 @@ while True:
 		print buttonArray
 
 		temp = read_temp(tempOldSerialData)
-		print(temp)
+		#print(temp)
 		oled_temp(disp, temp)
+		time.sleep(0.01)
 
 	def readXbox():
 		rospy.init_node('readXbox',anonymous=False)
