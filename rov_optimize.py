@@ -78,6 +78,9 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	new_min = 500
 	new_max = 1000
 	
+	ceiling = new_max
+	floor = new_min
+	
 	temp = new_min
 	new_max = (new_max-new_min)/2
 	new_min = 0
