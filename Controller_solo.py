@@ -193,11 +193,14 @@ def readXbox():
 #time.sleep(0.01)
 
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
+
+print "AAAAAA"
+
 if __name__=='__main__':
 	#####	Perform the readXbox function	#####
 	readXbox()
 
-print "AAAAAA"
+
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
 #def signal_handler(signal, frame):
 #	print('Exiting...')
