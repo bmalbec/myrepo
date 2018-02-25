@@ -53,7 +53,7 @@ def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
 	
 	pwmXmlCurrentValues.write(pwmCurrentValues)
 	time.sleep(0.001)
-	pwmXmlCurrentFile.close()							#close the xml file
+	pwmXmlCurrentValues.close()							#close the xml file
 	time.sleep(0.001)
 	
 def parse_pwm_values(pwmXmlCurrentFile):
