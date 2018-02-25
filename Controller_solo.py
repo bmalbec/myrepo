@@ -160,6 +160,17 @@ def callback(data):
 	ser.write(myData)
 	ser.write('\n')
 
+	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
+	#temp = read_temp(tempOldSerialData)
+
+	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
+	#print(temp)
+
+	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
+	#oled_temp(disp, temp)
+	#time.sleep(0.01)
+	
+	
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	print "AXES:"
 	print axesArray
@@ -185,30 +196,11 @@ def readXbox():
 	#####	Keep python from exiting until this node is stopped	##### 
 	rospy.spin()
 
-#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-#temp = read_temp(tempOldSerialData)
-
-#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-#print(temp)
-
-#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-#oled_temp(disp, temp)
-#time.sleep(0.01)
-
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
-
-
-
-#if __name__=='__main__':
-while __name__=='__main__':
-	print "while loop"
+if __name__=='__main__':	
 	#####	Perform the readXbox function	#####
 	readXbox()
 	
-#while True:
-#	print "AAAAA"
-
-
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
 def signal_handler(signal, frame):
 	print('Exiting...')
