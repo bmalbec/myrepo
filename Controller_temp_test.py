@@ -42,8 +42,7 @@ while (True):
     tempOldSerialData = tempSerialData
     tempXmlBackup.close()
   if not tempSerialData:
-    tempSerialData = tempOldSerialData.read()
-    tempOldSerialData.close()
+    tempSerialData = tempOldSerialData
 
   tempXmlData.write(tempSerialData)
 
