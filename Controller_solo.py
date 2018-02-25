@@ -103,14 +103,14 @@ def callback(data):
 	axesArray.insert(1,data.axes[1])
 	axesArray.insert(2,data.axes[3])
 	axesArray.insert(3,data.axes[4])
-	axesArray=axesArray[:-4]
+#	axesArray=axesArray[:-4]
 
 	#####	Fill buttonArray with the D-Pad's left/right/up/down data, then cut off the arbitrary data	#####
 	buttonArray.insert(0,data.buttons[11])
 	buttonArray.insert(1,data.buttons[12])
 	buttonArray.insert(2,data.buttons[13])
 	buttonArray.insert(3,data.buttons[14])
-	buttonArray=buttonArray[:-4]
+#	buttonArray=buttonArray[:-4]
 
 	#####	Create the .xml structure	#####
 	
