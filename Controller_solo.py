@@ -57,7 +57,7 @@ def read_temp(tempOldSerialData):
 		#tempXmlBackup = open("temp_xml_backup.xml", 'w+')
 		#tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
-		tempXmlBackup.close()
+		#tempXmlBackup.close()
 	if not tempSerialData:
 		tempSerialData = tempOldSerialData
 
