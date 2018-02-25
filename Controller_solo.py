@@ -96,7 +96,7 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 def callback(data):
 	#axesArray = [1.0,1.0,1.0,1.0]
 	#buttonArray = [1.0, 1.0, 1.0, 1.0]
-	
+	count+=1
 	axesArray = []
 	buttonArray = []
 	
@@ -164,7 +164,7 @@ def callback(data):
 	print axesArray
 	print "BUTTONS:"
 	print buttonArray
-
+	print "count: %i" % count
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox():
