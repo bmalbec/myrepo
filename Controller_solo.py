@@ -18,31 +18,6 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
 from std_msgs.msg import String, Char, Float64, Int32
 
-#####################################
-#####	Initializations		#####
-#####################################
-
-#####	Define the serial port and baud rate	#####
-ser = serial.Serial('/dev/ttyO4', 38400)
-
-#####	I2C address of OLED Display	#####
-disp = DISP(0x3C)
-
-#####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
-disp.begin()
-time.sleep(0.01)
-
-#####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
-oled_init(disp)
-time.sleep(0.001)
-
-#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-tempOldSerialInit = open("temp_xml_template.xml", 'r+')
-time.sleep(0.01)
-tempOldSerialData = tempOldSerialInit.read()
-time.sleep(0.01)
-tempOldSerialInit.close()
-time.sleep(0.01)
 
 #####################################
 #####	Define Functions	#####
@@ -195,6 +170,32 @@ def readXbox():
 def signal_handler(signal, frame):
 	print('Exiting...')
 	sys.exit(0)
+	
+#####################################
+#####	Initializations		#####
+#####################################
+
+#####	Define the serial port and baud rate	#####
+ser = serial.Serial('/dev/ttyO4', 38400)
+
+#####	I2C address of OLED Display	#####
+disp = DISP(0x3C)
+
+#####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
+disp.begin()
+time.sleep(0.01)
+
+#####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
+oled_init(disp)
+time.sleep(0.001)
+
+#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
+tempOldSerialInit = open("temp_xml_template.xml", 'r+')
+time.sleep(0.01)
+tempOldSerialData = tempOldSerialInit.read()
+time.sleep(0.01)
+tempOldSerialInit.close()
+time.sleep(0.01)
 
 #############################
 #####	Main loop	#####
