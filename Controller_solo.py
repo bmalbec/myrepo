@@ -42,10 +42,16 @@ def init_temp_values(tempXmlInitFile):
 	tempXmlInit.close()						#close initialization xml
 	time.sleep(0.001)
 	
+	tempXmlBackup = open("temp_xml_backup.xml", 'w+')
+	time.sleep(0.001)
+	tempXmlBackup.write(tempInitValues)
+	time.sleep(0.001)
+	tempXmlBackup.close()
+	
 	return tempInitValues
 
 #####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
-def read_temp(tempOldSerialData):
+def read_temp():
 	#tempXmlTemplate = open("temp_xml_template.xml", 'r')
 	#tempXmlBackup = tempXmlTemplate.read()
 	#tempXmlTemplate.close()
@@ -54,13 +60,18 @@ def read_temp(tempOldSerialData):
 	tempSerialData = ser.readline()
 	time.sleep(0.001)
 	if tempSerialData:
-		#tempXmlBackup = open("temp_xml_backup.xml", 'w+')
-		#tempXmlBackup.write(tempSerialData)
+		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
+		tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
-		#tempXmlBackup.close()
+		tempXmlBackup.close()
 	if not tempSerialData:
-		tempSerialData = tempOldSerialData
-
+		tempXmlBackup = open("temp_xml_backup.xml", 'r')
+		tempBackupData = tempXmlBackup.read()
+		tempSerialData = tempBackupData
+		tempXmlBackup.close()
+	
+	
+	
 	tempXmlData.write(tempSerialData)
 
 	tempXmlData.close()
@@ -141,12 +152,9 @@ def callback(data):
 	ser.write(myData)
 	ser.write('\n')
 	
-	#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-	tempOldSerialData = init_temp_values("temp_xml_template.xml")
-	time.sleep(0.001)
 	
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-	temp = read_temp(tempOldSerialData)
+	temp = read_temp()
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#print(temp)
@@ -207,7 +215,7 @@ oled_init(disp)
 time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-tempOldSerialData = init_temp_values("temp_xml_template.xml")
+init_temp_values("temp_xml_template.xml")
 time.sleep(0.001)
 
 
