@@ -160,8 +160,10 @@ def readXbox():
 	
 	print "readXbox prior rospy.subscriber"
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
-	rospy.Subscriber("joy",Joy,callback)
-	print "readXbox post rospy.subscriber"
+	while not rospy.is_shutdown():
+		rospy.Subscriber("joy",Joy,callback)
+		print "readXbox post rospy.subscriber"
+	print "readXbox post while loop"
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
