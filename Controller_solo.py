@@ -93,8 +93,7 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 #while True:
 
-#def callback(data):
-def callback(data,axesArray,buttonArray):
+def callback(data):
 	#axesArray = [1.0,1.0,1.0,1.0]
 	#buttonArray = [1.0, 1.0, 1.0, 1.0]
 	
