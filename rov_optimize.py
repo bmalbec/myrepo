@@ -204,13 +204,23 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	pwm.set_pwm(4,0,motor5)
 	pwm.set_pwm(5,0,motor6)
 	
-def send_temp(tempPin, tempData, ser):
+def new_temp_xml(rawTemp):
+	tempData = ET.Element('data')
+	tempItem = ET.SubElement(tempData, 'temp')
+	tempItem1 = ET.SubElement(tempItem, 'item')
+	tempItem1.set('name','Temperature')
+	tempItem1.text = rawTemp
+	
+	return tempData
+	
+def send_temp(tempPin, ser):
 	rawTemp = ADC.read(tempPin)
 	time.sleep(0.001)
+	tempData = new_temp_xml(rawTemp)
 	tempXML = ET.tostring(tempData)
 	ser.write(tempXML)
 	ser.write('\n')
-	print(rawTemp)
+	#print(rawTemp)
 
 ##############################################
 ############# Set Parameters #################
@@ -250,7 +260,7 @@ while True:
 	
 	set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
 	
-	send_temp(tempPin, tempData, ser)
+	send_temp(tempPin, ser)
 	
 	#print "AXES:"
 	#print "LX: %i" % newValueLX
