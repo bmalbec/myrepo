@@ -26,33 +26,34 @@ def oled_temp(display, temperature):
   display.write(temperature)
   
 def read_temp(tempOldSerialData):
-  tempXmlTemplate = open("temp_xml_template.xml", 'r')
-  tempXmlBackup = tempXmlTemplate.read()
-  tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
-  tempCover = tempXmlBackup2.write(tempXmlBackup)
-  tempXmlTemplate.close()
-  tempXmlBackup2.close()
+	tempXmlTemplate = open("temp_xml_template.xml", 'r')
+	tempXmlBackup = tempXmlTemplate.read()
+	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
+	tempCover = tempXmlBackup2.write(tempXmlBackup)
+	tempXmlTemplate.close()
+	tempXmlBackup2.close()
 
-  tempXmlData = open("temp_xml_data.xml", 'w+')
-  tempSerialData = ser.readline()
-  if tempSerialData:
-    tempXmlBackup = open("temp_xml_backup.xml", 'w')
-    tempXmlBackup.write(tempSerialData)
-    tempOldSerialData = tempSerialData
-    tempXmlBackup.close()
-  if not tempSerialData:
-    tempSerialData = tempOldSerialData
+	tempXmlData = open("temp_xml_data.xml", 'w+')
+	tempSerialData = ser.readline()
+	if tempSerialData:
+		tempXmlBackup = open("temp_xml_backup.xml", 'w')
+		tempXmlBackup.write(tempSerialData)
+		tempOldSerialData = tempSerialData
+		tempXmlBackup.close()
+	if not tempSerialData:
+		tempSerialData = tempOldSerialData
 
-  tempXmlData.write(tempSerialData)
+		tempXmlData.write(tempSerialData)
 
-  tempXmlData.close()
-  time.sleep(0.01)
-  tempXmlTree = ET.parse("temp_xml_data.xml")
-  tempXmlRoot = tempXmlTree.getroot()
+		tempXmlData.close()
+		time.sleep(0.01)
+		
+	tempXmlTree = ET.parse("temp_xml_data.xml")
+	tempXmlRoot = tempXmlTree.getroot()
 
-  temp = tempXmlRoot[0][0].text
-  
-return temp
+	temp = tempXmlRoot[0][0].text
+
+	return temp
 
 disp = DISP(0x3C)
 
