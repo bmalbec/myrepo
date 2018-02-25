@@ -26,7 +26,7 @@ def oled_temp(display, temperature):
   display.write(temperature)
   
 def read_temp(tempOldSerialData):
-	tempXmlTemplate = open("temp_xml_template.xml", 'r')
+	tempXmlTemplate = open("temp_xml_template.xml", 'r+')
 	tempXmlBackup = tempXmlTemplate.read()
 	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
 	tempCover = tempXmlBackup2.write(tempXmlBackup)
@@ -36,7 +36,7 @@ def read_temp(tempOldSerialData):
 	tempXmlData = open("temp_xml_data.xml", 'w+')
 	tempSerialData = ser.readline()
 	if tempSerialData:
-		tempXmlBackup = open("temp_xml_backup.xml", 'w')
+		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
 		tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
 		tempXmlBackup.close()
@@ -64,7 +64,7 @@ time.sleep(0.01)
 oled_init(disp)
 time.sleep(0.001)
 
-tempOldSerialInit = open("temp_xml_template.xml", 'r')
+tempOldSerialInit = open("temp_xml_template.xml", 'r+')
 time.sleep(0.01)
 tempOldSerialData = tempOldSerialInit.read()
 time.sleep(0.01)
