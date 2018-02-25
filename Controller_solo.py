@@ -160,15 +160,6 @@ def callback(data):
 	print "BUTTONS:"
 	print buttonArray
 
-#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-temp = read_temp(tempOldSerialData)
-
-#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-#print(temp)
-
-#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-oled_temp(disp, temp)
-time.sleep(0.01)
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox():
@@ -188,6 +179,17 @@ def readXbox():
 if __name__=='__main__':
 	#####	Perform the readXbox function	#####
 	readXbox()
+	
+	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
+	temp = read_temp(tempOldSerialData)
+
+	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
+	#print(temp)
+
+	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
+	oled_temp(disp, temp)
+	time.sleep(0.01)
+
 
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
 def signal_handler(signal, frame):
