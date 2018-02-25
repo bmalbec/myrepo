@@ -19,67 +19,67 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Define Functions	#####
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
-def oled_init(display):
-  display.command(0x01)
-  display.command(0x00)
-  display.write("Temperature:")
+#def oled_init(display):
+#  display.command(0x01)
+#  display.command(0x00)
+#  display.write("Temperature:")
  
 #####	Move the OLED cursor to the second line and write out the temperature	#####	
-def oled_temp(display, temperature):
-  display.command(0xA0)
-  display.write(temperature)
+#def oled_temp(display, temperature):
+#  display.command(0xA0)
+#  display.write(temperature)
 
 #####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
-def read_temp(tempOldSerialData):
-	tempXmlTemplate = open("temp_xml_template.xml", 'r+')
-	tempXmlBackup = tempXmlTemplate.read()
-	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
-	tempCover = tempXmlBackup2.write(tempXmlBackup)
-	tempXmlTemplate.close()
-	tempXmlBackup2.close()
+#def read_temp(tempOldSerialData):
+#	tempXmlTemplate = open("temp_xml_template.xml", 'r+')
+#	tempXmlBackup = tempXmlTemplate.read()
+#	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
+#	tempCover = tempXmlBackup2.write(tempXmlBackup)
+#	tempXmlTemplate.close()
+#	tempXmlBackup2.close()
 
-	tempXmlData = open("temp_xml_data.xml", 'w+')
-	tempSerialData = ser.readline()
-	if tempSerialData:
-		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
-		tempXmlBackup.write(tempSerialData)
-		tempOldSerialData = tempSerialData
-		tempXmlBackup.close()
-	if not tempSerialData:
-		tempSerialData = tempOldSerialData
+#	tempXmlData = open("temp_xml_data.xml", 'w+')
+#	tempSerialData = ser.readline()
+#	if tempSerialData:
+#		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
+#		tempXmlBackup.write(tempSerialData)
+#		tempOldSerialData = tempSerialData
+#		tempXmlBackup.close()
+#	if not tempSerialData:
+#		tempSerialData = tempOldSerialData
 
-	tempXmlData.write(tempSerialData)
+#	tempXmlData.write(tempSerialData)
 
-	tempXmlData.close()
-	time.sleep(0.01)
+#	tempXmlData.close()
+#	time.sleep(0.01)
 		
-	tempXmlTree = ET.parse("temp_xml_data.xml")
-	tempXmlRoot = tempXmlTree.getroot()
+#	tempXmlTree = ET.parse("temp_xml_data.xml")
+#	tempXmlRoot = tempXmlTree.getroot()
 
-	temp = tempXmlRoot[0][0].text
+#	temp = tempXmlRoot[0][0].text
 
-	return temp
+#	return temp
 
 #####	Initialization	#####
 
 #####	I2C address of OLED Display	#####
-disp = DISP(0x3C)
+#disp = DISP(0x3C)
 
 #####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
-disp.begin()
-time.sleep(0.01)
+#disp.begin()
+#time.sleep(0.01)
 
 #####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
-oled_init(disp)
-time.sleep(0.001)
+#oled_init(disp)
+#time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-tempOldSerialInit = open("temp_xml_template.xml", 'r+')
-time.sleep(0.01)
-tempOldSerialData = tempOldSerialInit.read()
-time.sleep(0.01)
-tempOldSerialInit.close()
-time.sleep(0.01)
+#tempOldSerialInit = open("temp_xml_template.xml", 'r+')
+#time.sleep(0.01)
+#tempOldSerialData = tempOldSerialInit.read()
+#time.sleep(0.01)
+#tempOldSerialInit.close()
+#time.sleep(0.01)
 
 #####	Create the arrays that will be sent over the serial port, populate them with arbitrary data	#####
 axesArray = [1.0,1.0,1.0,1.0]
@@ -176,14 +176,14 @@ def readXbox():
 	rospy.spin()
 
 #####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-temp = read_temp(tempOldSerialData)
+#temp = read_temp(tempOldSerialData)
 
 #####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 #print(temp)
 
 #####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-oled_temp(disp, temp)
-time.sleep(0.01)
+#oled_temp(disp, temp)
+#time.sleep(0.01)
 
 #####	Allows the script to be ran by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal)	#####
 if __name__=='__main__':
