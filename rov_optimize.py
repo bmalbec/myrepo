@@ -209,7 +209,7 @@ def new_temp_xml(rawTemp):
 	tempItem = ET.SubElement(tempData, 'temp')
 	tempItem1 = ET.SubElement(tempItem, 'item')
 	tempItem1.set('name','Temperature')
-	tempItem1.text = rawTemp
+	tempItem1.text = str(rawTemp)
 	
 	return tempData
 	
