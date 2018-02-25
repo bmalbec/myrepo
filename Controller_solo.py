@@ -67,7 +67,7 @@ def read_temp(tempOldSerialData):
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
-	print "start callback"
+#	print "start callback"
 	#####	Initialize the arrays	#####
 	axesArray = []
 	buttonArray = []
@@ -150,25 +150,25 @@ def callback(data):
 	print "BUTTONS:"
 	print buttonArray
 	
-	print "end callback"
+#	print "end callback"
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox():
-	print "start readXbox"
+	#print "start readXbox"
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 	
-	print "readXbox prior rospy.subscriber"
+	#print "readXbox prior rospy.subscriber"
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
 	
-	print rospy.Subscriber("joy",Joy,callback)
-	print "readXbox post rospy.subscriber"
+	rospy.Subscriber("joy",Joy,callback)
+	#print "readXbox post rospy.subscriber"
 	
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
 	#####	Keep python from exiting until this node is stopped (this keeps the script alive)	##### 
-#	rospy.spin()
+	rospy.spin()
 
 	
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
