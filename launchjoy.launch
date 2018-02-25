@@ -7,7 +7,7 @@
 		<param name="deadzone" value="0.35" />
 	</node>
 
-	<node respawn="true" pkg="beginner_tutorials" type="Controller_solo.py" name="transmit_node" >
-	</node>
+	<!--<node respawn="true" pkg="beginner_tutorials" type="Controller_solo.py" name="transmit_node" >
+	</node>-->
 
 </launch>
