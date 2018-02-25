@@ -58,7 +58,6 @@ def read_temp():
 	time.sleep(0.001)
 	tempXmlData = open("temp_xml_data.xml", 'w+')
 	tempSerialData = ser.readline()
-	print(tempSerialData)
 	time.sleep(0.001)
 	if tempSerialData:
 		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
@@ -156,7 +155,7 @@ def callback(data):
 	
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
 	temp = read_temp()
-	print(temp)
+	
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#print(temp)
 
