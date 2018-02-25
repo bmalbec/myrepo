@@ -181,14 +181,19 @@ def readXbox():
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
-	
+	#####	Keep python from exiting until this node is stopped	##### 
 	rospy.spin()
 
+#####	Allows the script to be ran by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal)	#####
 if __name__=='__main__':
+	#####	Perform the readXbox function	#####
 	readXbox()
 
+#####	Checks if Ctrl-C was pressed, kills the program if it was	#####
 def signal_handler(signal, frame):
 	print('Exiting...')
 	sys.exit(0)
+
+#####	Checks if Ctrl-C was pressed also, backup in case the function above doesn't work	#####
 signal.signal(signal.SIGINT, signal_handler)
 
