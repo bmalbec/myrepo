@@ -90,8 +90,6 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 
 #	return temp
 
-
-
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
 	
@@ -189,7 +187,7 @@ def readXbox():
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
-	#####	Keep python from exiting until this node is stopped	##### 
+	#####	Keep python from exiting until this node is stopped (this keeps the script alive)	##### 
 	rospy.spin()
 
 	
