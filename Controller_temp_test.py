@@ -5,9 +5,19 @@ import xml.etree.ElementTree as ET
 import math
 import re
 from shutil import copyfile
+from US2066 import US2066Base as DISP
 
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 time.sleep(0.01)
+
+disp = DISP(0x3C)
+
+disp.begin()
+
+time.sleep(0.01)
+
+disp.command(0x01)
+time.sleep(0.001)
 
 while (True):
   tempXmlTemplate = open("temp_xml_template.xml", 'r')
@@ -37,3 +47,4 @@ while (True):
 
   temp = float(tempXmlRoot[0][0].text)
   print(temp)
+  disp.write(temp)
