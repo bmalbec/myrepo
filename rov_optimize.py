@@ -38,7 +38,7 @@ def init_temp_xml():
 	tempItem = ET.SubElement(tempData, 'temp')
 	tempItem1 = ET.SubElement(tempItem, 'item')
 	tempItem1.set('name','Temperature')
-	tempItem1.text = str(rawTemp)
+	tempItem1.text = "0.0"
 	
 	return tempData
 
