@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
-
+#####################################
 #####	Import Libraries	#####
+#####################################
+
 import rospy
 import sys
 import serial
@@ -16,7 +18,16 @@ from geometry_msgs.msg import Twist
 from sensor_msgs.msg import Joy
 from std_msgs.msg import String, Char, Float64, Int32
 
+#####################################
+#####	Initializations		#####
+#####################################
+
+#####	Define the serial port and baud rate	#####
+ser = serial.Serial('/dev/ttyO4', 38400)
+
+#####################################
 #####	Define Functions	#####
+#####################################
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 #def oled_init(display):
@@ -81,8 +92,6 @@ from std_msgs.msg import String, Char, Float64, Int32
 #tempOldSerialInit.close()
 #time.sleep(0.01)
 
-#####	Define the serial port and baud rate	#####
-ser = serial.Serial('/dev/ttyO4', 38400)
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
@@ -195,5 +204,5 @@ def signal_handler(signal, frame):
 	sys.exit(0)
 
 #####	Checks if Ctrl-C was pressed also, backup in case the function above doesn't work	#####
-signal.signal(signal.SIGINT, signal_handler)
+#signal.signal(signal.SIGINT, signal_handler)
 
