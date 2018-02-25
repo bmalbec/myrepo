@@ -199,12 +199,14 @@ def readXbox():
 
 
 
-if __name__=='__main__':
+#if __name__=='__main__':
+while __name__=='__main__':
+	print "while loop"
 	#####	Perform the readXbox function	#####
 	readXbox()
 	
-while True:
-	print "AAAAA"
+#while True:
+#	print "AAAAA"
 
 
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
