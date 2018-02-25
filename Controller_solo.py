@@ -92,9 +92,12 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 #while True:
 def callback(data):
 
-	axesArray = [1.0,1.0,1.0,1.0]
-	buttonArray = [1.0, 1.0, 1.0, 1.0]
-
+	#axesArray = [1.0,1.0,1.0,1.0]
+	#buttonArray = [1.0, 1.0, 1.0, 1.0]
+	
+	axesArray = []
+	buttonArray = []
+	
 	#####	Fill axesArray with the left analog stick's x & y axes, as well as the right analog stick's x & y axes, then cut off the arbitrary data	#####
 	axesArray.insert(0,data.axes[0])
 	axesArray.insert(1,data.axes[1])
