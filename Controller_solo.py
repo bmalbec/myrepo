@@ -121,10 +121,10 @@ def callback(data):
 	leftAnalogY.text = str(axesArray[1])
 	rightAnalogX.text = str(axesArray[2])
 	rightAnalogY.text = str(axesArray[3])
-	dPadUp.text = str(buttonArray[0])
-	dPadDown.text = str(buttonArray[1])
-	dPadLeft.text = str(buttonArray[2])
-	dPadRight.text = str(buttonArray[3])
+	dPadLeft.text = str(buttonArray[0])
+	dPadRight.text = str(buttonArray[1])
+	dPadUp.text = str(buttonArray[2])
+	dPadDown.text = str(buttonArray[3])
 
 	#####	Package everything together, store it in the variable "myData"	#####
 	myData = ET.tostring(controllerPacket)
