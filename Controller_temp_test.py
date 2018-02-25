@@ -62,7 +62,7 @@ tempOldSerialData = tempOldSerialInit.read()
 tempOldSerialInit.close()
 
 while (True):
-  temp = read_temp(OldSerialData)
+  temp = read_temp(tempOldSerialData)
   print(temp)
   oled_temp(disp, temp)
   time.sleep(1)
