@@ -73,7 +73,7 @@ axesArray = [1.0,1.0,1.0,1.0]
 buttonArray = [1.0, 1.0, 1.0, 1.0]
 count=4
 
-ser = serial.Serial('/dev/ttyUSB0', 38400)
+ser = serial.Serial('/dev/ttyO4', 38400)
 while True:
 	def callback(data):
 
