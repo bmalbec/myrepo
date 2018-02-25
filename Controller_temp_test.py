@@ -16,23 +16,7 @@ def oled_temp(display, temperature):
   display.command(0xA0)
   display.write(temperature)
   
-ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
-time.sleep(0.01)
-
-disp = DISP(0x3C)
-
-disp.begin()
-
-time.sleep(0.01)
-
-oled_init(disp)
-time.sleep(0.001)
-
-tempOldSerialInit = open("temp_xml_template.xml", 'r')
-tempOldSerialData = tempOldSerialInit.read()
-tempOldSerialInit.close()
-
-while (True):
+def read_temp():
   tempXmlTemplate = open("temp_xml_template.xml", 'r')
   tempXmlBackup = tempXmlTemplate.read()
   tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
@@ -58,6 +42,27 @@ while (True):
   tempXmlRoot = tempXmlTree.getroot()
 
   temp = tempXmlRoot[0][0].text
+  
+  return temp
+  
+ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
+time.sleep(0.01)
+
+disp = DISP(0x3C)
+
+disp.begin()
+
+time.sleep(0.01)
+
+oled_init(disp)
+time.sleep(0.001)
+
+tempOldSerialInit = open("temp_xml_template.xml", 'r')
+tempOldSerialData = tempOldSerialInit.read()
+tempOldSerialInit.close()
+
+while (True):
+  temp = read_temp()
   print(temp)
   oled_temp(disp, temp)
   time.sleep(1)
