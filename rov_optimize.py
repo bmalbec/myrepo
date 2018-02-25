@@ -51,7 +51,7 @@ def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
 	if not pwmCurrentValues:							#if no incoming data
 		pwmCurrentValues = pwmInitValues				#set the pwm values to initial values
 	
-	pwmXmlCurrentFile.write(pwmCurrentValues)
+	pwmXmlCurrentValues.write(pwmCurrentValues)
 	time.sleep(0.001)
 	pwmXmlCurrentFile.close()							#close the xml file
 	time.sleep(0.001)
