@@ -60,3 +60,4 @@ while (True):
   temp = tempXmlRoot[0][0].text
   print(temp)
   oled_temp(disp, temp)
+  time.sleep(1)
