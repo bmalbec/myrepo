@@ -45,6 +45,6 @@ while (True):
   tempXmlTree = ET.parse("temp_xml_data.xml")
   tempXmlRoot = tempXmlTree.getroot()
 
-  temp = float(tempXmlRoot[0][0].text)
+  temp = tempXmlRoot[0][0].text
   print(temp)
   disp.write(temp)
