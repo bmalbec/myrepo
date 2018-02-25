@@ -14,7 +14,7 @@ while (True):
   tempXmlBackup = tempXmlTemplate.read()
   tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
   tempCover = tempXmlBackup2.write(tempXmlBackup)
-  tempXmlBackup.close()
+  tempXmlTemplate.close()
   tempXmlBackup2.close()
 
   tempXmlData = open("temp_xml_data.xml", 'w+')
