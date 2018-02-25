@@ -43,6 +43,7 @@ def init_temp_xml():
 	return tempData
 
 def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
+	time.sleep(0.01)
 	pwmXmlCurrentValues = open(pwmXmlCurrentFile, 'w+')	#open the xml for current pwm values
 	time.sleep(0.001)
 	pwmCurrentValues = ser.readline()					#read the incoming values
