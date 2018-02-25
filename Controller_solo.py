@@ -81,23 +81,13 @@ from std_msgs.msg import String, Char, Float64, Int32
 #tempOldSerialInit.close()
 #time.sleep(0.01)
 
-#####	Create the arrays that will be sent over the serial port, populate them with arbitrary data	#####
-#axesArray = [1.0,1.0,1.0,1.0]
-#buttonArray = [1.0, 1.0, 1.0, 1.0]
-#axesArray = []
-#buttonArray = []
-
 #####	Define the serial port and baud rate	#####
 ser = serial.Serial('/dev/ttyO4', 38400)
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
-#while True:
-
 def callback(data):
-	#axesArray = [1.0,1.0,1.0,1.0]
-	#buttonArray = [1.0, 1.0, 1.0, 1.0]
-	print "callback"
 	
+	#####	Initialize the arrays	#####
 	axesArray = []
 	buttonArray = []
 	
@@ -115,7 +105,9 @@ def callback(data):
 	buttonArray.insert(3,data.buttons[14])
 #	buttonArray=buttonArray[:-4]
 
+	#############################################
 	#####	Create the .xml structure	#####
+	#############################################
 	
 	#####	Create the header (parent)	#####
 	controllerPacket = ET.Element('frame')
@@ -183,13 +175,9 @@ def readXbox():
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 	
-	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####
-	print "readXbox"
-	
+	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
 	rospy.Subscriber("joy",Joy,callback)
-	#testStuff = rospy.Subscriber("joy",Joy)
-	#callback(testStuff,axesArray,buttonArray)
-
+	
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
