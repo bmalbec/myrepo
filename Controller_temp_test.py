@@ -47,4 +47,6 @@ while (True):
 
   temp = tempXmlRoot[0][0].text
   print(temp)
+  disp.command(0x01)
+  disp.command(0x00)
   disp.write(temp)
