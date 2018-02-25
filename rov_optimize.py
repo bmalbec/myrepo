@@ -72,7 +72,7 @@ def parse_pwm_values(pwmXmlCurrentFile):
 	
 	return lx, ly, rx, ry, d_left, d_right, d_up, d_down
 	
-def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down)
+def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
 	old_max = 1
 	new_min = 500
