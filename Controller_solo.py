@@ -96,7 +96,7 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 def callback(data):
 	#axesArray = [1.0,1.0,1.0,1.0]
 	#buttonArray = [1.0, 1.0, 1.0, 1.0]
-	count+=1
+	
 	axesArray = []
 	buttonArray = []
 	
@@ -164,10 +164,10 @@ def callback(data):
 	print axesArray
 	print "BUTTONS:"
 	print buttonArray
-	print "count: %i" % count
+	
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
-def readXbox():
+def readXbox(count):
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 	
@@ -175,7 +175,8 @@ def readXbox():
 	rospy.Subscriber("joy",Joy,callback)
 	#testStuff = rospy.Subscriber("joy",Joy)
 	#callback(testStuff,axesArray,buttonArray)
-	
+	count+=1
+	print "count: %i" % count
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
 
@@ -195,7 +196,7 @@ count=0
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
 if __name__=='__main__':
 	#####	Perform the readXbox function	#####
-	readXbox()
+	readXbox(count)
 	
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
 #def signal_handler(signal, frame):
