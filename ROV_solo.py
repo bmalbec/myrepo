@@ -23,6 +23,7 @@ ADC.setup()
 time.sleep(1)
 
 count = 0
+
 ####	backup .xml files	############
 template = open("testfile5.xml",'r')
 backup = template.read()
@@ -92,12 +93,12 @@ while True:
 		d_right = int(root[0][5].text)
 		d_up = int(root[0][6].text)
 		d_down = int(root[0][7].text)
-		
+
 		newValueLX=int(((lx-old_min)*new_range)/old_range)+new_min
 		newValueLY=int(((ly-old_min)*new_range)/old_range)+new_min
 		newValueRX=int(((rx-old_min)*new_range)/old_range)+new_min
 		newValueRY=int(((ry-old_min)*new_range)/old_range)+new_min
-		
+
 		motor1=stopped
 		motor2=stopped
 		motor3=stopped
@@ -107,9 +108,9 @@ while True:
 
 		if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
 			print "\t\tSTOPPED"
-		else: 
+		else:
 		#	LEFT
-			if newValueLX > threshold: 
+			if newValueLX > threshold:
 				print "\t\tLEFT"
 				leftval = newValueLX - threshold
 				motor1 -= leftval
@@ -203,7 +204,7 @@ while True:
 		print "LY: %i" % newValueLY
 		print "RX: %i" % newValueRX
 		print "RY: %i" % newValueRY
-		
+
 		print "MOTORS:"
 		print "1: %i" % motor1
 		print "2: %i" % motor2
