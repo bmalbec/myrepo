@@ -24,7 +24,7 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####################################
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
-def oled_init(display):
+'''def oled_init(display):
   display.command(0x01)
   display.command(0x00)
   display.write("Temperature:")
@@ -36,7 +36,7 @@ def oled_temp(display, temperature):
 
 #####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
 def read_temp(tempOldSerialData):
-	tempXmlTemplate = open("temp_xml_template.xml", 'r+')
+	tempXmlTemplate = open("temp_xml_template.xml", 'r')
 	tempXmlBackup = tempXmlTemplate.read()
 	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
 	tempCover = tempXmlBackup2.write(tempXmlBackup)
@@ -63,7 +63,7 @@ def read_temp(tempOldSerialData):
 
 	temp = tempXmlRoot[0][0].text
 
-	return temp
+	return temp'''
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
@@ -134,14 +134,14 @@ def callback(data):
 	ser.write('\n')
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-	temp = read_temp(tempOldSerialData)
+#	temp = read_temp(tempOldSerialData)
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#print(temp)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-	oled_temp(disp, temp)
-	time.sleep(0.01)
+#	oled_temp(disp, temp)
+#	time.sleep(0.01)
 	
 	
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
@@ -179,7 +179,7 @@ def signal_handler(signal, frame):
 ser = serial.Serial('/dev/ttyO4', 38400)
 
 #####	I2C address of OLED Display	#####
-disp = DISP(0x3C)
+'''disp = DISP(0x3C)
 
 #####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
 disp.begin()
@@ -195,7 +195,7 @@ time.sleep(0.01)
 tempOldSerialData = tempOldSerialInit.read()
 time.sleep(0.01)
 tempOldSerialInit.close()
-time.sleep(0.01)
+time.sleep(0.01)'''
 
 #############################
 #####	Main loop	#####
