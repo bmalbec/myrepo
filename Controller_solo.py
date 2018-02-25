@@ -208,10 +208,10 @@ while True:
 
 
 #####	Checks if Ctrl-C was pressed, kills the program if it was	#####
-#def signal_handler(signal, frame):
-#	print('Exiting...')
-#	sys.exit(0)
+def signal_handler(signal, frame):
+	print('Exiting...')
+	sys.exit(0)
 
 #####	Checks if Ctrl-C was pressed also, backup in case the function above doesn't work	#####
-#signal.signal(signal.SIGINT, signal_handler)
+signal.signal(signal.SIGINT, signal_handler)
 
