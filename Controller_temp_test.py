@@ -26,6 +26,8 @@ time.sleep(0.01)
 disp.command(0x01)
 time.sleep(0.001)
 
+tempOldSerialData = "0.0"
+
 while (True):
   tempXmlTemplate = open("temp_xml_template.xml", 'r')
   tempXmlBackup = tempXmlTemplate.read()
