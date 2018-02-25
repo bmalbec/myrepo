@@ -210,7 +210,6 @@ def send_temp(tempPin, tempData, ser):
 	tempXML = ET.tostring(tempData)
 	ser.write(tempXML)
 	ser.write('\n')
-	print ("Temperature =", rawTemp)
 
 ##############################################
 ############# Set Parameters #################
