@@ -140,7 +140,11 @@ def callback(data):
 	#####	Send info through the serial port, along with a newline character (required for ROV to read data properly)	#####
 	ser.write(myData)
 	ser.write('\n')
-
+	
+	#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
+	tempOldSerialData = init_temp_values("temp_xml_template.xml")
+	time.sleep(0.001)
+	
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
 	temp = read_temp(tempOldSerialData)
 
