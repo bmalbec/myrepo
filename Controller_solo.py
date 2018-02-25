@@ -25,6 +25,25 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Define the serial port and baud rate	#####
 ser = serial.Serial('/dev/ttyO4', 38400)
 
+#####	I2C address of OLED Display	#####
+#disp = DISP(0x3C)
+
+#####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
+#disp.begin()
+#time.sleep(0.01)
+
+#####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
+#oled_init(disp)
+#time.sleep(0.001)
+
+#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
+#tempOldSerialInit = open("temp_xml_template.xml", 'r+')
+#time.sleep(0.01)
+#tempOldSerialData = tempOldSerialInit.read()
+#time.sleep(0.01)
+#tempOldSerialInit.close()
+#time.sleep(0.01)
+
 #####################################
 #####	Define Functions	#####
 #####################################
@@ -71,26 +90,6 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 
 #	return temp
 
-#####	Initialization	#####
-
-#####	I2C address of OLED Display	#####
-#disp = DISP(0x3C)
-
-#####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
-#disp.begin()
-#time.sleep(0.01)
-
-#####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
-#oled_init(disp)
-#time.sleep(0.001)
-
-#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-#tempOldSerialInit = open("temp_xml_template.xml", 'r+')
-#time.sleep(0.01)
-#tempOldSerialData = tempOldSerialInit.read()
-#time.sleep(0.01)
-#tempOldSerialInit.close()
-#time.sleep(0.01)
 
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
@@ -105,14 +104,14 @@ def callback(data):
 	axesArray.insert(1,data.axes[1])
 	axesArray.insert(2,data.axes[3])
 	axesArray.insert(3,data.axes[4])
-#	axesArray=axesArray[:-4]
+
 
 	#####	Fill buttonArray with the D-Pad's left/right/up/down data, then cut off the arbitrary data	#####
 	buttonArray.insert(0,data.buttons[11])
 	buttonArray.insert(1,data.buttons[12])
 	buttonArray.insert(2,data.buttons[13])
 	buttonArray.insert(3,data.buttons[14])
-#	buttonArray=buttonArray[:-4]
+
 
 	#############################################
 	#####	Create the .xml structure	#####
