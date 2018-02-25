@@ -55,9 +55,10 @@ def read_temp():
 	#tempXmlTemplate = open("temp_xml_template.xml", 'r')
 	#tempXmlBackup = tempXmlTemplate.read()
 	#tempXmlTemplate.close()
-
+	time.sleep(0.001)
 	tempXmlData = open("temp_xml_data.xml", 'w+')
 	tempSerialData = ser.readline()
+	print(tempSerialData)
 	time.sleep(0.001)
 	if tempSerialData:
 		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
