@@ -7,6 +7,13 @@ import re
 from shutil import copyfile
 from US2066 import US2066Base as DISP
 
+def oled_temp(display, temperature)
+  display.command(0x01)
+  display.command(0x00)
+  display.write("Temperature:")
+  display.command(0xA0)
+  display.write(temperature)
+  
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 time.sleep(0.01)
 
@@ -32,11 +39,11 @@ while (True):
   if tempSerialData:
     tempXmlBackup = open("temp_xml_backup.xml", 'w')
     tempXmlBackup.write(tempSerialData)
+    tempOldSerialData = tempSerialData
     tempXmlBackup.close()
   if not tempSerialData:
-    tempSerialData2 = open("temp_xml_backup.xml", 'r')
-    tempSerialData = tempSerialData2.read()
-    tempSerialData2.close()
+    tempSerialData = tempOldSerialData.read()
+    tempOldSerialData.close()
 
   tempXmlData.write(tempSerialData)
 
@@ -47,6 +54,4 @@ while (True):
 
   temp = tempXmlRoot[0][0].text
   print(temp)
-  disp.command(0x01)
-  disp.command(0x00)
-  disp.write(temp)
+  oled_temp(disp, temp)
