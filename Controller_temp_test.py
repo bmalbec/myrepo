@@ -7,10 +7,12 @@ import re
 from shutil import copyfile
 from US2066 import US2066Base as DISP
 
-def oled_temp(display, temperature):
+def oled_init(display):
   display.command(0x01)
   display.command(0x00)
   display.write("Temperature:")
+  
+def oled_temp(display, temperature)
   display.command(0xA0)
   display.write(temperature)
   
@@ -23,7 +25,7 @@ disp.begin()
 
 time.sleep(0.01)
 
-disp.command(0x01)
+oled_init(disp)
 time.sleep(0.001)
 
 tempOldSerialInit = open("temp_xml_template.xml", 'r')
