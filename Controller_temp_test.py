@@ -26,7 +26,9 @@ time.sleep(0.01)
 disp.command(0x01)
 time.sleep(0.001)
 
-tempOldSerialData = "0.0"
+tempOldSerialInit = open("temp_xml_template.xml", 'r')
+tempOldSerialData = tempOldSerialInit.read()
+tempOldSerialInit.close()
 
 while (True):
   tempXmlTemplate = open("temp_xml_template.xml", 'r')
