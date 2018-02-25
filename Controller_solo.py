@@ -96,6 +96,7 @@ ser = serial.Serial('/dev/ttyO4', 38400)
 def callback(data):
 	#axesArray = [1.0,1.0,1.0,1.0]
 	#buttonArray = [1.0, 1.0, 1.0, 1.0]
+	print "callback"
 	
 	axesArray = []
 	buttonArray = []
@@ -172,6 +173,8 @@ def readXbox():
 	rospy.init_node('readXbox',anonymous=False)
 	
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####
+	print "readXbox"
+	
 	rospy.Subscriber("joy",Joy,callback)
 	#testStuff = rospy.Subscriber("joy",Joy)
 	#callback(testStuff,axesArray,buttonArray)
@@ -194,7 +197,7 @@ def readXbox():
 
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
 
-print "AAAAAA"
+
 
 if __name__=='__main__':
 	#####	Perform the readXbox function	#####
