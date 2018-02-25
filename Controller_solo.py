@@ -24,7 +24,7 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####################################
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
-'''def oled_init(display):
+def oled_init(display):
   display.command(0x01)
   display.command(0x00)
   display.write("Temperature:")
@@ -33,21 +33,29 @@ from std_msgs.msg import String, Char, Float64, Int32
 def oled_temp(display, temperature):
   display.command(0xA0)
   display.write(temperature)
+	
+def init_temp_values(tempXmlInitFile):
+	tempXmlInit = open(tempXmlInitFile, 'r')	#open initialization xml for pwm values
+	time.sleep(0.001)
+	tempInitValues = tempXmlInit.read()		#read the initial pwm values into pwmInitValues
+	time.sleep(0.001)
+	tempXmlInit.close()						#close initialization xml
+	time.sleep(0.001)
+	
+	return tempInitValues
 
 #####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
 def read_temp(tempOldSerialData):
-	tempXmlTemplate = open("temp_xml_template.xml", 'r')
-	tempXmlBackup = tempXmlTemplate.read()
-	tempXmlBackup2 = open("temp_xml_backup.xml", 'w+')
-	tempCover = tempXmlBackup2.write(tempXmlBackup)
-	tempXmlTemplate.close()
-	tempXmlBackup2.close()
+	#tempXmlTemplate = open("temp_xml_template.xml", 'r')
+	#tempXmlBackup = tempXmlTemplate.read()
+	#tempXmlTemplate.close()
 
 	tempXmlData = open("temp_xml_data.xml", 'w+')
 	tempSerialData = ser.readline()
+	time.sleep(0.001)
 	if tempSerialData:
-		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
-		tempXmlBackup.write(tempSerialData)
+		#tempXmlBackup = open("temp_xml_backup.xml", 'w+')
+		#tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
 		tempXmlBackup.close()
 	if not tempSerialData:
@@ -56,14 +64,14 @@ def read_temp(tempOldSerialData):
 	tempXmlData.write(tempSerialData)
 
 	tempXmlData.close()
-	time.sleep(0.01)
+	time.sleep(0.001)
 		
 	tempXmlTree = ET.parse("temp_xml_data.xml")
 	tempXmlRoot = tempXmlTree.getroot()
 
 	temp = tempXmlRoot[0][0].text
 
-	return temp'''
+	return temp
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
@@ -134,14 +142,14 @@ def callback(data):
 	ser.write('\n')
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-#	temp = read_temp(tempOldSerialData)
+	temp = read_temp(tempOldSerialData)
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#print(temp)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-#	oled_temp(disp, temp)
-#	time.sleep(0.01)
+	oled_temp(disp, temp)
+	time.sleep(0.001)
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
@@ -184,23 +192,20 @@ def signal_handler(signal, frame):
 ser = serial.Serial('/dev/ttyO4', 38400)
 
 #####	I2C address of OLED Display	#####
-'''disp = DISP(0x3C)
+disp = DISP(0x3C)
 
 #####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
 disp.begin()
-time.sleep(0.01)
+time.sleep(0.001)
 
 #####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
 oled_init(disp)
 time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-tempOldSerialInit = open("temp_xml_template.xml", 'r+')
-time.sleep(0.01)
-tempOldSerialData = tempOldSerialInit.read()
-time.sleep(0.01)
-tempOldSerialInit.close()
-time.sleep(0.01)'''
+tempOldSerialInit = init_temp_values("temp_xml_template.xml")
+time.sleep(0.001)
+
 
 #############################
 #####	Main loop	#####
