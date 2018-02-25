@@ -203,7 +203,7 @@ oled_init(disp)
 time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-tempOldSerialInit = init_temp_values("temp_xml_template.xml")
+tempOldSerialData = init_temp_values("temp_xml_template.xml")
 time.sleep(0.001)
 
 
