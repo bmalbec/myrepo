@@ -7,7 +7,7 @@ import re
 from shutil import copyfile
 from US2066 import US2066Base as DISP
 
-def oled_temp(display, temperature)
+def oled_temp(display, temperature):
   display.command(0x01)
   display.command(0x00)
   display.write("Temperature:")
