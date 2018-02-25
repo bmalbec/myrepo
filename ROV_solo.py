@@ -3,6 +3,9 @@ import xml.dom.minidom
 import serial
 import time
 import re
+import Adafruit_BBIO.ADC as ADC
+import struct
+import math
 from shutil import copyfile
 #from Adafruit_PCA9685 import PCA9685 as PWM
 
@@ -12,9 +15,13 @@ from shutil import copyfile
 #set freq to 1000Hz
 #pwm.set_pwm_freq(1000)
 
+tempPin = "AIN1"
+
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
+
+ADC.setup()
 time.sleep(1)
-#ser.flushInput() ser.flushOutput()
+
 count = 0
 ####	backup .xml files	############
 mybackup = open("testfile5.xml",'r')
@@ -264,6 +271,22 @@ while True:
 		print "D-Pad Up: %i" % d_up
 		print "D-Pad Down: %i" % d_down
 		print '\n'
+
+
+############	Temp sensor sending	###########
+		rawTemp = ADC.read(tempPin)
+		time.sleep(.1)
+
+		tempData = ET.Element('data')
+		tempItem = ET.SubElement(tempData, 'temp')
+		tempItem1 = ET.SubElement(tempItem, 'item')
+		tempItem1.set('name','Temperature')
+		tempItem1.text = str(rawTemp)
+
+		tempXML = ET.tostring(tempData)
+		ser.write(tempXML)
+		ser.write('\n')
+		print("Wrote ", rawTemp, " to UART\n")
 	###############################################################################
 	except ET.ParseError:
 		print "I crashed, oops"
