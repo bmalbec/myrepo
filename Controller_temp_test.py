@@ -12,7 +12,7 @@ def oled_init(display):
   display.command(0x00)
   display.write("Temperature:")
   
-def oled_temp(display, temperature)
+def oled_temp(display, temperature):
   display.command(0xA0)
   display.write(temperature)
   
