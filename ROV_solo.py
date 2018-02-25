@@ -234,7 +234,7 @@ while True:
 		tempXML = ET.tostring(tempData)
 		ser.write(tempXML)
 		ser.write('\n')
-		print("Wrote ", rawTemp, " to UART\n")
+#		print("Wrote ", rawTemp, " to UART\n")
 	###############################################################################
 	except ET.ParseError:
 		print "I crashed, oops"
