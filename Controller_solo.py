@@ -81,7 +81,7 @@ def read_temp():
 	tempXmlRoot = tempXmlTree.getroot()
 
 	temp = tempXmlRoot[0][0].text
-
+	
 	return temp
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
@@ -155,7 +155,7 @@ def callback(data):
 	
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
 	temp = read_temp()
-
+	print(temp)
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#print(temp)
 
