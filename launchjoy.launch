@@ -5,9 +5,10 @@
 		<param name="dev" type="string" value="/dev/input/js0" />
 		<param name="coalesce_interval" value="0.1" />
 		<param name="deadzone" value="0.35" />
+		<param name="autorepeat_rate" value="10" />
 	</node>
-
-	<!--<node respawn="true" pkg="beginner_tutorials" type="Controller_solo.py" name="transmit_node" >
-	</node>-->
+<!-- custom node -->
+	<node respawn="true" pkg="beginner_tutorials" type="Controller_solo.py" name="transmit_node" >
+	</node>
 
 </launch>
