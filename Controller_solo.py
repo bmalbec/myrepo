@@ -86,7 +86,7 @@ def read_temp():
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
-#	print "start callback"
+	print "start callback"
 	#####	Initialize the arrays	#####
 	axesArray = []
 	buttonArray = []
@@ -170,19 +170,19 @@ def callback(data):
 	print "BUTTONS:"
 	print buttonArray
 
-#	print "end callback"
+	print "end callback"
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox():
-	#print "start readXbox"
+	print "start readXbox"
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 
-	#print "readXbox prior rospy.subscriber"
+	print "readXbox prior rospy.subscriber"
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
 
 	rospy.Subscriber("joy",Joy,callback)
-	#print "readXbox post rospy.subscriber"
+	print "readXbox post rospy.subscriber"
 
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
@@ -226,5 +226,6 @@ time.sleep(0.001)
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
 if __name__=='__main__':	
 	#####	Perform the readXbox function	#####
+	print "if loop"
 	readXbox()
 
