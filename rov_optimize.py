@@ -76,8 +76,8 @@ def parse_pwm_values(pwmXmlCurrentFile):
 def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
 	old_max = 1
-	new_min = 500
-	new_max = 1000
+	new_min = 2300
+	new_max = 3700
 
 	ceiling = new_max
 	floor = new_min
@@ -236,7 +236,7 @@ def send_temp(tempPin, ser):
 tempPin = "AIN1"
 
 i2cAddress = 0x40
-pwmFreq = 1000
+pwmFreq = 485
 
 pwmXmlInitFile = "testfile5.xml"
 pwmXmlCurrentFile = "testfile4.xml"
