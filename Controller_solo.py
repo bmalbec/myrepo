@@ -154,17 +154,21 @@ def callback(data):
 	print "shit's sent"
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
+	print "boutta go to read_temp"
 	temp = read_temp()
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-	#print(temp)
+	print "finna print temp"
+	print(temp)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
+	print "finna go to oled_temp"
 	oled_temp(disp, temp)
 	time.sleep(0.001)
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
+	print "finna print more shit out"
 	print "AXES:"
 	print axesArray
 	print "BUTTONS:"
