@@ -197,12 +197,19 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	return motor1, motor2, motor3, motor4, motor5, motor6
 
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
+	time.sleep(0.1)
 	pwm.set_pwm(0,0,motor1)
+	time.sleep(0.1)
 	pwm.set_pwm(1,0,motor2)
+	time.sleep(0.1)
 	pwm.set_pwm(2,0,motor3)
+	time.sleep(0.1)
 	pwm.set_pwm(3,0,motor4)
+	time.sleep(0.1)
 	pwm.set_pwm(4,0,motor5)
+	time.sleep(0.1)
 	pwm.set_pwm(5,0,motor6)
+	time.sleep(0.1)
 
 def new_temp_xml(rawTemp):
 	tempData = ET.Element('data')
