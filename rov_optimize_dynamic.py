@@ -238,20 +238,28 @@ pwmXmlCurrentFile = "testfile4.xml"
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 
 statement="""
-Temperature:{}
-Axes:{}
-Buttons:{}
+Motor 1:{}
+Motor 2:{}
+Motor 3:{}
+Motor 4:{}
+Motor 5:{}
+Motor 6:{}
+D-Pad Left:{}
+D-Pad Right:{}
+D-Pad Up:{}
+D-Pad Down:{}
 *********************************************************************
 *********************************************************************
 *************				*****************************
-*************	I'm the mothafuckin	*****************************
-*************	controller GUI		*****************************
+*************	 I'm the mothafuckin	*****************************
+*************	       ROV GUI		*****************************
 *************				*****************************
 *********************************************************************
 *********************************************************************
 """
 
 screen = curses.initscr()
+
 ###############################################
 ####### Call Initialization Functions #########
 ###############################################
@@ -282,7 +290,7 @@ while True:
 		#print "LY: %i" % newValueLY
 		#print "RX: %i" % newValueRX
 		#print "RY: %i" % newValueRY
-		screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
+		screen.addstr(0, 0, statement.format(newValueLX, newValueLY, newValueRX, newValueRY, d_left, d_right, d_up, d_down))
 		screen.refresh()
 #		print "MOTORS:"
 #		print "1: %i" % motor1
