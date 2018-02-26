@@ -16,9 +16,9 @@ from Adafruit_PCA9685 import PCA9685 as PWM
 def init_pwm(i2cAddress, pwmFreq):
 	pwm = PWM(i2cAddress) 		#create a pwm object for PCA9685 at i2cAddress
 	pwm.set_pwm_freq(pwmFreq) 	#set desired pwm freq
-	
+
 	return pwm
-	
+
 def init_temp():
 	ADC.setup()
 	time.sleep(0.001)
@@ -30,16 +30,16 @@ def init_pwm_values(pwmXmlInitFile):
 	time.sleep(0.001)
 	pwmXmlInit.close()						#close initialization xml
 	time.sleep(0.001)
-	
+
 	return pwmInitValues
-	
+
 def init_temp_xml():
 	tempData = ET.Element('data')
 	tempItem = ET.SubElement(tempData, 'temp')
 	tempItem1 = ET.SubElement(tempItem, 'item')
 	tempItem1.set('name','Temperature')
 	tempItem1.text = "0.0"
-	
+
 	return tempData
 
 def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
@@ -48,20 +48,20 @@ def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
 	time.sleep(0.001)
 	pwmCurrentValues = ser.readline()					#read the incoming values
 	time.sleep(0.001)
-	
+
 	if not pwmCurrentValues:							#if no incoming data
 		pwmCurrentValues = pwmInitValues				#set the pwm values to initial values
-	
+
 	pwmXmlCurrentValues.write(pwmCurrentValues)
 	time.sleep(0.001)
 	pwmXmlCurrentValues.close()							#close the xml file
 	time.sleep(0.001)
-	
+
 def parse_pwm_values(pwmXmlCurrentFile):
 	pwmTree = ET.parse(pwmXmlCurrentFile)	#parse the current values
 	time.sleep(0.001)
 	pwmRoot = pwmTree.getroot()				#get the root of the parse tree
-	
+
 	lx = float(pwmRoot[0][0].text)
 	ly = float(pwmRoot[0][1].text)
 	rx = float(pwmRoot[0][2].text)
@@ -70,18 +70,18 @@ def parse_pwm_values(pwmXmlCurrentFile):
 	d_right = int(pwmRoot[0][5].text)
 	d_up = int(pwmRoot[0][6].text)
 	d_down = int(pwmRoot[0][7].text)
-	
+
 	return lx, ly, rx, ry, d_left, d_right, d_up, d_down
-	
+
 def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
 	old_max = 1
 	new_min = 500
 	new_max = 1000
-	
+
 	ceiling = new_max
 	floor = new_min
-	
+
 	temp = new_min
 	new_max = (new_max-new_min)/2
 	new_min = 0
@@ -91,12 +91,12 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 
 	stopped=temp+new_max
 	threshold= new_max/2
-	
+
 	newValueLX=int(((lx-old_min)*new_range)/old_range)+new_min
 	newValueLY=int(((ly-old_min)*new_range)/old_range)+new_min
 	newValueRX=int(((rx-old_min)*new_range)/old_range)+new_min
 	newValueRY=int(((ry-old_min)*new_range)/old_range)+new_min
-	
+
 	motor1=stopped
 	motor2=stopped
 	motor3=stopped
@@ -193,9 +193,9 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 		motor6=ceiling
 	if motor6<floor:
 		motor6=floor
-		
+
 	return motor1, motor2, motor3, motor4, motor5, motor6
-	
+
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	pwm.set_pwm(0,0,motor1)
 	pwm.set_pwm(1,0,motor2)
@@ -203,14 +203,24 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	pwm.set_pwm(3,0,motor4)
 	pwm.set_pwm(4,0,motor5)
 	pwm.set_pwm(5,0,motor6)
-	
-def send_temp(tempPin, tempData, ser):
+
+def new_temp_xml(rawTemp):
+	tempData = ET.Element('data')
+	tempItem = ET.SubElement(tempData, 'temp')
+	tempItem1 = ET.SubElement(tempItem, 'item')
+	tempItem1.set('name','Temperature')
+	tempItem1.text = str(rawTemp)
+
+	return tempData
+
+def send_temp(tempPin, ser):
 	rawTemp = ADC.read(tempPin)
 	time.sleep(0.001)
+	tempData = new_temp_xml(rawTemp)
 	tempXML = ET.tostring(tempData)
 	ser.write(tempXML)
 	ser.write('\n')
-	print(rawTemp)
+	#print(rawTemp)
 
 ##############################################
 ############# Set Parameters #################
@@ -241,34 +251,37 @@ pwmInitValues = init_pwm_values(pwmXmlInitFile)
 ##############################################
 
 while True:
-	
-	read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
-	
-	lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
-	
-	motor1, motor2, motor3, motor4, motor5, motor6 = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down)
-	
-	set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
-	
-	send_temp(tempPin, tempData, ser)
-	
-	#print "AXES:"
-	#print "LX: %i" % newValueLX
-	#print "LY: %i" % newValueLY
-	#print "RX: %i" % newValueRX
-	#print "RY: %i" % newValueRY
+	try:
+		read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
 
-	print "MOTORS:"
-	print "1: %i" % motor1
-	print "2: %i" % motor2
-	print "3: %i" % motor3
-	print "4: %i" % motor4
-	print "5: %i" % motor5
-	print "6: %i" % motor6
+		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
 
-	print "BUTTONS:"
-	print "D-Pad Left: %i" % d_left
-	print "D-Pad Right: %i" % d_right
-	print "D-Pad Up: %i" % d_up
-	print "D-Pad Down: %i" % d_down
-print '\n'
+		motor1, motor2, motor3, motor4, motor5, motor6 = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down)
+
+		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
+
+		send_temp(tempPin, ser)
+
+		#print "AXES:"
+		#print "LX: %i" % newValueLX
+		#print "LY: %i" % newValueLY
+		#print "RX: %i" % newValueRX
+		#print "RY: %i" % newValueRY
+
+		print "MOTORS:"
+		print "1: %i" % motor1
+		print "2: %i" % motor2
+		print "3: %i" % motor3
+		print "4: %i" % motor4
+		print "5: %i" % motor5
+		print "6: %i" % motor6
+
+		print "BUTTONS:"
+		print "D-Pad Left: %i" % d_left
+		print "D-Pad Right: %i" % d_right
+		print "D-Pad Up: %i" % d_up
+		print "D-Pad Down: %i" % d_down
+		print '\n'
+
+	except ET.ParseError:
+pass
