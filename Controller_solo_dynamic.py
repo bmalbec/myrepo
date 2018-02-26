@@ -12,6 +12,7 @@ import xml.etree.ElementTree as ET
 import math
 import signal
 import time
+import curses
 
 from US2066 import US2066Base as DISP
 from geometry_msgs.msg import Twist
@@ -161,7 +162,7 @@ def callback(data):
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 #	print "finna print temp"
-	print(temp)
+#	print(temp)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
 #	print "finna go to oled_temp"
@@ -171,10 +172,12 @@ def callback(data):
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 #	print "finna print more shit out"
-	print "AXES:"
-	print axesArray
-	print "BUTTONS:"
-	print buttonArray
+	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
+	screen.refresh()
+#	print "AXES:"
+#	print axesArray
+#	print "BUTTONS:"
+#	print buttonArray
 
 #	print "end callback"
 
@@ -224,6 +227,22 @@ time.sleep(0.001)
 init_temp_values("temp_xml_template.xml")
 time.sleep(0.001)
 
+statement="""
+Temperature:{}
+Axes:{}
+Buttons:{}
+
+*********************************************************************
+*********************************************************************
+*************				*****************************
+*************	I'm the mothafuckin	*****************************
+*************	controller GUI		*****************************
+*************				*****************************
+*********************************************************************
+*********************************************************************
+"""
+
+screen = curses.initscr()
 
 #############################
 #####	Main loop	#####
@@ -234,3 +253,5 @@ if __name__=='__main__':
 	#####	Perform the readXbox function	#####
 #	print "if loop"
 	readXbox()
+
+curses.endwin()
