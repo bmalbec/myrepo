@@ -207,7 +207,7 @@ def signal_handler(signal, frame):
 #####################################
 
 #####	Define the serial port and baud rate	#####
-ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
+ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.05)
 
 #####	I2C address of OLED Display	#####
 disp = DISP(0x3C)
