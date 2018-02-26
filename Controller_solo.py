@@ -96,14 +96,14 @@ def callback(data):
 	axesArray.insert(1,data.axes[1])
 	axesArray.insert(2,data.axes[3])
 	axesArray.insert(3,data.axes[4])
-
+	print "axesArray filled"
 
 	#####	Fill buttonArray with the D-Pad's left/right/up/down data, then cut off the arbitrary data	#####
 	buttonArray.insert(0,data.buttons[11])
 	buttonArray.insert(1,data.buttons[12])
 	buttonArray.insert(2,data.buttons[13])
 	buttonArray.insert(3,data.buttons[14])
-
+	print "buttonArray filled"
 
 	#############################################
 	#####	Create the .xml structure	#####
@@ -151,7 +151,7 @@ def callback(data):
 	#####	Send info through the serial port, along with a newline character (required for ROV to read data properly)	#####
 	ser.write(myData)
 	ser.write('\n')
-
+	print "shit's sent"
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
 	temp = read_temp()
