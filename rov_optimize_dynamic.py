@@ -6,6 +6,7 @@ import re
 import Adafruit_BBIO.ADC as ADC
 import struct
 import math
+import curses
 from shutil import copyfile
 from Adafruit_PCA9685 import PCA9685 as PWM
 
@@ -236,7 +237,21 @@ pwmXmlCurrentFile = "testfile4.xml"
 
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 
+statement="""
+Temperature:{}
+Axes:{}
+Buttons:{}
+*********************************************************************
+*********************************************************************
+*************				*****************************
+*************	I'm the mothafuckin	*****************************
+*************	controller GUI		*****************************
+*************				*****************************
+*********************************************************************
+*********************************************************************
+"""
 
+screen = curses.initscr()
 ###############################################
 ####### Call Initialization Functions #########
 ###############################################
@@ -267,21 +282,23 @@ while True:
 		#print "LY: %i" % newValueLY
 		#print "RX: %i" % newValueRX
 		#print "RY: %i" % newValueRY
+		screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
+		screen.refresh()
+#		print "MOTORS:"
+#		print "1: %i" % motor1
+#		print "2: %i" % motor2
+#		print "3: %i" % motor3
+#		print "4: %i" % motor4
+#		print "5: %i" % motor5
+#		print "6: %i" % motor6
 
-		print "MOTORS:"
-		print "1: %i" % motor1
-		print "2: %i" % motor2
-		print "3: %i" % motor3
-		print "4: %i" % motor4
-		print "5: %i" % motor5
-		print "6: %i" % motor6
-
-		print "BUTTONS:"
-		print "D-Pad Left: %i" % d_left
-		print "D-Pad Right: %i" % d_right
-		print "D-Pad Up: %i" % d_up
-		print "D-Pad Down: %i" % d_down
-		print '\n'
+#		print "BUTTONS:"
+#		print "D-Pad Left: %i" % d_left
+#		print "D-Pad Right: %i" % d_right
+#		print "D-Pad Up: %i" % d_up
+#		print "D-Pad Down: %i" % d_down
+#		print '\n'
 
 	except ET.ParseError:
-pass
+		pass
+curses.endwin()
