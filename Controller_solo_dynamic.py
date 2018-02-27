@@ -13,6 +13,7 @@ import math
 import signal
 import time
 import curses
+from os import getcwd
 
 from US2066 import US2066Base as DISP
 from geometry_msgs.msg import Twist
@@ -43,7 +44,7 @@ def init_temp_values(tempXmlInitFile):
 	tempXmlInit.close()						#close initialization xml
 	time.sleep(0.001)
 
-	tempXmlBackup = open('$HOME/temp_xml_backup.xml', 'w+')
+	tempXmlBackup = open('temp_xml_backup.xml', 'w+')
 	time.sleep(0.001)
 	tempXmlBackup.write(tempInitValues)
 	time.sleep(0.001)
@@ -57,18 +58,18 @@ def read_temp():
 	#tempXmlBackup = tempXmlTemplate.read()
 	#tempXmlTemplate.close()
 	time.sleep(0.001)
-	tempXmlData = open('$HOME/temp_xml_data.xml', 'w+')
+	tempXmlData = open('temp_xml_data.xml', 'w+')
 
 	tempSerialData = ser.readline()
 
 	time.sleep(0.001)
 	if tempSerialData:
-		tempXmlBackup = open('$HOME/temp_xml_backup.xml', 'w+')
+		tempXmlBackup = open('temp_xml_backup.xml', 'w+')
 		tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
 		tempXmlBackup.close()
 	if not tempSerialData:
-		tempXmlBackup = open('$HOME/temp_xml_backup.xml', 'r')
+		tempXmlBackup = open('temp_xml_backup.xml', 'r')
 		tempBackupData = tempXmlBackup.read()
 		tempSerialData = tempBackupData
 		tempXmlBackup.close()
@@ -80,7 +81,7 @@ def read_temp():
 	tempXmlData.close()
 	time.sleep(0.001)
 
-	tempXmlTree = ET.parse('$HOME/temp_xml_data.xml')
+	tempXmlTree = ET.parse('temp_xml_data.xml')
 	tempXmlRoot = tempXmlTree.getroot()
 
 	temp = tempXmlRoot[0][0].text
@@ -169,7 +170,7 @@ def callback(data):
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
+	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
 	screen.refresh()
 #	print "AXES:"
 #	print axesArray
@@ -217,14 +218,14 @@ oled_init(disp)
 time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-init_temp_values('$HOME/temp_xml_template.xml')
+init_temp_values('temp_xml_template.xml')
 time.sleep(0.001)
 
 statement="""
 Temperature:{}
 Axes:{}
 Buttons:{}
-
+Directory:{}
 *********************************************************************
 *********************************************************************
 *************				*****************************
