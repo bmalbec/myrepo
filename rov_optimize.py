@@ -208,7 +208,7 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	#time.sleep(0.1)
 	pwm.set_pwm(4,0,motor5)
 	#time.sleep(0.1)
-	pwm.set_pwm(5,0,motor6)
+	pwm.set_pwm(1,0,motor6)
 	#time.sleep(0.1)
 
 def new_temp_xml(rawTemp):
