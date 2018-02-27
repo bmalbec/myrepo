@@ -170,7 +170,8 @@ def callback(data):
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
+	#screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
+	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
 	screen.refresh()
 #	print "AXES:"
 #	print axesArray
@@ -225,7 +226,7 @@ statement="""
 Temperature:{}
 Axes:{}
 Buttons:{}
-Directory:{}
+
 *********************************************************************
 *********************************************************************
 *************				*****************************
