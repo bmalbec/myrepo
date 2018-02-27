@@ -3,11 +3,9 @@
 . ~/catkin_ws/devel/setup.bash
 
 cd ~/catkin_ws/src/beginner_tutorials/scripts
-rm -f Controller_solo.py
+rm -f Controller_solo_dynamic.py temp_xml_template.xml
 cd ~
-cp Controller_solo.py Controller_solo2.py
-mv Controller_solo.py catkin_ws/src/beginner_tutorials/scripts
-mv Controller_solo2.py Controller_solo.py
+cp Controller_solo_dynamic.py temp_xml_template.xml catkin_ws/src/beginner_tutorials/scripts
 
 roslaunch launchjoy.launch
 
