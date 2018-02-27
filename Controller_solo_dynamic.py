@@ -44,7 +44,7 @@ def init_temp_values(tempXmlInitFile):
 	tempXmlInit.close()						#close initialization xml
 	time.sleep(0.001)
 
-	tempXmlBackup = open('temp_xml_backup.xml', 'w+')
+	tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'w+')
 	time.sleep(0.001)
 	tempXmlBackup.write(tempInitValues)
 	time.sleep(0.001)
@@ -58,18 +58,18 @@ def read_temp():
 	#tempXmlBackup = tempXmlTemplate.read()
 	#tempXmlTemplate.close()
 	time.sleep(0.001)
-	tempXmlData = open('temp_xml_data.xml', 'w+')
+	tempXmlData = open('/home/ubuntu/temp_xml_data.xml', 'w+')
 
 	tempSerialData = ser.readline()
 
 	time.sleep(0.001)
 	if tempSerialData:
-		tempXmlBackup = open('temp_xml_backup.xml', 'w+')
+		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'w+')
 		tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
 		tempXmlBackup.close()
 	if not tempSerialData:
-		tempXmlBackup = open('temp_xml_backup.xml', 'r')
+		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'r')
 		tempBackupData = tempXmlBackup.read()
 		tempSerialData = tempBackupData
 		tempXmlBackup.close()
@@ -81,7 +81,7 @@ def read_temp():
 	tempXmlData.close()
 	time.sleep(0.001)
 
-	tempXmlTree = ET.parse('temp_xml_data.xml')
+	tempXmlTree = ET.parse('/home/ubuntu/temp_xml_data.xml')
 	tempXmlRoot = tempXmlTree.getroot()
 
 	temp = tempXmlRoot[0][0].text
@@ -218,7 +218,7 @@ oled_init(disp)
 time.sleep(0.001)
 
 #####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-init_temp_values('temp_xml_template.xml')
+init_temp_values('/home/ubuntu/temp_xml_template.xml')
 time.sleep(0.001)
 
 statement="""
