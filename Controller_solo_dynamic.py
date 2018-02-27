@@ -58,9 +58,9 @@ def read_temp():
 	#tempXmlTemplate.close()
 	time.sleep(0.001)
 	tempXmlData = open("temp_xml_data.xml", 'w+')
-#	print "finna read serial"
+
 	tempSerialData = ser.readline()
-#	print "read the serial"
+
 	time.sleep(0.001)
 	if tempSerialData:
 		tempXmlBackup = open("temp_xml_backup.xml", 'w+')
@@ -89,7 +89,7 @@ def read_temp():
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
-#	print "start callback"
+
 	#####	Initialize the arrays	#####
 	axesArray = []
 	buttonArray = []
@@ -99,14 +99,14 @@ def callback(data):
 	axesArray.insert(1,data.axes[1])
 	axesArray.insert(2,data.axes[3])
 	axesArray.insert(3,data.axes[4])
-#	print "axesArray filled"
+
 
 	#####	Fill buttonArray with the D-Pad's left/right/up/down data, then cut off the arbitrary data	#####
 	buttonArray.insert(0,data.buttons[11])
 	buttonArray.insert(1,data.buttons[12])
 	buttonArray.insert(2,data.buttons[13])
 	buttonArray.insert(3,data.buttons[14])
-#	print "buttonArray filled"
+
 
 	#############################################
 	#####	Create the .xml structure	#####
@@ -154,24 +154,21 @@ def callback(data):
 	#####	Send info through the serial port, along with a newline character (required for ROV to read data properly)	#####
 	ser.write(myData)
 	ser.write('\n')
-#	print "shit's sent"
+
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-#	print "boutta go to read_temp"
+
 	temp = read_temp()
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-#	print "finna print temp"
 #	print(temp)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-#	print "finna go to oled_temp"
 	oled_temp(disp, temp)
 	time.sleep(0.001)
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-#	print "finna print more shit out"
 	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
 	screen.refresh()
 #	print "AXES:"
@@ -179,19 +176,15 @@ def callback(data):
 #	print "BUTTONS:"
 #	print buttonArray
 
-#	print "end callback"
+
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox():
-#	print "start readXbox"
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 
-#	print "readXbox prior rospy.subscriber"
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
-
 	rospy.Subscriber("joy",Joy,callback)
-#	print "readXbox post rospy.subscriber"
 
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
@@ -235,8 +228,8 @@ Buttons:{}
 *********************************************************************
 *********************************************************************
 *************				*****************************
-*************	I'm the mothafuckin	*****************************
-*************	controller GUI		*****************************
+*************	   Controller GUI	*****************************
+*************	    (Debug mode)	*****************************
 *************				*****************************
 *********************************************************************
 *********************************************************************
@@ -251,7 +244,6 @@ screen = curses.initscr()
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
 if __name__=='__main__':	
 	#####	Perform the readXbox function	#####
-#	print "if loop"
 	readXbox()
 
 curses.endwin()
