@@ -58,20 +58,25 @@ def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
 	time.sleep(0.001)
 
 def parse_pwm_values(pwmXmlCurrentFile):
-	pwmTree = ET.parse(pwmXmlCurrentFile)	#parse the current values
-	time.sleep(0.001)
-	pwmRoot = pwmTree.getroot()				#get the root of the parse tree
+	try:
+		time.sleep(0.005)
+		pwmTree = ET.parse(pwmXmlCurrentFile)	#parse the current values
+		time.sleep(0.001)
+		pwmRoot = pwmTree.getroot()				#get the root of the parse tree
 
-	lx = float(pwmRoot[0][0].text)
-	ly = float(pwmRoot[0][1].text)
-	rx = float(pwmRoot[0][2].text)
-	ry = float(pwmRoot[0][3].text)
-	d_left = int(pwmRoot[0][4].text)
-	d_right = int(pwmRoot[0][5].text)
-	d_up = int(pwmRoot[0][6].text)
-	d_down = int(pwmRoot[0][7].text)
+		lx = float(pwmRoot[0][0].text)
+		ly = float(pwmRoot[0][1].text)
+		rx = float(pwmRoot[0][2].text)
+		ry = float(pwmRoot[0][3].text)
+		d_left = int(pwmRoot[0][4].text)
+		d_right = int(pwmRoot[0][5].text)
+		d_up = int(pwmRoot[0][6].text)
+		d_down = int(pwmRoot[0][7].text)
 
-	return lx, ly, rx, ry, d_left, d_right, d_up, d_down
+		return lx, ly, rx, ry, d_left, d_right, d_up, d_down
+	
+	except ET.ParseError:
+		pass
 
 def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
@@ -160,14 +165,14 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 		if newValueRY > threshold:
 			print "\t\tASCEND"
 			ascendval = 2*(newValueRY - threshold)
-			motor5 += ascendval
-			motor6 += ascendval
+			motor5 -= ascendval
+			motor6 -= ascendval
 	#	DESCEND
 		if newValueRY < threshold:
 			print "\t\tDESCEND"
 			descendval = 2*(threshold - newValueRY)
-			motor5 -= descendval
-			motor6 -= descendval
+			motor5 += descendval
+			motor6 += descendval
 
 	if motor1>ceiling:
 		motor1=ceiling
