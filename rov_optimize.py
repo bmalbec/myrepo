@@ -200,7 +200,7 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	#time.sleep(0.1)
 	pwm.set_pwm(0,0,motor1)
 	#time.sleep(0.1)
-	pwm.set_pwm(1,0,motor2)
+	pwm.set_pwm(5,0,motor2)
 	#time.sleep(0.1)
 	pwm.set_pwm(2,0,motor3)
 	#time.sleep(0.1)
