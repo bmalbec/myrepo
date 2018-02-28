@@ -76,7 +76,7 @@ def parse_pwm_values(pwmXmlCurrentFile):
 		return lx, ly, rx, ry, d_left, d_right, d_up, d_down
 	
 	except ET.ParseError:
-		pass
+		return 0, 0, 0, 0, 0, 0, 0, 0
 
 def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
