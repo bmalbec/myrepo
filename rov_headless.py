@@ -59,7 +59,7 @@ def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
 
 def parse_pwm_values(pwmXmlCurrentFile):
 	try:
-		time.sleep(0.005)
+		time.sleep(0.009)
 		pwmTree = ET.parse(pwmXmlCurrentFile)	#parse the current values
 		time.sleep(0.001)
 		pwmRoot = pwmTree.getroot()				#get the root of the parse tree
@@ -110,11 +110,11 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	motor6=stopped
 
 	if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
-		print "\t\tSTOPPED"
+		#print "\t\tSTOPPED"
 	else:
 	#	LEFT
 		if newValueLX > threshold:
-			print "\t\tLEFT"
+			#print "\t\tLEFT"
 			leftval = newValueLX - threshold
 			motor1 -= leftval
 			motor2 += leftval
@@ -122,7 +122,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 			motor4 -= leftval
 	#	RIGHT
 		if newValueLX < threshold:
-			print "\t\tRIGHT"
+			#print "\t\tRIGHT"
 			rightval = threshold - newValueLX
 			motor1 += rightval
 			motor2 -= rightval
@@ -130,7 +130,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 			motor4 += rightval
 	#	FORWARD
 		if newValueLY > threshold:
-			print "\t\tFORWARD"
+			#print "\t\tFORWARD"
 			fwdval = newValueLY - threshold
 			motor1 += fwdval
 			motor2 += fwdval
@@ -138,7 +138,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 			motor4 += fwdval
 	#	BACKWARD
 		if newValueLY < threshold:
-			print "\t\tBACKWARD"
+			#print "\t\tBACKWARD"
 			backval = threshold - newValueLY
 			motor1 -= backval
 			motor2 -= backval
@@ -146,7 +146,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 			motor4 -= backval
 	#	ROTATE LEFT
 		if newValueRX > threshold:
-			print "\t\tROTATE LEFT"
+			#print "\t\tROTATE LEFT"
 			rotateleftval = newValueRX - threshold
 			motor1 -= rotateleftval
 			motor2 += rotateleftval
@@ -155,7 +155,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 
 	#	ROTATE RIGHT
 		if newValueRX < threshold:
-			print "\t\tROTATE RIGHT"
+			#print "\t\tROTATE RIGHT"
 			rotaterightval = threshold - newValueRX
 			motor1 += rotaterightval
 			motor2 -= rotaterightval
@@ -163,13 +163,13 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 			motor4 -= rotaterightval
 	#	ASCEND
 		if newValueRY > threshold:
-			print "\t\tASCEND"
+			#print "\t\tASCEND"
 			ascendval = 2*(newValueRY - threshold)
 			motor5 -= ascendval
 			motor6 -= ascendval
 	#	DESCEND
 		if newValueRY < threshold:
-			print "\t\tDESCEND"
+			#print "\t\tDESCEND"
 			descendval = 2*(threshold - newValueRY)
 			motor5 += descendval
 			motor6 += descendval
@@ -282,20 +282,20 @@ while True:
 		#print "RX: %i" % newValueRX
 		#print "RY: %i" % newValueRY
 
-		print "MOTORS:"
-		print "1: %i" % motor1
-		print "2: %i" % motor2
-		print "3: %i" % motor3
-		print "4: %i" % motor4
-		print "5: %i" % motor5
-		print "6: %i" % motor6
+		#print "MOTORS:"
+		#print "1: %i" % motor1
+		#print "2: %i" % motor2
+		#print "3: %i" % motor3
+		#print "4: %i" % motor4
+		#print "5: %i" % motor5
+		#print "6: %i" % motor6
 
-		print "BUTTONS:"
-		print "D-Pad Left: %i" % d_left
-		print "D-Pad Right: %i" % d_right
-		print "D-Pad Up: %i" % d_up
-		print "D-Pad Down: %i" % d_down
-		print '\n'
+		#print "BUTTONS:"
+		#print "D-Pad Left: %i" % d_left
+		#print "D-Pad Right: %i" % d_right
+		#print "D-Pad Up: %i" % d_up
+		#print "D-Pad Down: %i" % d_down
+		#print '\n'
 
 	except ET.ParseError:
 		pass
