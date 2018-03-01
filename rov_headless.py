@@ -109,70 +109,70 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	motor5=stopped
 	motor6=stopped
 
-	if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
+	#if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
 		#print "\t\tSTOPPED"
-	else:
-	#	LEFT
-		if newValueLX > threshold:
-			#print "\t\tLEFT"
-			leftval = newValueLX - threshold
-			motor1 -= leftval
-			motor2 += leftval
-			motor3 += leftval
-			motor4 -= leftval
-	#	RIGHT
-		if newValueLX < threshold:
-			#print "\t\tRIGHT"
-			rightval = threshold - newValueLX
-			motor1 += rightval
-			motor2 -= rightval
-			motor3 -= rightval
-			motor4 += rightval
-	#	FORWARD
-		if newValueLY > threshold:
-			#print "\t\tFORWARD"
-			fwdval = newValueLY - threshold
-			motor1 += fwdval
-			motor2 += fwdval
-			motor3 += fwdval
-			motor4 += fwdval
-	#	BACKWARD
-		if newValueLY < threshold:
-			#print "\t\tBACKWARD"
-			backval = threshold - newValueLY
-			motor1 -= backval
-			motor2 -= backval
-			motor3 -= backval
-			motor4 -= backval
-	#	ROTATE LEFT
-		if newValueRX > threshold:
-			#print "\t\tROTATE LEFT"
-			rotateleftval = newValueRX - threshold
-			motor1 -= rotateleftval
-			motor2 += rotateleftval
-			motor3 -= rotateleftval
-			motor4 += rotateleftval
+	#else:
+#	LEFT
+	if newValueLX > threshold:
+		#print "\t\tLEFT"
+		leftval = newValueLX - threshold
+		motor1 -= leftval
+		motor2 += leftval
+		motor3 += leftval
+		motor4 -= leftval
+#	RIGHT
+	if newValueLX < threshold:
+		#print "\t\tRIGHT"
+		rightval = threshold - newValueLX
+		motor1 += rightval
+		motor2 -= rightval
+		motor3 -= rightval
+		motor4 += rightval
+#	FORWARD
+	if newValueLY > threshold:
+		#print "\t\tFORWARD"
+		fwdval = newValueLY - threshold
+		motor1 += fwdval
+		motor2 += fwdval
+		motor3 += fwdval
+		motor4 += fwdval
+#	BACKWARD
+	if newValueLY < threshold:
+		#print "\t\tBACKWARD"
+		backval = threshold - newValueLY
+		motor1 -= backval
+		motor2 -= backval
+		motor3 -= backval
+		motor4 -= backval
+#	ROTATE LEFT
+	if newValueRX > threshold:
+		#print "\t\tROTATE LEFT"
+		rotateleftval = newValueRX - threshold
+		motor1 -= rotateleftval
+		motor2 += rotateleftval
+		motor3 -= rotateleftval
+		motor4 += rotateleftval
 
-	#	ROTATE RIGHT
-		if newValueRX < threshold:
-			#print "\t\tROTATE RIGHT"
-			rotaterightval = threshold - newValueRX
-			motor1 += rotaterightval
-			motor2 -= rotaterightval
-			motor3 += rotaterightval
-			motor4 -= rotaterightval
-	#	ASCEND
-		if newValueRY > threshold:
-			#print "\t\tASCEND"
-			ascendval = 2*(newValueRY - threshold)
-			motor5 -= ascendval
-			motor6 -= ascendval
-	#	DESCEND
-		if newValueRY < threshold:
-			#print "\t\tDESCEND"
-			descendval = 2*(threshold - newValueRY)
-			motor5 += descendval
-			motor6 += descendval
+#	ROTATE RIGHT
+	if newValueRX < threshold:
+		#print "\t\tROTATE RIGHT"
+		rotaterightval = threshold - newValueRX
+		motor1 += rotaterightval
+		motor2 -= rotaterightval
+		motor3 += rotaterightval
+		motor4 -= rotaterightval
+#	ASCEND
+	if newValueRY > threshold:
+		#print "\t\tASCEND"
+		ascendval = 2*(newValueRY - threshold)
+		motor5 -= ascendval
+		motor6 -= ascendval
+#	DESCEND
+	if newValueRY < threshold:
+		#print "\t\tDESCEND"
+		descendval = 2*(threshold - newValueRY)
+		motor5 += descendval
+		motor6 += descendval
 
 	if motor1>ceiling:
 		motor1=ceiling
