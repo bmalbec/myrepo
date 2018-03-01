@@ -171,8 +171,7 @@ def callback(data):
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
-	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
-	screen.refresh()
+	
 #	print "AXES:"
 #	print axesArray
 #	print "BUTTONS:"
@@ -222,22 +221,6 @@ time.sleep(0.001)
 init_temp_values('/home/ubuntu/temp_xml_template.xml')
 time.sleep(0.001)
 
-statement="""
-Temperature:{}
-Axes:{}
-Buttons:{}
-
-*********************************************************************
-*********************************************************************
-*************				*****************************
-*************	   Controller GUI	*****************************
-*************	    (Debug mode)	*****************************
-*************				*****************************
-*********************************************************************
-*********************************************************************
-"""
-
-screen = curses.initscr()
 
 #############################
 #####	Main loop	#####
@@ -248,4 +231,4 @@ if __name__=='__main__':
 	#####	Perform the readXbox function	#####
 	readXbox()
 
-curses.endwin()
+
