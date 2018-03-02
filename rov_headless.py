@@ -237,7 +237,8 @@ def send_temp(tempPin, ser):
 	ser.write(tempXML)
 	ser.write('\n')
 	#print(rawTemp)
-
+	#print tempC
+	
 ##############################################
 ############# Set Parameters #################
 ##############################################
