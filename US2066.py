@@ -96,7 +96,10 @@ def ROM_A_Switch(argument):
 		"x":0x78,
 		"y":0x79,
 		"z":0x7A,
-		"~":0x80
+		"~":0x80,
+		"[":0xFA,
+		"]":0xFC,
+		"$":0x82
 	}
 	return ROM_A_Switcher.get(argument)
 
