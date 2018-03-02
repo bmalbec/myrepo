@@ -95,7 +95,8 @@ def ROM_A_Switch(argument):
 		"w":0x77,
 		"x":0x78,
 		"y":0x79,
-		"z":0x7A
+		"z":0x7A,
+		"deg":0x80
 	}
 	return ROM_A_Switcher.get(argument)
 
