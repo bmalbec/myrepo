@@ -27,15 +27,21 @@ from std_msgs.msg import String, Char, Float64, Int32
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 def oled_init(display):
-  display.command(0x01)
-  display.command(0x00)
-  display.write("Temperature:")
+  #display.command(0x01)
+  #display.command(0x00)
+  #display.write("Temperature:")
+	display.command(0x01)
+	display.command(0x00)
+	display.write("Temperature:")
 
 #####	Move the OLED cursor to the second line and write out the temperature	#####	
 def oled_temp(display, temperature):
-  display.command(0xA0)
-  display.write(temperature)
-  display.write("~C")
+  #display.command(0xA0)
+  #display.write(temperature)
+  #display.write("~C")
+  	display.command(0xA0)
+  	display.write(temperature)
+  	display.write("~C")
 
 def init_temp_values(tempXmlInitFile):
 	tempXmlInit = open(tempXmlInitFile, 'r')	#open initialization xml for pwm values
