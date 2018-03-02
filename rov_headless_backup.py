@@ -78,17 +78,12 @@ def parse_pwm_values(pwmXmlCurrentFile):
 	except ET.ParseError:
 		return 0, 0, 0, 0, 0, 0, 0, 0
 
-#def ramp_formula(oldValue, currentValue):	
-#	difference =
-	
-def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY):
+def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down):
 	old_min = -1
 	old_max = 1
 	new_min = 2300
 	new_max = 3700
-	
-	max_jump = 100
-	
+
 	ceiling = new_max
 	floor = new_min
 
@@ -114,40 +109,9 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevVa
 	motor5=stopped
 	motor6=stopped
 
-#	if abs(newValueLX - prevValueLX) > threshold:
-#		newValueLX = ramp_formula(prevValueLX, newValueLX)
-#	if abs(newValueLY - prevValueLY) > threshold:
-#		newValueLY = ramp_formula(prevValueLY, newValueLY)
-#	if abs(newValueRX - prevValueRX) > threshold:
-#		newValueRX = ramp_formula(prevValueRX, newValueRX)
-#	if abs(newValueRY - prevValueRY) > threshold:
-#		newValueRY = ramp_formula(prevValueRY, newValueRY)
-
-	if (newValueLX - prevValueLX) > max_jump:
-		newValueLX = prevValueLX + max_jump
-	if (prevValueLX - newValueLX) > max_jump:
-		newValueLX = prevValueLX - max_jump
-		
-	if (newValueLY - prevValueLY) > max_jump:
-		newValueLY = prevValueLY + max_jump
-	if (prevValueLY - newValueLY) > max_jump:
-		newValueLY = prevValueLY - max_jump
-		
-	if (newValueRX - prevValueRX) > max_jump:
-		newValueRX = prevValueRX + max_jump
-	if (prevValueRX - newValueRX) > max_jump:
-		newValueRX = prevValueRX - max_jump		
-
-	if (newValueRY - prevValueRY) > max_jump:
-		newValueRY = prevValueRY + max_jump
-	if (prevValueRY - newValueRY) > max_jump:
-		newValueRY = prevValueRY - max_jump
-		
-	prevValueLX = newValueLX
-	prevValueLY = newValueLY
-	prevValueRX = newValueRX
-	prevValueRY = newValueRY
-	
+	#if newValueLX == threshold and newValueLY == threshold and newValueRX == threshold and newValueRY == threshold:
+		#print "\t\tSTOPPED"
+	#else:
 #	LEFT
 	if newValueLX > threshold:
 		#print "\t\tLEFT"
@@ -235,7 +199,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevVa
 	if motor6<floor:
 		motor6=floor
 
-	return motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY
+	return motor1, motor2, motor3, motor4, motor5, motor6
 
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	#time.sleep(0.1)
@@ -289,10 +253,6 @@ pwmXmlCurrentFile = '/home/ubuntu/testfile4.xml'
 
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 
-prevValueLX = 3000
-prevValueLY = 3000
-prevValueRX = 3000
-prevValueRY = 3000
 
 ###############################################
 ####### Call Initialization Functions #########
@@ -313,7 +273,7 @@ while True:
 
 		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
 
-		motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY)
+		motor1, motor2, motor3, motor4, motor5, motor6 = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down)
 
 		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
 
