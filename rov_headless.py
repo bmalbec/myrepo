@@ -246,8 +246,8 @@ tempPin = "AIN1"
 i2cAddress = 0x40
 pwmFreq = 485
 
-pwmXmlInitFile = "testfile5.xml"
-pwmXmlCurrentFile = "testfile4.xml"
+pwmXmlInitFile = '/home/ubuntu/testfile5.xml'
+pwmXmlCurrentFile = '/home/ubuntu/testfile4.xml'
 
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 
