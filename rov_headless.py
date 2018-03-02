@@ -228,12 +228,10 @@ def new_temp_xml(rawTemp):
 def send_temp(tempPin, ser):
 	#rawTemp = round(ADC.read(tempPin),1)
 	rawTemp = ADC.read(tempPin)
-	###trying out###############
-	rawTemp = "%10.1f" % rawTemp
-	############################
 	time.sleep(0.001)
 	millivolts = rawTemp * 1800
-	tempC = (millivolts - 800) / 10
+	#tempC = (millivolts - 800) / 10
+	tempC = float("{0:.1f}".format((millivolts - 800) / 10))
 	tempData = new_temp_xml(tempC)
 	tempXML = ET.tostring(tempData)
 	ser.write(tempXML)
