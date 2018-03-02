@@ -44,7 +44,7 @@ def oled_temp(display, temperature):
   #display.write("~C")
   	display.command(0xA0)
   	display.write(temperature)
-  	display.write(" ~C")
+  	display.write(" ~C ")
 
 def init_temp_values(tempXmlInitFile):
 	tempXmlInit = open(tempXmlInitFile, 'r')	#open initialization xml for pwm values
