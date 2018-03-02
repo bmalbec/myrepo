@@ -125,23 +125,27 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevVa
 
 	if (newValueLX - prevValueLX) > max_jump:
 		newValueLX = prevValueLX + max_jump
-	if (prevValueLX - newValueLX) > max_jump:
-		newValueLX = prevValueLX - max_jump
+	else:
+		if (prevValueLX - newValueLX) > max_jump:
+			newValueLX = prevValueLX - max_jump
 		
 	if (newValueLY - prevValueLY) > max_jump:
 		newValueLY = prevValueLY + max_jump
-	if (prevValueLY - newValueLY) > max_jump:
-		newValueLY = prevValueLY - max_jump
+	else:
+		if (prevValueLY - newValueLY) > max_jump:
+			newValueLY = prevValueLY - max_jump
 		
 	if (newValueRX - prevValueRX) > max_jump:
 		newValueRX = prevValueRX + max_jump
-	if (prevValueRX - newValueRX) > max_jump:
-		newValueRX = prevValueRX - max_jump		
+	else:
+		if (prevValueRX - newValueRX) > max_jump:
+			newValueRX = prevValueRX - max_jump		
 
 	if (newValueRY - prevValueRY) > max_jump:
 		newValueRY = prevValueRY + max_jump
-	if (prevValueRY - newValueRY) > max_jump:
-		newValueRY = prevValueRY - max_jump
+	else:
+		if (prevValueRY - newValueRY) > max_jump:
+			newValueRY = prevValueRY - max_jump
 		
 	prevValueLX = newValueLX
 	prevValueLY = newValueLY
