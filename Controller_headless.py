@@ -34,9 +34,35 @@ def oled_logo(display):
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 def oled_init(display):
 	###trying to display NT2 logo	###
-	display.command(0x01)
+	display.command(0x28)	#fundamental command set
+	display.command(0x80)	#DDRAM address 0x00
+	display.command(0x40)	#CGRAM address 0x00
+	display.command(0x1F)	#first line of dots for custom character 
+	
+	display.command(0x41)
+	display.command(0x10)
+	
+	display.command(0x42)
+	display.command(0x17)
+	
+	display.command(0x43)
+	display.command(0x17)
+	
+	display.command(0x44)
+	display.command(0x16)
+	
+	display.command(0x45)
+	display.command(0x16)
+	
+	display.command(0x46)
+	display.command(0x16)
+	
+	display.command(0x47)
+	display.command(0x16)
+	
 	display.command(0x00)
 	display.write("       ")
+	display.write(0x00)
 	time.sleep(4)
 	##################################
 	display.command(0x01)
