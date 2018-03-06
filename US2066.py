@@ -167,7 +167,8 @@ class US2066Base(object):
 		self.command(0x72)  #function selection B, disable internal Vdd regualtor
 		self.data(0x00)     #ROM CGRAM selection
 		### my stuff	###
-		self.command(0x40)
+	#	self.command(0x40)
+		self.command(0x00)
 		self.data(0x00)
 		self.data(0x0F)
 		self.data(0x08)
