@@ -186,7 +186,7 @@ class US2066Base(object):
 		self.data(0x16)
 		self.data(0x16)
 		####################
-		###	playground	###################
+		###	top 2	###################
 		self.data(0x0)
 		self.data(0x0)
 		self.data(0x11)
@@ -195,6 +195,26 @@ class US2066Base(object):
 		self.data(0x19)
 		self.data(0x19)
 		self.data(0x19)
+		###########################################
+		###	top 3	###################
+		self.data(0x0)
+		self.data(0x0)
+		self.data(0x17)
+		self.data(0x17)
+		self.data(0x11)
+		self.data(0x11)
+		self.data(0x11)
+		self.data(0x11)
+		###########################################
+		###	top 4	###################
+		self.data(0x1f)
+		self.data(0x1)
+		self.data(0x1d)
+		self.data(0x1d)
+		self.data(0x11)
+		self.data(0x11)
+		self.data(0x11)
+		self.data(0x11)
 		###########################################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
