@@ -228,7 +228,7 @@ class US2066Base(object):
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x18)
-		self.data(0x19)
+		self.data(0x0)
 		###########################################
 		###	top 4	###################
 	#	self.data(0x1f)
