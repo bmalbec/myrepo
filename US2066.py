@@ -15,13 +15,13 @@ ENTRY_MODE_SET_CURSOR_LEFT_SHIFT = 0x05
 def ROM_A_Switch(argument):
 	ROM_A_Switcher = {
 		" ":0x0F,
-		"!":0x21,
-		"#":0x23,
-		"%":0x25,
-		"&":0x26,
-		"(":0x28,
+		#"!":0x21,
+		#"#":0x23,
+		#"%":0x25,
+		#"&":0x26,
+		#"(":0x28,
 		")":0x29,
-		"*":0x2A,
+		#"*":0x2A,
 		"+":0x2B,
 		",":0x2C,
 		"-":0x2D,
@@ -99,8 +99,16 @@ def ROM_A_Switch(argument):
 		"~":0x80,
 		"[":0xFA,
 		"]":0xFC,
-		"$":0x82,
-		"@":0x00
+		#"$":0x82,	#squared character
+		"!":0x00,	#top 1
+		"@":0x01,	#top 2
+		"#":0x02,	#top 3
+		"$":0x03,	#top 4
+		"%":0x04,	#bottom 1
+		"^":0x05,	#bottom 2
+		"&":0x06,	#bottom 3
+		"*":0x07,	#bottom 4
+		"(":0x82	#squared char
 	}
 	return ROM_A_Switcher.get(argument)
 
@@ -178,6 +186,16 @@ class US2066Base(object):
 		self.data(0x16)
 		self.data(0x16)
 		####################
+		###	playground	###################
+		self.data(0x0)
+		self.data(0x0)
+		self.data(0x11)
+		self.data(0x11)
+		self.data(0x19)
+		self.data(0x19)
+		self.data(0x19)
+		self.data(0x19)
+		###########################################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
 		self.command(0xDA)  #set SEG pins hardware configuration
