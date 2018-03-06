@@ -152,13 +152,6 @@ class US2066Base(object):
 		self.reset()
 		self._initialize()
 		self.command(0x0F) #turn on display
-		
-		###	trying to display the nt2 logo	#####
-		self.command(0x05)
-		#self.write(leftBracketTop)
-		self.write("Hello")
-		time.sleep(2)
-		#############################################
 
 	def reset(self):
 		"Reset the display"
