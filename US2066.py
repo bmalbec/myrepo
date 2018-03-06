@@ -100,7 +100,7 @@ def ROM_A_Switch(argument):
 		"[":0xFA,
 		"]":0xFC,
 		"$":0x82,
-		"@":0x01
+		"@":0x00
 	}
 	return ROM_A_Switcher.get(argument)
 
@@ -167,12 +167,16 @@ class US2066Base(object):
 		self.command(0x72)  #function selection B, disable internal Vdd regualtor
 		self.data(0x00)     #ROM CGRAM selection
 		### my stuff	###
-	#	self.command(0x40)
-		self.data(0x1F)
-		self.data(0x1F)
-		self.data(0x1F)
-		self.data(0x1F)
-		self.data(0x1F)
+		self.command(0x40)
+		self.data(0x00)
+		self.data(0x0F)
+		self.data(0x08)
+		self.data(0x08)
+		self.data(0x09)
+		self.data(0x09)
+		self.data(0x09)
+		self.data(0x09)
+	#	self.data(0x1F)
 	#	self.data(0x10)
 	#	self.data(0x17)
 	#	self.data(0x17)
