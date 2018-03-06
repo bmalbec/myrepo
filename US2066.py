@@ -156,6 +156,7 @@ class US2066Base(object):
 		###	trying to display the nt2 logo	#####
 		self.command(0x05)
 		self.write(leftBracketTop)
+		time.sleep(2)
 		#############################################
 
 	def reset(self):
