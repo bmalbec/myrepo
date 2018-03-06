@@ -44,6 +44,9 @@ def oled_temp(display, temperature):
   #display.write("~C")
   	display.command(0xA0)
   	display.write(temperature)
+	###trying out#######
+	display.command(0xAA)
+	####################
   	display.write(" ~C ")
 
 def init_temp_values(tempXmlInitFile):
