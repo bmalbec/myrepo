@@ -45,7 +45,7 @@ def oled_temp(display, temperature):
   	display.command(0xA0)
   	display.write(temperature)
 	###trying out#######
-	display.command(0xAA)
+	display.command(0xA6)
 	####################
   	display.write(" ~C ")
 
