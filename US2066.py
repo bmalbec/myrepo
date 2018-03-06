@@ -168,7 +168,8 @@ class US2066Base(object):
 		self.data(0x00)     #ROM CGRAM selection
 		### my stuff	###
 	#	self.command(0x40)
-		self.command(0x00)
+		self.command(0x28)	#	fundamental command set
+		self.command(0x40)	#	cgram address 0
 		self.data(0x00)
 		self.data(0x0F)
 		self.data(0x08)
