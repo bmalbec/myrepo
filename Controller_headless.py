@@ -256,7 +256,7 @@ disp.begin()
 time.sleep(0.001)
 
 #####	Display NT^2 logo	#####
-disp.createChar(0,top1)
+
 #oled_logo(disp)
 #time.sleep(4)
 
