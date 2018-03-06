@@ -165,6 +165,17 @@ class US2066Base(object):
 		self.command(0x06)  #COM SEG direction
 		self.command(0x72)  #function selection B, disable internal Vdd regualtor
 		self.data(0x00)     #ROM CGRAM selection
+		### my stuff	###
+		self.command(0x40)
+		self.data(0x1F)
+		self.data(0x10)
+		self.data(0x17)
+		self.data(0x17)
+		self.data(0x16)
+		self.data(0x16)
+		self.data(0x16)
+		self.data(0x16)
+		####################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
 		self.command(0xDA)  #set SEG pins hardware configuration
