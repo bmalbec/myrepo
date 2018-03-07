@@ -260,8 +260,8 @@ class US2066Base(object):
 		###########################################
 		###	T2	###################
 		self.data(0x0)
-		self.data(0x1f)
-		self.data(0x1f)
+		self.data(0x1e)
+		self.data(0x1e)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
