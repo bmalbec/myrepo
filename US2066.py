@@ -190,14 +190,14 @@ class US2066Base(object):
 		self.data(0x1b)
 		self.data(0x19)
 		self.data(0x19)'''
-		self.data(0x0)
-		self.data(0x1e)
-		self.data(0x1e)
-		self.data(0x1b)
-		self.data(0x1b)
-		self.data(0x1b)
-		self.data(0x19)
-		self.data(0x19)
+		self.data(0x1f)
+		self.data(0x10)
+		self.data(0x16)
+		self.data(0x16)
+		self.data(0x15)
+		self.data(0x15)
+		self.data(0x15)
+		self.data(0x15)
 	########	N top right		##################################################################
 '''		self.data(0x0)
 		self.data(0x3)
@@ -207,6 +207,14 @@ class US2066Base(object):
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x13)'''
+		self.data(0x0)
+		self.data(0x0)
+		self.data(0x4)
+		self.data(0x4)
+		self.data(0x4)
+		self.data(0x4)
+		self.data(0x4)
+		self.data(0x4)
 	########	N bottom left		###################################################################
 '''		self.data(0x19)
 		self.data(0x18)
@@ -216,6 +224,14 @@ class US2066Base(object):
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x0)'''
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x10)
+		self.data(0x1f)
 	########	N bottom right		####################################################################
 '''		self.data(0x13)
 		self.data(0x13)
@@ -225,6 +241,14 @@ class US2066Base(object):
 		self.data(0xf)
 		self.data(0xf)
 		self.data(0x0)'''
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0x14)
+		self.data(0xc)
+		self.data(0xc)
+		self.data(0x0)
+		self.data(0x0)
 	########	T top left		####################################################################
 '''		self.data(0x0)
 		self.data(0xf)
@@ -234,6 +258,14 @@ class US2066Base(object):
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)'''
+		self.data(0x0)
+		self.data(0x0)
+		self.data(0xf)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
 	########	T top right		####################################################################
 '''		self.data(0x0)
 		self.data(0x1e)
@@ -243,6 +275,14 @@ class US2066Base(object):
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)'''
+		self.data(0x1f)
+		self.data(0x1)
+		self.data(0x1d)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
 	########	T bottom left		####################################################################
 '''		self.data(0x1)
 		self.data(0x1)
@@ -252,6 +292,14 @@ class US2066Base(object):
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x0)'''
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x0)
+		self.data(0x0)
 	########	T bottom right		####################################################################
 '''		self.data(0x10)
 		self.data(0x10)
@@ -261,6 +309,14 @@ class US2066Base(object):
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x0)	'''
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1f)
 
 #####################################################################################################################
 		self.command(0x2A)  #function set (extended self.command set)
