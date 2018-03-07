@@ -47,14 +47,14 @@ def oled_logo(display):
 	#display.write("        !@%^(")
 	display.write("        !@%^")
 	display.command(0xA0)
-	display.command(0xAB)
+	display.command(0xAA)
 	display.write("&*")
 	time.sleep(1)
 	
 	###	Squared
 	display.command(0x02)
-	display.command(0x0F)
-	display.write("(")
+	display.write("        !@%^(")
+	
 	#display.command(0xA8)
 	#display.write("#$&*")
 	display.command(0x0C)
