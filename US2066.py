@@ -174,17 +174,14 @@ class US2066Base(object):
 		self.command(0x06)  #COM SEG direction
 		self.command(0x72)  #function selection B, disable internal Vdd regualtor
 		self.data(0x00)     #ROM CGRAM selection
-		### my stuff (THIS WORKS)	###
+		
+################	 my stuff (THIS WORKS)	###################################################################
+	
+	
 		self.command(0x28)	#	fundamental command set
 		self.command(0x40)	#	cgram address 0
-	#	self.data(0x1F)
-	#	self.data(0x10)
-	#	self.data(0x17)
-	#	self.data(0x17)
-	#	self.data(0x16)
-	#	self.data(0x16)
-	#	self.data(0x16)
-	#	self.data(0x16)
+		
+	########	N top left		###################################################################
 		self.data(0x0)
 		self.data(0x1e)
 		self.data(0x1e)
@@ -193,16 +190,7 @@ class US2066Base(object):
 		self.data(0x1b)
 		self.data(0x19)
 		self.data(0x19)
-		####################
-		###	top 2	###################
-	#	self.data(0x0)
-	#	self.data(0x0)
-	#	self.data(0x11)
-	#	self.data(0x11)
-	#	self.data(0x19)
-	#	self.data(0x19)
-	#	self.data(0x19)
-	#	self.data(0x19)
+	########	N top right		##################################################################
 		self.data(0x0)
 		self.data(0x3)
 		self.data(0x3)
@@ -211,16 +199,7 @@ class US2066Base(object):
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x13)
-		###########################################
-		###	top 3	###################
-	#	self.data(0x0)
-	#	self.data(0x0)
-	#	self.data(0x17)
-	#	self.data(0x17)
-	#	self.data(0x11)
-	#	self.data(0x11)
-	#	self.data(0x11)
-	#	self.data(0x11)
+	########	N bottom left		###################################################################
 		self.data(0x19)
 		self.data(0x18)
 		self.data(0x18)
@@ -229,16 +208,7 @@ class US2066Base(object):
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x0)
-		###########################################
-		###	top 4	###################
-	#	self.data(0x1f)
-	#	self.data(0x1)
-	#	self.data(0x1d)
-	#	self.data(0x1d)
-	#	self.data(0x11)
-	#	self.data(0x11)
-	#	self.data(0x11)
-	#	self.data(0x11)
+	########	N bottom right		####################################################################
 		self.data(0x13)
 		self.data(0x13)
 		self.data(0x1b)
@@ -247,8 +217,7 @@ class US2066Base(object):
 		self.data(0xf)
 		self.data(0xf)
 		self.data(0x0)
-		###########################################
-		###	T1	###################
+	########	T top left		####################################################################
 		self.data(0x0)
 		self.data(0xf)
 		self.data(0xf)
@@ -257,8 +226,7 @@ class US2066Base(object):
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
-		###########################################
-		###	T2	###################
+	########	T top right		####################################################################
 		self.data(0x0)
 		self.data(0x1e)
 		self.data(0x1e)
@@ -267,8 +235,7 @@ class US2066Base(object):
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
-		###########################################
-		###	T3	###################
+	########	T bottom left		####################################################################
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
@@ -277,8 +244,7 @@ class US2066Base(object):
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x0)
-		###########################################
-		###	T4	###################
+	########	T bottom right		####################################################################
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
@@ -287,7 +253,7 @@ class US2066Base(object):
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x0)
-		###########################################
+#####################################################################################################################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
 		self.command(0xDA)  #set SEG pins hardware configuration
