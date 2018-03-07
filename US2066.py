@@ -182,6 +182,14 @@ class US2066Base(object):
 		self.command(0x40)	#	cgram address 0
 		
 	########	N top left		###################################################################
+'''		self.data(0x0)
+		self.data(0x1e)
+		self.data(0x1e)
+		self.data(0x1b)
+		self.data(0x1b)
+		self.data(0x1b)
+		self.data(0x19)
+		self.data(0x19)'''
 		self.data(0x0)
 		self.data(0x1e)
 		self.data(0x1e)
@@ -191,68 +199,69 @@ class US2066Base(object):
 		self.data(0x19)
 		self.data(0x19)
 	########	N top right		##################################################################
-		self.data(0x0)
+'''		self.data(0x0)
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x3)
 		self.data(0x3)
-		self.data(0x13)
+		self.data(0x13)'''
 	########	N bottom left		###################################################################
-		self.data(0x19)
+'''		self.data(0x19)
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x18)
 		self.data(0x18)
-		self.data(0x0)
+		self.data(0x0)'''
 	########	N bottom right		####################################################################
-		self.data(0x13)
+'''		self.data(0x13)
 		self.data(0x13)
 		self.data(0x1b)
 		self.data(0x1b)
 		self.data(0x1b)
 		self.data(0xf)
 		self.data(0xf)
-		self.data(0x0)
+		self.data(0x0)'''
 	########	T top left		####################################################################
-		self.data(0x0)
+'''		self.data(0x0)
 		self.data(0xf)
 		self.data(0xf)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
-		self.data(0x1)
+		self.data(0x1)'''
 	########	T top right		####################################################################
-		self.data(0x0)
+'''		self.data(0x0)
 		self.data(0x1e)
 		self.data(0x1e)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
-		self.data(0x10)
+		self.data(0x10)'''
 	########	T bottom left		####################################################################
+'''		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
 		self.data(0x1)
-		self.data(0x1)
-		self.data(0x0)
+		self.data(0x0)'''
 	########	T bottom right		####################################################################
+'''		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
 		self.data(0x10)
-		self.data(0x10)
-		self.data(0x0)
+		self.data(0x0)	'''
+
 #####################################################################################################################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
