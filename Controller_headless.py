@@ -28,8 +28,10 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Make the NT^2 logo	#####
 def oled_logo(display):
 	display.command(0x01)
-	display.command(0x05)
-	display.write("Hello!")
+	display.command(0x03)
+	display.write("!@%^(")
+	display.command(0xA3)
+	display.write("#$&*")
 
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 def oled_init(display):
@@ -38,7 +40,7 @@ def oled_init(display):
 	##################################
 	display.command(0x01)
 	display.command(0x00)
-	display.write("!@%^(Temperature:")
+	display.write("Temperature:")
 	
 	###trying out###
 	display.command(0x0C)
@@ -47,7 +49,6 @@ def oled_init(display):
 #####	Move the OLED cursor to the second line and write out the temperature	#####	
 def oled_temp(display, temperature):
   	display.command(0xA0)
-	display.write("#$&*")
   	display.write(temperature)
 	###trying out#######
 	display.command(0xA6)
@@ -264,8 +265,8 @@ time.sleep(0.001)
 
 #####	Display NT^2 logo	#####
 
-#oled_logo(disp)
-#time.sleep(4)
+oled_logo(disp)
+time.sleep(3)
 
 #####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
 oled_init(disp)
