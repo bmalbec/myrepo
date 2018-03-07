@@ -29,8 +29,8 @@ from std_msgs.msg import String, Char, Float64, Int32
 def oled_logo(display):
 	display.command(0x01)
 	display.command(0x00)
-	display.write("          !@%^(")
-	display.command(0xAA)
+	display.write("        !@%^(")
+	display.command(0xA8)
 	display.write("#$&*")
 	display.command(0x0C)
 	
@@ -267,7 +267,7 @@ time.sleep(0.001)
 #####	Display NT^2 logo	#####
 
 oled_logo(disp)
-time.sleep(3)
+time.sleep(5)
 
 #####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
 oled_init(disp)
