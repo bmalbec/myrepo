@@ -32,7 +32,7 @@ def oled_logo(display):
 	display.command(0x0C)
 	
 	###	N
-	display.command(0x01)
+	#display.command(0x01)
 	display.command(0x00)
 	#display.write("        !@%^(")
 	display.write("        !@")
@@ -41,7 +41,7 @@ def oled_logo(display):
 	time.sleep(1)
 	
 	###	T
-	display.command(0x0A)
+	display.command(0x0C)
 	#display.write("        !@%^(")
 	display.write("%^")
 	display.command(0xAC)
