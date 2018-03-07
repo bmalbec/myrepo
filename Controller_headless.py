@@ -43,7 +43,7 @@ def oled_logo(display):
 	
 	###	T
 	display.command(0x02)
-	display.command(0x80)
+	display.command(0xC0)
 	#display.write("        !@%^(")
 	display.write("%^")
 	display.command(0xA0)
