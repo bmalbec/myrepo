@@ -38,7 +38,7 @@ def oled_init(display):
 	##################################
 	display.command(0x01)
 	display.command(0x00)
-	display.write("!@Temperature:")
+	display.write("!@  %^(Temperature:")
 	
 	###trying out###
 	display.command(0x0C)
@@ -47,7 +47,7 @@ def oled_init(display):
 #####	Move the OLED cursor to the second line and write out the temperature	#####	
 def oled_temp(display, temperature):
   	display.command(0xA0)
-	display.write("#$")
+	display.write("#$  &*")
   	display.write(temperature)
 	###trying out#######
 	display.command(0xA6)
