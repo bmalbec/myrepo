@@ -41,7 +41,7 @@ def oled_logo(display):
 	time.sleep(1)
 	
 	###	T
-	display.command(0x00)
+	display.command(0x02)
 	display.command(0x09)
 	#display.write("        !@%^(")
 	display.write("%^")
