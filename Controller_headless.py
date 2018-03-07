@@ -29,10 +29,11 @@ from std_msgs.msg import String, Char, Float64, Int32
 def oled_logo(display):
 	display.command(0x01)
 	display.command(0x00)
-	display.write("   !@%^(")
-	display.command(0xA3)
+	display.write("          !@%^(")
+	display.command(0xAA)
 	display.write("#$&*")
-
+	display.command(0x0C)
+	
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 def oled_init(display):
 	###trying to display NT2 logo	###
