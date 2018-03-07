@@ -32,31 +32,24 @@ def oled_logo(display):
 	display.command(0x0C)
 	
 	###	N
-	#display.command(0x01)
-	#display.command(0x00)
+
 	display.command(0x02)
-	#display.write("        !@%^(")
 	display.write("        !@")
 	display.command(0xA8)
 	display.write("#$")
-	time.sleep(1)
+	time.sleep(.5)
 	
 	###	T
 	display.command(0x02)
-#	display.command(0xC0)
-	#display.write("        !@%^(")
 	display.write("        !@%^")
 	display.command(0xA0)
 	display.command(0xAA)
 	display.write("&*")
-	time.sleep(1)
+	time.sleep(.5)
 	
 	###	Squared
 	display.command(0x02)
 	display.write("        !@%^(")
-	
-	#display.command(0xA8)
-	#display.write("#$&*")
 	display.command(0x0C)
 	
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
