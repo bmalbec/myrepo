@@ -28,8 +28,8 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Make the NT^2 logo	#####
 def oled_logo(display):
 	display.command(0x01)
-	display.command(0x03)
-	display.write("!@%^(")
+	display.command(0x00)
+	display.write("  !@%^(")
 	display.command(0xA3)
 	display.write("#$&*")
 
