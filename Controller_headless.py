@@ -33,7 +33,8 @@ def oled_logo(display):
 	
 	###	N
 	#display.command(0x01)
-	display.command(0x00)
+	#display.command(0x00)
+	display.command(0x02)
 	#display.write("        !@%^(")
 	display.write("        !@")
 	display.command(0xA8)
@@ -42,7 +43,7 @@ def oled_logo(display):
 	
 	###	T
 	display.command(0x02)
-	display.command(0x09)
+	display.command(0x50)
 	#display.write("        !@%^(")
 	display.write("%^")
 	display.command(0xA0)
