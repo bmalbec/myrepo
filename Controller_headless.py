@@ -27,18 +27,33 @@ from std_msgs.msg import String, Char, Float64, Int32
 
 #####	Make the NT^2 logo	#####
 def oled_logo(display):
+	###	! @	% ^	(
+	###	# $	& *
+	display.command(0x0C)
+	
 	display.command(0x01)
 	display.command(0x00)
-	display.write("        !@%^(")
+	#display.write("        !@%^(")
+	display.write("        !@")
 	display.command(0xA8)
-	display.write("#$&*")
-	display.command(0x0C)
+	display.write("#$")
+	time.sleep(1)
+	
+	display.command(0x08)
+	#display.write("        !@%^(")
+	display.write("%^")
+	display.command(0xAA)
+	display.write("&*")
+	time.sleep(1)
+	
+	display.command(0x0F)
+	display.write("(")
+	#display.command(0xA8)
+	#display.write("#$&*")
+	
 	
 #####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
 def oled_init(display):
-	###trying to display NT2 logo	###
-
-	##################################
 	display.command(0x01)
 	display.command(0x00)
 	display.write("Temperature:")
