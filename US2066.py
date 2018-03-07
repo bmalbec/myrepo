@@ -248,6 +248,46 @@ class US2066Base(object):
 		self.data(0xf)
 		self.data(0x0)
 		###########################################
+		###	T1	###################
+		self.data(0x0)
+		self.data(0xf)
+		self.data(0xf)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		###########################################
+		###	T2	###################
+		self.data(0x0)
+		self.data(0x1f)
+		self.data(0x1f)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		###########################################
+		###	T3	###################
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x1)
+		self.data(0x0)
+		###########################################
+		###	T4	###################
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x10)
+		self.data(0x0)
+		###########################################
 		self.command(0x2A)  #function set (extended self.command set)
 		self.command(0x79)  #OLED self.command set enabled
 		self.command(0xDA)  #set SEG pins hardware configuration
