@@ -333,7 +333,6 @@ while True:
 			pwm.set_pwm(4,0,i)
 			pwm.set_pwm(5,0,i)
 			pwm.set_pwm(6,0,i)
-			pwm.set_pwm(7,0,i)
 			print "rise %i" % i
 			time.sleep(0.01)
 			
