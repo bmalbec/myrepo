@@ -241,7 +241,7 @@ def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevVa
 
 	return motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY
 
-def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
+def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servoTurn, servoGrip):
 	#time.sleep(0.1)
 	pwm.set_pwm(0,0,motor1)
 	#time.sleep(0.1)
@@ -255,6 +255,20 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6):
 	#time.sleep(0.1)
 	pwm.set_pwm(1,0,motor6)
 	#time.sleep(0.1)
+	
+#	if d_left == 1:
+		#	turn left
+#	else:
+#		if d_right == 1:
+			#	turn right
+	
+	if d_up == 1:
+		#	open
+	else:
+		if d_down == 1:
+			#	close
+	
+	return servoTurn, servoGrip
 
 def new_temp_xml(rawTemp):
 	tempData = ET.Element('data')
@@ -298,6 +312,10 @@ prevValueLY = 3000
 prevValueRX = 3000
 prevValueRY = 3000
 
+servoTurn = 2600
+servoGrip = 2600
+
+
 ###############################################
 ####### Call Initialization Functions #########
 ###############################################
@@ -313,15 +331,15 @@ pwmInitValues = init_pwm_values(pwmXmlInitFile)
 
 while True:
 	try:
-#		read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
+		read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
 
-#		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
+		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
 
-#		motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY)
+		motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY)
 
-#		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
+		servoTurn, servoGrip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servoTurn, servoGrip)
 
-#		send_temp(tempPin, ser)
+		send_temp(tempPin, ser)
 		x=4000
 		i=1200
 		
@@ -329,7 +347,6 @@ while True:
 			pwm.set_pwm(0,0,i)
 			print "rise %i" % i
 			i+=10
-		#	time.sleep(0.01)
 		
 		x=4000
 		i=1200
@@ -337,8 +354,9 @@ while True:
 		while x > i:
 			pwm.set_pwm(0,0,x)
 			print "fall %i" % x
-		#	time.sleep(0.01)
+	
 			x-=10
+						
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
 		#print "LY: %i" % newValueLY
