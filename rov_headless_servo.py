@@ -322,11 +322,13 @@ while True:
 #		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
 
 #		send_temp(tempPin, ser)
+		x=4000
+		i=1200
 		
-		
-		for i in range(1200, 4000):
+		while i < x:
 			pwm.set_pwm(0,0,i)
 			print "rise %i" % i
+			i+=10
 		#	time.sleep(0.01)
 		
 		x=4000
@@ -336,7 +338,7 @@ while True:
 			pwm.set_pwm(0,0,x)
 			print "fall %i" % x
 		#	time.sleep(0.01)
-			x-=1
+			x-=10
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
 		#print "LY: %i" % newValueLY
