@@ -328,10 +328,12 @@ while True:
 		for i in range(0, 50):
 			pwm.set_pwm(0,0,i)
 			print "rise %i" % i
+			time.sleep(0.01)
 			
 		for i in range(50, 0):
 			pwm.set_pwm(0,0,i)
 			print "fall %i" % i
+			time.sleep(0.01)
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
 		#print "LY: %i" % newValueLY
