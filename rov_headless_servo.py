@@ -257,17 +257,29 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left
 	#time.sleep(0.1)
 	
 #	if d_left == 1:
-		#	turn left
+#		servoTurn -=5
 #	else:
 #		if d_right == 1:
-			#	turn right
+#			servoTurn +=5
 	
 	if d_up == 1:
-		#	open
+		servoGrip -= 5
 	else:
 		if d_down == 1:
-			#	close
+			servoGrip += 5
 	
+	if servoTurn > servoMax:
+		servoTurn = servoMax
+	if servoTurn < servoMin:
+		servoTurn = servoMin
+	if servoGrip > servoMax:
+		servoGrip = servoMax
+	if servoGrip < servoMin:
+		servoGrip = servoMin
+		
+	pwm.set_pwm(0,0,servoGrip)
+#	pwm.set_pwm(0,0,servoTurn)
+		
 	return servoTurn, servoGrip
 
 def new_temp_xml(rawTemp):
@@ -314,7 +326,8 @@ prevValueRY = 3000
 
 servoTurn = 2600
 servoGrip = 2600
-
+servoMax = 4000
+servoMin = 1200
 
 ###############################################
 ####### Call Initialization Functions #########
