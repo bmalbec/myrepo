@@ -327,6 +327,12 @@ while True:
 		
 		for i in range(0, 50):
 			pwm.set_pwm(0,0,i)
+			pwm.set_pwm(1,0,i)
+			pwm.set_pwm(2,0,i)
+			pwm.set_pwm(3,0,i)
+			pwm.set_pwm(4,0,i)
+			pwm.set_pwm(5,0,i)
+			pwm.set_pwm(6,0,i)
 			print "rise %i" % i
 			time.sleep(0.01)
 			
