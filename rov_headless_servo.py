@@ -256,29 +256,30 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left
 	pwm.set_pwm(1,0,motor6)
 	#time.sleep(0.1)
 	
-#	if d_left == 1:
-#		servoTurn -=5
-#	else:
-#		if d_right == 1:
-#			servoTurn +=5
-	
-	if d_up == 1:
-		servoGrip -= 5
-	else:
-		if d_down == 1:
-			servoGrip += 5
-	
-	if servoTurn > servoMax:
-		servoTurn = servoMax
-	if servoTurn < servoMin:
-		servoTurn = servoMin
-	if servoGrip > servoMax:
-		servoGrip = servoMax
-	if servoGrip < servoMin:
-		servoGrip = servoMin
-		
-	pwm.set_pwm(0,0,servoGrip)
-#	pwm.set_pwm(0,0,servoTurn)
+	if not d_left + d_right + d_up + d_down == 0:
+	#	if d_left == 1:
+	#		servoTurn -=5
+	#	else:
+	#		if d_right == 1:
+	#			servoTurn +=5
+
+		if d_up == 1:
+			servoGrip -= 5
+		else:
+			if d_down == 1:
+				servoGrip += 5
+
+		if servoTurn > servoMax:
+			servoTurn = servoMax
+		if servoTurn < servoMin:
+			servoTurn = servoMin
+		if servoGrip > servoMax:
+			servoGrip = servoMax
+		if servoGrip < servoMin:
+			servoGrip = servoMin
+
+		pwm.set_pwm(0,0,servoGrip)
+	#	pwm.set_pwm(0,0,servoTurn)
 		
 	return servoTurn, servoGrip
 
