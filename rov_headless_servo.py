@@ -322,11 +322,13 @@ while True:
 #		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
 
 #		send_temp(tempPin, ser)
+	#	x=50
+	#	i=0
 		
-		for i in range(0, 50)
+		for i in range(0, 50):
 			pwm.set_pwm(0,0,i)
 			
-		for i in range(50, 0)
+		for i in range(50, 0):
 			pwm.set_pwm(0,0,i)
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
