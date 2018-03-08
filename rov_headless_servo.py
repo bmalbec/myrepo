@@ -353,22 +353,23 @@ while True:
 		servoTurn, servoGrip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servoTurn, servoGrip)
 
 		send_temp(tempPin, ser)
-		x=4000
-		i=1200
 		
-		while i < x:
-			pwm.set_pwm(0,0,i)
-			print "rise %i" % i
-			i+=10
+#		x=4000
+#		i=1200
 		
-		x=4000
-		i=1200
+#		while i < x:
+#			pwm.set_pwm(0,0,i)
+#			print "rise %i" % i
+#			i+=10
 		
-		while x > i:
-			pwm.set_pwm(0,0,x)
-			print "fall %i" % x
+#		x=4000
+#		i=1200
+		
+#		while x > i:
+#			pwm.set_pwm(0,0,x)
+#			print "fall %i" % x
 	
-			x-=10
+#			x-=10
 						
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
