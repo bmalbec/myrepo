@@ -278,7 +278,7 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left
 		if servoGrip < servoMin:
 			servoGrip = servoMin
 
-		pwm.set_pwm(9,0,servoGrip)
+		pwm.set_pwm(6,0,servoGrip)
 	#	pwm.set_pwm(0,0,servoTurn)
 		
 	return servoTurn, servoGrip
