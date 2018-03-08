@@ -324,18 +324,18 @@ while True:
 #		send_temp(tempPin, ser)
 		
 		
-		for i in range(1000, 3100):
+		for i in range(1200, 3100):
 			pwm.set_pwm(0,0,i)
 			print "rise %i" % i
-			time.sleep(0.01)
+		#	time.sleep(0.01)
 		
 		x=3100
-		i=1000
+		i=1200
 		
 		while x > i:
 			pwm.set_pwm(0,0,x)
 			print "fall %i" % x
-			time.sleep(0.01)
+		#	time.sleep(0.01)
 			x-=1
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
