@@ -329,14 +329,14 @@ while True:
 			print "rise %i" % i
 			time.sleep(0.01)
 		
-		x=50
-		i=0
+		x=4096
+		i=2048
 		
 		while x > i:
-			pwm.set_pwm(0,0,i)
-			print "fall %i" % i
+			pwm.set_pwm(0,0,x)
+			print "fall %i" % x
 			time.sleep(0.01)
-			i+=1
+			x-=1
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
 		#print "LY: %i" % newValueLY
