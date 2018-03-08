@@ -324,13 +324,13 @@ while True:
 #		send_temp(tempPin, ser)
 		
 		
-		for i in range(2048, 4096):
+		for i in range(1000, 3100):
 			pwm.set_pwm(0,0,i)
 			print "rise %i" % i
 			time.sleep(0.01)
 		
-		x=4096
-		i=2048
+		x=3100
+		i=1000
 		
 		while x > i:
 			pwm.set_pwm(0,0,x)
