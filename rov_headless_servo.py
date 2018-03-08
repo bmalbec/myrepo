@@ -313,16 +313,21 @@ pwmInitValues = init_pwm_values(pwmXmlInitFile)
 
 while True:
 	try:
-		read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
+#		read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser)
 
-		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
+#		lx, ly, rx, ry, d_left, d_right, d_up, d_down = parse_pwm_values(pwmXmlCurrentFile)
 
-		motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY)
+#		motor1, motor2, motor3, motor4, motor5, motor6, prevValueLX, prevValueLY, prevValueRX, prevValueRY = calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY)
 
-		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
+#		set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6)
 
-		send_temp(tempPin, ser)
-
+#		send_temp(tempPin, ser)
+		
+		for i in range(0, 50)
+			pwm.set_pwm(0,0,i)
+			
+		for i in range(50, 0)
+			pwm.set_pwm(0,0,i)
 		#print "AXES:"
 		#print "LX: %i" % newValueLX
 		#print "LY: %i" % newValueLY
