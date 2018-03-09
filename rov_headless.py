@@ -318,7 +318,7 @@ pwmFreq = 485
 pwmXmlInitFile = '/home/ubuntu/testfile5.xml'
 pwmXmlCurrentFile = '/home/ubuntu/testfile4.xml'
 
-ser = serial.Serial('/dev/ttyO4', 19200, timeout=0.15)
+ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.15)
 
 prevValueLX = 3000
 prevValueLY = 3000
