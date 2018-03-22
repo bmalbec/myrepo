@@ -13,9 +13,9 @@ from Adafruit_PCA9685 import PCA9685 as PWM
 ########### Declare Functions #############
 ###########################################
 
-def init_pwm(i2cAddress, pwmFreq):
-	pwm = PWM(i2cAddress) 		#create a pwm object for PCA9685 at i2cAddress
-	pwm.set_pwm_freq(pwmFreq) 	#set desired pwm freq
+def init_pwm(i2c_address, pwm_freq):
+	pwm = PWM(i2c_address) 		#create a pwm object for PCA9685 at i2cAddress
+	pwm.set_pwm_freq(pwm_freq) 	#set desired pwm freq
 
 	return pwm
 
@@ -23,63 +23,60 @@ def init_temp():
 	ADC.setup()
 	time.sleep(0.001)
 
-def init_pwm_values(pwmXmlInitFile):
-	pwmXmlInit = open(pwmXmlInitFile, 'r')	#open initialization xml for pwm values
+def init_pwm_values(pwm_xml_init_file):
+	pwm_xml_init = open(pwm_xml_init_file, 'r')	#open initialization xml for pwm values
 	time.sleep(0.001)
-	pwmInitValues = pwmXmlInit.read()		#read the initial pwm values into pwmInitValues
+	pwm_init_values = pwm_xml_init.read()		#read the initial pwm values into pwmInitValues
 	time.sleep(0.001)
-	pwmXmlInit.close()						#close initialization xml
+	pwm_xml_init.close()						#close initialization xml
 	time.sleep(0.001)
 
-	return pwmInitValues
+	return pwm_init_values
 
 def init_temp_xml():
-	tempData = ET.Element('data')
-	tempItem = ET.SubElement(tempData, 'temp')
-	tempItem1 = ET.SubElement(tempItem, 'item')
-	tempItem1.set('name','Temperature')
-	tempItem1.text = "0.0"
+	temp_data = ET.Element('data')
+	temp_item = ET.SubElement(temp_data, 'temp')
+	temp_item_container = ET.SubElement(temp_item, 'item')
+	temp_item_container.set('name','Temperature')
+	temp_item_container.text = "0.0"
 
-	return tempData
+	return temp_data
 
-def read_pwm_values(pwmInitValues, pwmXmlCurrentFile, ser):
+def read_pwm_values(pwm_init_values, pwm_xml_current_file, ser):
 	time.sleep(0.01)
-	pwmXmlCurrentValues = open(pwmXmlCurrentFile, 'w+')	#open the xml for current pwm values
+	pwm_xml = open(pwm_xml_current_file, 'w+')	#open the xml for current pwm values
 	time.sleep(0.001)
-	pwmCurrentValues = ser.readline()					#read the incoming values
-	time.sleep(0.001)
-
-	if not pwmCurrentValues:							#if no incoming data
-		pwmCurrentValues = pwmInitValues				#set the pwm values to initial values
-
-	pwmXmlCurrentValues.write(pwmCurrentValues)
-	time.sleep(0.001)
-	pwmXmlCurrentValues.close()							#close the xml file
+	pwm_current_values = ser.readline()					#read the incoming values
 	time.sleep(0.001)
 
-def parse_pwm_values(pwmXmlCurrentFile):
+	if not pwm_current_values:							#if no incoming data
+		pwm_current_values = pwm_init_values				#set the pwm values to initial values
+
+	pwm_xml.write(pwm_current_values)
+	time.sleep(0.001)
+	pwm_xml.close()							#close the xml file
+	time.sleep(0.001)
+
+def parse_pwm_values(pwm_xml):
 	try:
 		time.sleep(0.009)
-		pwmTree = ET.parse(pwmXmlCurrentFile)	#parse the current values
+		pwm_tree = ET.parse(pwm_xml)	#parse the current values
 		time.sleep(0.001)
-		pwmRoot = pwmTree.getroot()				#get the root of the parse tree
+		pwm_root = pwm_tree.getroot()				#get the root of the parse tree
 
-		lx = float(pwmRoot[0][0].text)
-		ly = float(pwmRoot[0][1].text)
-		rx = float(pwmRoot[0][2].text)
-		ry = float(pwmRoot[0][3].text)
-		d_left = int(pwmRoot[0][4].text)
-		d_right = int(pwmRoot[0][5].text)
-		d_up = int(pwmRoot[0][6].text)
-		d_down = int(pwmRoot[0][7].text)
+		lx = float(pwm_root[0][0].text)
+		ly = float(pwm_root[0][1].text)
+		rx = float(pwm_root[0][2].text)
+		ry = float(pwm_root[0][3].text)
+		d_left = int(pwm_root[0][4].text)
+		d_right = int(pwm_root[0][5].text)
+		d_up = int(pwm_root[0][6].text)
+		d_down = int(pwm_root[0][7].text)
 
 		return lx, ly, rx, ry, d_left, d_right, d_up, d_down
 	
 	except ET.ParseError:
 		return 0, 0, 0, 0, 0, 0, 0, 0
-
-#def ramp_formula(oldValue, currentValue):	
-#	difference =
 	
 def calculate_motor_speeds(lx, ly, rx, ry, d_left, d_right, d_up, d_down, prevValueLX, prevValueLY, prevValueRX, prevValueRY):
 	old_min = -1
