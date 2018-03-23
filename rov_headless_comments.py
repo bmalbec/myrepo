@@ -82,6 +82,7 @@ def parse_pwm_values(pwm_xml):
 def calculate_motor_speeds(left_x, left_y, right_x, right_y, 
 			   d_left, d_right, d_up, d_down, 
 			   prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY):
+	
 	old_min = -1
 	old_max = 1
 	new_min = 2300
@@ -93,7 +94,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 	floor = new_min
 
 	#temp = new_min
-	new_max = (new_max-new_min)/2
+	new_max = (new_max - new_min) / 2
 	new_min = 0
 
 	old_range = old_max - old_min
@@ -101,19 +102,19 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 
 	#stopped=temp+new_max		commented out bc "temp" is redundant of "floor", and it's only used here 
 	stopped = floor + new_max
-	threshold= new_max/2
+	threshold = new_max / 2
 
-	new_value_LX=int(((left_x-old_min)*new_range)/old_range)+new_min
-	new_value_LY=int(((left_y-old_min)*new_range)/old_range)+new_min
-	new_value_RX=int(((right_x-old_min)*new_range)/old_range)+new_min
-	new_value_RY=int(((right_y-old_min)*new_range)/old_range)+new_min
+	new_value_LX = int(((left_x - old_min) * new_range) / old_range) + new_min
+	new_value_LY = int(((left_y - old_min) * new_range) / old_range) + new_min
+	new_value_RX = int(((right_x - old_min) * new_range) / old_range) + new_min
+	new_value_RY = int(((right_y - old_min) * new_range) / old_range) + new_min
 
-	motor1=stopped
-	motor2=stopped
-	motor3=stopped
-	motor4=stopped
-	motor5=stopped
-	motor6=stopped
+	motor1 = stopped
+	motor2 = stopped
+	motor3 = stopped
+	motor4 = stopped
+	motor5 = stopped
+	motor6 = stopped
 
 #	if abs(newValueLX - prevValueLX) > threshold:
 #		newValueLX = ramp_formula(prevValueLX, newValueLX)
@@ -161,6 +162,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		motor2 += left_val
 		motor3 += left_val
 		motor4 -= left_val
+
 #	RIGHT
 	if new_value_LX < threshold:
 		#print "\t\tRIGHT"
@@ -169,6 +171,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		motor2 -= right_val
 		motor3 -= right_val
 		motor4 += right_val
+
 #	FORWARD
 	if new_value_LY > threshold:
 		#print "\t\tFORWARD"
@@ -177,6 +180,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		motor2 += fwd_val
 		motor3 += fwd_val
 		motor4 += fwd_val
+
 #	BACKWARD
 	if new_value_LY < threshold:
 		#print "\t\tBACKWARD"
@@ -185,6 +189,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		motor2 -= back_val
 		motor3 -= back_val
 		motor4 -= back_val
+
 #	ROTATE LEFT
 	if new_value_RX > threshold:
 		#print "\t\tROTATE LEFT"
@@ -202,43 +207,46 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		motor2 -= rotate_right_val
 		motor3 += rotate_right_val
 		motor4 -= rotate_right_val
+
 #	ASCEND
 	if new_value_RY > threshold:
 		#print "\t\tASCEND"
-		ascend_val = 2*(new_value_RY - threshold)
+		ascend_val = 2 * (new_value_RY - threshold)
 		motor5 -= ascend_val
 		motor6 -= ascend_val
+
 #	DESCEND
 	if new_value_RY < threshold:
 		#print "\t\tDESCEND"
-		descend_val = 2*(threshold - new_value_RY)
+		descend_val = 2 * (threshold - new_value_RY)
 		motor5 += descend_val
 		motor6 += descend_val
 
-	if motor1>ceiling:
-		motor1=ceiling
-	if motor1<floor:
-		motor1=floor
-	if motor2>ceiling:
-		motor2=ceiling
-	if motor2<floor:
-		motor2=floor
-	if motor3>ceiling:
-		motor3=ceiling
-	if motor3<floor:
-		motor3=floor
-	if motor4>ceiling:
-		motor4=ceiling
-	if motor4<floor:
-		motor4=floor
-	if motor5>ceiling:
-		motor5=ceiling
-	if motor5<floor:
-		motor5=floor
-	if motor6>ceiling:
-		motor6=ceiling
-	if motor6<floor:
-		motor6=floor
+#	Restrict final motor values within the allowed bounds
+	if motor1 > ceiling:
+		motor1 = ceiling
+	if motor1 < floor:
+		motor1 = floor
+	if motor2 > ceiling:
+		motor2 = ceiling
+	if motor2 < floor:
+		motor2 = floor
+	if motor3 > ceiling:
+		motor3 = ceiling
+	if motor3 < floor:
+		motor3 = floor
+	if motor4 > ceiling:
+		motor4 = ceiling
+	if motor4 < floor:
+		motor4 = floor
+	if motor5 > ceiling:
+		motor5 = ceiling
+	if motor5 < floor:
+		motor5 = floor
+	if motor6 > ceiling:
+		motor6 = ceiling
+	if motor6 < floor:
+		motor6 = floor
 
 	return (motor1, motor2, motor3, motor4, motor5, motor6, 
 		prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
@@ -263,15 +271,18 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 	
 	
 	if not d_left + d_right + d_up + d_down == 0:
+#		Rotate Left
 	#	if d_left == 1:
 	#		servo_turn -=5
 	#	else:
+#			Rotate Right	
 	#		if d_right == 1:
 	#			servo_turn +=5
-
+#		Open
 		if d_up == 1:
 			servo_grip -= 5
 		else:
+#			Close
 			if d_down == 1:
 				servo_grip += 5
 
@@ -282,6 +293,7 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 		servo_min = 1200
 ##########################################################################
 
+#		Restrict servo values within the allowed bounds
 		if servo_turn > servo_max:
 			servo_turn = servo_max
 		if servo_turn < servo_min:
@@ -291,12 +303,14 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 		if servo_grip < servo_min:
 			servo_grip = servo_min
 
+#		Set the PWM of each servo
 		pwm.set_pwm(6,0,servo_grip)
 	#	pwm.set_pwm(0,0,servo_turn)
 		
 	return servo_turn, servo_grip
 
 def new_temp_xml(raw_temp):
+
 	temp_data = ET.Element('data')
 	temp_item = ET.SubElement(temp_data, 'temp')
 	temp_item_container = ET.SubElement(temp_item, 'item')
@@ -306,18 +320,15 @@ def new_temp_xml(raw_temp):
 	return temp_data
 
 def send_temp(temp_pin, ser):
-	#rawTemp = round(ADC.read(tempPin),1)
+	
 	raw_temp = ADC.read(temp_pin)
 	time.sleep(0.001)
-	millivolts = raw_temp * 1800
-	#tempC = (millivolts - 800) / 10
+	millivolts = raw_temp * 1800	
 	temp_C = float("{0:.1f}".format((millivolts - 803) / 8))
 	temp_data = new_temp_xml(temp_C)
 	temp_XML = ET.tostring(temp_data)
 	ser.write(temp_XML)
 	ser.write('\n')
-	#print(rawTemp)
-	#print tempC
 	
 ##############################################
 ############# Set Parameters #################
@@ -346,7 +357,6 @@ servo_min = 1200
 ###############################################
 ####### Call Initialization Functions #########
 ###############################################
-
 pwm = init_pwm(i2c_address, pwm_freq)
 init_temp()
 temp_data = init_temp_xml()
@@ -355,7 +365,6 @@ pwm_init_values = init_pwm_values(pwm_xml_init_file)
 ##############################################
 ################### Main #####################
 ##############################################
-
 while True:
 	try:
 		read_pwm_values(pwm_init_values, pwm_xml_current_file, ser)
