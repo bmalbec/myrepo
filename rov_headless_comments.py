@@ -14,7 +14,7 @@ from Adafruit_PCA9685 import PCA9685 as PWM
 ###########################################
 
 def init_pwm(i2c_address, pwm_freq):
-	pwm = PWM(i2c_address) 		#create a pwm object for PCA9685 at i2cAddress
+	pwm = PWM(i2c_address) 		#create a pwm object for PCA9685 at i2c_address
 	pwm.set_pwm_freq(pwm_freq) 	#set desired pwm freq
 
 	return pwm
