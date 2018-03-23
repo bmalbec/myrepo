@@ -73,12 +73,15 @@ def parse_pwm_values(pwm_xml):
 		d_up = int(pwm_root[0][6].text)
 		d_down = int(pwm_root[0][7].text)
 
-		return left_x, left_y, right_x, right_y, d_left, d_right, d_up, d_down
+		return (left_x, left_y, right_x, right_y, 
+			d_left, d_right, d_up, d_down)
 	
 	except ET.ParseError:
 		return 0, 0, 0, 0, 0, 0, 0, 0
 	
-def calculate_motor_speeds(left_x, left_y, right_x, right_y, d_left, d_right, d_up, d_down, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY):
+def calculate_motor_speeds(left_x, left_y, right_x, right_y, 
+			   d_left, d_right, d_up, d_down, 
+			   prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY):
 	old_min = -1
 	old_max = 1
 	new_min = 2300
@@ -237,9 +240,13 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y, d_left, d_right, d_
 	if motor6<floor:
 		motor6=floor
 
-	return motor1, motor2, motor3, motor4, motor5, motor6, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY
+	return (motor1, motor2, motor3, motor4, motor5, motor6, 
+		prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
 
-def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servo_turn, servo_grip):
+def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, 
+		     d_left, d_right, d_up, d_down, 
+		     servo_turn, servo_grip):
+	
 	#time.sleep(0.1)
 	pwm.set_pwm(0,0,motor1)
 	#time.sleep(0.1)
@@ -361,43 +368,5 @@ while True:
 
 		send_temp(temp_pin, ser)
 		
-#		x=4000
-#		i=1200
-		
-#		while i < x:
-#			pwm.set_pwm(0,0,i)
-#			print "rise %i" % i
-#			i+=10
-		
-#		x=4000
-#		i=1200
-		
-#		while x > i:
-#			pwm.set_pwm(0,0,x)
-#			print "fall %i" % x
-	
-#			x-=10
-						
-		#print "AXES:"
-		#print "LX: %i" % newValueLX
-		#print "LY: %i" % newValueLY
-		#print "RX: %i" % newValueRX
-		#print "RY: %i" % newValueRY
-
-		#print "MOTORS:"
-		#print "1: %i" % motor1
-		#print "2: %i" % motor2
-		#print "3: %i" % motor3
-		#print "4: %i" % motor4
-		#print "5: %i" % motor5
-		#print "6: %i" % motor6
-
-		#print "BUTTONS:"
-		#print "D-Pad Left: %i" % d_left
-		#print "D-Pad Right: %i" % d_right
-		#print "D-Pad Up: %i" % d_up
-		#print "D-Pad Down: %i" % d_down
-		#print '\n'
-
 	except ET.ParseError:
 		pass
