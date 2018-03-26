@@ -216,18 +216,20 @@ def callback(data):
 
 
 	#####	Testing as of March 26, 2018 by Brian Malbec	#####
-	if (data.buttons[0] == 0) && (screenChangeFlag == 1):
-		screenChangeFlag = 0
-		oled_init(disp)
-		time.sleep(0.001)
+	if (data.buttons[0] == 0):
+		if(screenChangeFlag == 1):
+			screenChangeFlag = 0
+			oled_init(disp)
+			time.sleep(0.001)
 
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
 #	oled_temp(disp, temp)
 #	time.sleep(0.001)
 	#####	Testing as of March 26, 2018 by Brian Malbec	#####
-	if (data.buttons[0] == 0) && (screenChangeFlag == 0):
-		oled_temp(disp, temp)
-		time.sleep(0.001)
+	if (data.buttons[0] == 0):
+		if(screenChangeFlag == 0):
+			oled_temp(disp, temp)
+			time.sleep(0.001)
 
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
