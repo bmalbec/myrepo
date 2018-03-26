@@ -124,18 +124,16 @@ def read_temp():
 	return temp
 
 #####	Testing March 26, 2018 by Brian Malbec	#####
-def check_status(display,receivedData):
-	display.command(0x01)
-	display.command(0x00)
-#	display.write("Controller: ")
-#	
-#	display.command(0xA0)
-	display.write("ROV: ")
-	if receivedData == 1:
-		display.write("Up")
-	if receivedData == 0:
-		display.write("Down")
-	display.command(0x0C)
+#def check_status(display,receivedData):
+#	display.command(0x01)
+#	display.command(0x00)
+
+#	display.write("ROV: ")
+#	if receivedData == 1:
+#		display.write("Up")
+#	if receivedData == 0:
+#		display.write("Down")
+#	display.command(0x0C)
 	
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
@@ -217,19 +215,19 @@ def callback(data):
 
 
 	#####	Testing as of March 26, 2018 by Brian Malbec	#####
-	if (data.buttons[0] == 0):
-		if(screenChangeFlag == 1):
-			screenChangeFlag = 0
-			oled_init(disp)
-			time.sleep(0.001)
+#	if (data.buttons[0] == 0):
+#		if(screenChangeFlag == 1):
+#			screenChangeFlag = 0
+#			oled_init(disp)
+#			time.sleep(0.001)
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-#	oled_temp(disp, temp)
-#	time.sleep(0.001)
+	oled_temp(disp, temp)
+	time.sleep(0.001)
 #####	Testing as of March 26, 2018 by Brian Malbec	#####
-	if (data.buttons[0] == 0):
-		if(screenChangeFlag == 0):
-			oled_temp(disp, temp)
-			time.sleep(0.001)
+#	if (data.buttons[0] == 0):
+#		if(screenChangeFlag == 0):
+#			oled_temp(disp, temp)
+#			time.sleep(0.001)
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
@@ -238,9 +236,10 @@ def callback(data):
 #	print axesArray
 #	print "BUTTONS:"
 #	print buttonArray
-	if data.buttons[0] == 1:
-		screenChangeFlag = 1
-		check_status(disp,receivedData)
+
+#	if data.buttons[0] == 1:
+#		screenChangeFlag = 1
+#		check_status(disp,receivedData)
 
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
@@ -309,8 +308,8 @@ time.sleep(0.001)
 init_temp_values('/home/ubuntu/temp_xml_template.xml')
 time.sleep(0.001)
 
-screenChangeFlag = 0
-receivedData = 0
+#screenChangeFlag = 0
+#receivedData = 0
 
 #############################
 #####	Main loop	#####
