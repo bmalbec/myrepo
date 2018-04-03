@@ -25,7 +25,8 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####################################
 #####	Define Functions	#####
 #####################################
-def servo_move(data, rate, servoCur, servoMin, servoMax):
+
+#def servo_move(data, rate, servoCur, servoMin, servoMax):
 	
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
