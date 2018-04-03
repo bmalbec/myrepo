@@ -60,8 +60,31 @@ def callback(data,itemList):
 	servoCur = itemList[2]
 	rate = itemList[3]
 	
-	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
+#	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 
+	if data.buttons[11] == 1:
+		rate -= 1
+	if data.buttons[12] == 1:
+		rate += 1
+
+	if rate < 1:
+		rate = 1
+	if rate > 10:
+		rate = 10
+	
+	if data.buttons[13] == 1:
+		if servoCur > servoMin:
+			servoCur -= rate
+			
+	if data.buttons[14] == 1:
+		if servoCur < servoMax:
+			servoCur += rate
+	
+	if servoCur < servoMin:
+		servoCur = servoMin
+	if servoCur > servoMax:
+		servoCur = servoMax
+		
 			
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
