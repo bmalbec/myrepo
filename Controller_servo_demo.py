@@ -76,6 +76,7 @@ Servo MINIMUM:{}
 Servo MAXIMUM:{}
 Servo CURRENT:{}
 
+Press left/right on D-pad to decrease/increase opening/closing rate
 Press 'A' to go into set-up mode
 
 In set-up mode:
