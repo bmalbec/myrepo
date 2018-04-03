@@ -66,9 +66,7 @@ def oled_init(display):
 def oled_temp(display, temperature):
   	display.command(0xA0)
   	display.write(temperature)
-	###trying out#######
 	display.command(0xA6)
-	####################
   	display.write(" ~C ")
 
 def init_temp_values(tempXmlInitFile):
@@ -89,9 +87,6 @@ def init_temp_values(tempXmlInitFile):
 
 #####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
 def read_temp():
-	#tempXmlTemplate = open("temp_xml_template.xml", 'r')
-	#tempXmlBackup = tempXmlTemplate.read()
-	#tempXmlTemplate.close()
 	time.sleep(0.001)
 	tempXmlData = open('/home/ubuntu/temp_xml_data.xml', 'w+')
 
@@ -99,11 +94,17 @@ def read_temp():
 
 	time.sleep(0.001)
 	if tempSerialData:
+		#####	Testing March 26, 2018	######
+		receivedData = 1
+		######################################
 		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'w+')
 		tempXmlBackup.write(tempSerialData)
 		tempOldSerialData = tempSerialData
 		tempXmlBackup.close()
 	if not tempSerialData:
+		#####	Testing March 26, 2018	######
+		receivedData = 0
+		######################################
 		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'r')
 		tempBackupData = tempXmlBackup.read()
 		tempSerialData = tempBackupData
@@ -124,18 +125,20 @@ def read_temp():
 	return temp
 
 #####	Testing March 26, 2018 by Brian Malbec	#####
-#def check_status(display,receivedData):
-#	display.command(0x01)
-#	display.command(0x00)
-
-#	display.write("ROV: ")
-#	if receivedData == 1:
-#		display.write("Up")
-#	if receivedData == 0:
-#		display.write("Down")
-#	display.command(0x0C)
+def check_status(display,receivedData):
+	display.command(0x01)
+	display.command(0x00)
+#	display.write("Controller: ")
+#	
+#	display.command(0xA0)
+	display.write("ROV: ")
+	if receivedData == 1:
+		display.write("Up")
+	if receivedData == 0:
+		display.write("Down")
+	display.command(0x0C)
 	
-
+		
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
 
@@ -206,28 +209,28 @@ def callback(data):
 
 
 	#####	Go to the function that reads the serial port for temperature data, set that data to the variable "temp"	#####
-
 	temp = read_temp()
 
 	#####	Print the temperature value to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 #	print(temp)
 
 
-
 	#####	Testing as of March 26, 2018 by Brian Malbec	#####
-#	if (data.buttons[0] == 0):
-#		if(screenChangeFlag == 1):
-#			screenChangeFlag = 0
-#			oled_init(disp)
-#			time.sleep(0.001)
+	if (data.buttons[0] == 0):
+		if(screenChangeFlag == 1):
+			screenChangeFlag = 0
+			oled_init(disp)
+			time.sleep(0.001)
+
 	#####	Write the temperature (variable "temp") to the OLED Display (at I2C address "disp"), wait 10ms	#####
-	oled_temp(disp, temp)
-	time.sleep(0.001)
-#####	Testing as of March 26, 2018 by Brian Malbec	#####
-#	if (data.buttons[0] == 0):
-#		if(screenChangeFlag == 0):
-#			oled_temp(disp, temp)
-#			time.sleep(0.001)
+#	oled_temp(disp, temp)
+#	time.sleep(0.001)
+	#####	Testing as of March 26, 2018 by Brian Malbec	#####
+	if (data.buttons[0] == 0):
+		if(screenChangeFlag == 0):
+			oled_temp(disp, temp)
+			time.sleep(0.001)
+
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
@@ -237,9 +240,10 @@ def callback(data):
 #	print "BUTTONS:"
 #	print buttonArray
 
-#	if data.buttons[0] == 1:
-#		screenChangeFlag = 1
-#		check_status(disp,receivedData)
+	#####	Testing as of March 26, 2018 by Brian Malbec	#####
+	if data.buttons[0] == 1:
+		screenChangeFlag = 1
+		check_status(disp,receivedData)
 
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
@@ -266,24 +270,6 @@ def signal_handler(signal, frame):
 #####	Initializations		#####
 #####################################
 
-#####	Custom OLED character codes	#####
-top1=[0x1f,0x10,0x17,0x17,0x16,0x16,0x16,0x16]
-top2=[0x0,0x0,0x11,0x11,0x19,0x19,0x19,0x19]
-top3=[0x0,0x0,0x17,0x17,0x11,0x11,0x11,0x11]
-top4=[0x1f,0x1,0x1d,0x1d,0x11,0x11,0x11,0x11]
-bottom1=[0x16,0x16,0x16,0x16,0x16,0x16,0x10,0x1f]
-bottom2=[0x1d,0xd,0xd,0xd,0x7,0x7,0x0,0x0]
-bottom3=[0x11,0x11,0x11,0x11,0x11,0x11,0x0,0x0]
-bottom4=[0x11,0x11,0x11,0x11,0x11,0x11,0x1,0x1f]
-
-Ntop1=[0x0,0x1e,0x1e,0x1b,0x1b,0x1b,0x19,0x19]
-Ntop2=[0x0,0x3,0x3,0x3,0x3,0x3,0x3,0x13]
-Nbot1=[0x19,0x18,0x18,0x18,0x18,0x18,0x18,0x0]
-Nbot2=[0x13,0x13,0x1b,0x1b,0x1b,0xf,0xf,0x0]
-Ttop1=[0x0,0xf,0xf,0x1,0x1,0x1,0x1,0x1]
-Ttop2=[0x0,0x1f,0x1f,0x10,0x10,0x10,0x10,0x10]
-Tbot1=[0x1,0x1,0x1,0x1,0x1,0x1,0x1,0x0]
-Tbot2=[0x10,0x10,0x10,0x10,0x10,0x10,0x10,0x0]
 
 #####	Define the serial port and baud rate	#####
 ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.05)
@@ -296,7 +282,6 @@ disp.begin()
 time.sleep(0.001)
 
 #####	Display NT^2 logo	#####
-
 oled_logo(disp)
 time.sleep(5)
 
@@ -308,8 +293,8 @@ time.sleep(0.001)
 init_temp_values('/home/ubuntu/temp_xml_template.xml')
 time.sleep(0.001)
 
-#screenChangeFlag = 0
-#receivedData = 0
+screenChangeFlag = 0
+receivedData = 0
 
 #############################
 #####	Main loop	#####
