@@ -55,7 +55,7 @@ def servo_move(data, rate, servoCur, servoMin, servoMax):
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
 
-	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
+	#servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 	
 	
 			
