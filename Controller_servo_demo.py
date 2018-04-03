@@ -44,10 +44,10 @@ def callback(data,itemList):
 	if data.buttons[12] == 1:
 		rate += 1
 
-	if rate < 10:
-		rate = 10
-	if rate > 20:
-		rate = 20
+	if rate < 1:
+		rate = 1
+	if rate > 200:
+		rate = 200
 	
 	if data.buttons[13] == 1:
 		servoCur -= rate
@@ -101,7 +101,7 @@ pwm.set_pwm_freq(485)
 servoMin = 1300
 servoMax = 4100
 servoCur = 2700
-rate = 15
+rate = 30
 
 itemList = [servoMin,servoMax,servoCur,rate]
 
