@@ -73,19 +73,18 @@ def callback(data,itemList):
 		rate = 10
 	
 	if data.buttons[13] == 1:
-		if servoCur > servoMin:
-			servoCur -= rate
+		servoCur -= rate
 			
 	if data.buttons[14] == 1:
-		if servoCur < servoMax:
-			servoCur += rate
+		servoCur += rate
 	
 	if servoCur < servoMin:
 		servoCur = servoMin
 	if servoCur > servoMax:
 		servoCur = servoMax
 		
-			
+	itemList[2] = servoCur
+	
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
 	screen.refresh()
