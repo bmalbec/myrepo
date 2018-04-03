@@ -25,70 +25,6 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####	Define Functions	#####
 #####################################
 
-#####	Reset the OLED cursor to the first line and write out the string "Temperature:"	#####
-def oled_init(display):
-  display.command(0x01)
-  display.command(0x00)
-  display.write("Temperature:")
-
-#####	Move the OLED cursor to the second line and write out the temperature	#####	
-def oled_temp(display, temperature):
-  display.command(0xA0)
-  display.write(temperature)
-
-
-def init_temp_values(tempXmlInitFile):
-	tempXmlInit = open(tempXmlInitFile, 'r')	#open initialization xml for pwm values
-	time.sleep(0.001)
-	tempInitValues = tempXmlInit.read()		#read the initial pwm values into pwmInitValues
-	time.sleep(0.001)
-	tempXmlInit.close()						#close initialization xml
-	time.sleep(0.001)
-
-	tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'w+')
-	time.sleep(0.001)
-	tempXmlBackup.write(tempInitValues)
-	time.sleep(0.001)
-	tempXmlBackup.close()
-
-	return tempInitValues
-
-#####	Read the serial port, write incoming temperature data into an .xml file, parse the .xml file, obtain the temperature data	#####
-def read_temp():
-	#tempXmlTemplate = open("temp_xml_template.xml", 'r')
-	#tempXmlBackup = tempXmlTemplate.read()
-	#tempXmlTemplate.close()
-	time.sleep(0.001)
-	tempXmlData = open('/home/ubuntu/temp_xml_data.xml', 'w+')
-
-	tempSerialData = ser.readline()
-
-	time.sleep(0.001)
-	if tempSerialData:
-		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'w+')
-		tempXmlBackup.write(tempSerialData)
-		tempOldSerialData = tempSerialData
-		tempXmlBackup.close()
-	if not tempSerialData:
-		tempXmlBackup = open('/home/ubuntu/temp_xml_backup.xml', 'r')
-		tempBackupData = tempXmlBackup.read()
-		tempSerialData = tempBackupData
-		tempXmlBackup.close()
-
-
-
-	tempXmlData.write(tempSerialData)
-
-	tempXmlData.close()
-	time.sleep(0.001)
-
-	tempXmlTree = ET.parse('/home/ubuntu/temp_xml_data.xml')
-	tempXmlRoot = tempXmlTree.getroot()
-
-	temp = tempXmlRoot[0][0].text
-
-	return temp
-
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
 
@@ -172,7 +108,7 @@ def callback(data):
 
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	#screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray,getcwd()))
-	screen.addstr(0, 0, statement.format(temp, axesArray, buttonArray))
+	screen.addstr(0, 0, statement.format(servoMax, servoMin, servoCur))
 	screen.refresh()
 #	print "AXES:"
 #	print axesArray
@@ -205,34 +141,22 @@ def signal_handler(signal, frame):
 #####	Initializations		#####
 #####################################
 
-#####	Define the serial port and baud rate	#####
-ser = serial.Serial('/dev/ttyO4', 38400, timeout=0.05)
-
-#####	I2C address of OLED Display	#####
-disp = DISP(0x3C)
-
-#####	Resets OLED, Clears OLED, Initializes OLED, then waits 10ms	#####
-disp.begin()
-time.sleep(0.001)
-
-#####	Start up OLED by sending I2C address to "oled_init" function, then wait 1ms	#####
-oled_init(disp)
-time.sleep(0.001)
-
-#####	Open the .xml template in read-only mode, assign whatever is inside to the tempOldSerialData variable, then close the file	#####
-init_temp_values('/home/ubuntu/temp_xml_template.xml')
-time.sleep(0.001)
-
 statement="""
-Temperature:{}
-Axes:{}
-Buttons:{}
+Servo MINIMUM:{}
+Servo MAXIMUM:{}
+Servo CURRENT:{}
+
+Press 'A' to go into set-up mode
+
+In set-up mode:
+	Press 'X' to set current to new minimum
+	Press 'Y' to set current to new maximum
 
 *********************************************************************
 *********************************************************************
 *************				*****************************
-*************	   Controller GUI	*****************************
-*************	    (Debug mode)	*****************************
+*************	   Controller Servo	*****************************
+*************	    	Demo		*****************************
 *************				*****************************
 *********************************************************************
 *********************************************************************
