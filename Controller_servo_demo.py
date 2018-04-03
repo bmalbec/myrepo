@@ -60,7 +60,7 @@ def callback(data):
 	
 			
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
-	screen.addstr(0, 0, statement.format(servoMax, servoMin, servoCur, rate))
+	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
 	screen.refresh()
 
 	pwm.set_pwm(7,0,servoCur)
