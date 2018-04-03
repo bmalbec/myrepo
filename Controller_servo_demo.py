@@ -74,7 +74,7 @@ def callback(data,itemList):
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
 	screen.refresh()
 
-	pwm.set_pwm(7,0,servoCur)
+	#pwm.set_pwm(7,0,servoCur)
 
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
