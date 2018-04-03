@@ -32,10 +32,10 @@ def servo_move(data, rate, servoCur, servoMin, servoMax):
 	if data.buttons[12] == 1:
 		rate += 1
 
-	if rate < 1:
-		rate = 1
-	if rate > 10:
+	if rate < 10:
 		rate = 10
+	if rate > 20:
+		rate = 20
 	
 	if data.buttons[13] == 1:
 		if servoCur > servoMin:
@@ -84,6 +84,7 @@ def callback(data,itemList):
 		servoCur = servoMax
 		
 	itemList[2] = servoCur
+	itemList[3] = rate
 	
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
@@ -123,7 +124,7 @@ pwm.set_pwm_freq(485)
 servoMin = 1300
 servoMax = 4100
 servoCur = 2700
-rate = 3
+rate = 15
 
 itemList = [servoMin,servoMax,servoCur,rate]
 
