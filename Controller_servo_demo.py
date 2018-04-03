@@ -99,9 +99,10 @@ pwm = PWM(0x40)
 
 pwm.set_pwm_freq(485)
 
-servoMin = 1300
-servoMax = 4100
-servoCur = 2700
+servoMin = 1400
+servoMax = 3900
+mid = servoMin+(servoMax-servoMin/2)
+servoCur = mid
 rate = 100
 
 itemList = [servoMin,servoMax,servoCur,rate]
