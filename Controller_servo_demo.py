@@ -57,7 +57,7 @@ def callback(data):
 
 	#servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 	
-	
+	print data.buttons[11]
 			
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
