@@ -25,7 +25,7 @@ from std_msgs.msg import String, Char, Float64, Int32
 #####################################
 #####	Define Functions	#####
 #####################################
-def servo_move(data, rate):
+def servo_move(data, rate, servoCur, servoMin, servoMax):
 	
 	if data.buttons[11] == 1:
 		rate -= 1
@@ -55,7 +55,7 @@ def servo_move(data, rate):
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
 def callback(data):
 
-	servoCur = servo_move(data, rate)
+	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 	
 	
 			
