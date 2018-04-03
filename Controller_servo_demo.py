@@ -88,7 +88,7 @@ pwm.set_pwm_freq(485)
 
 servoMin = 1300
 servoMax = 4100
-servoCur = start
+servoCur = servoMin
 rate = 3
 
 statement="""
