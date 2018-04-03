@@ -50,39 +50,26 @@ def callback(data,itemList):
 		rate = 200
 	
 	#	Open
-#	if data.buttons[13] == 1:
-#		servoCur -= rate
-#		pwm.set_pwm(7,0,servoCur)
-	
-	#	Close
-#	if data.buttons[14] == 1:
-#		servoCur += rate
-#		pwm.set_pwm(7,0,servoCur)
-
-	while (data.buttons[13] == 1) and (servoCur > servoMin):
+	if data.buttons[13] == 1:
 		servoCur -= rate
-		pwm.set_pwm(7,0,servoCur)
-	
-	while (data.buttons[14] == 1) and (servoCur < servoMax):
+		
+	#	Close
+	if data.buttons[14] == 1:
 		servoCur += rate
-		pwm.set_pwm(7,0,servoCur)
 	
 	if servoCur < servoMin:
 		servoCur = servoMin
-		pwm.set_pwm(7,0,servoMin)
 	if servoCur > servoMax:
 		servoCur = servoMax
-		pwm.set_pwm(7,0,servoMax)
 		
 	itemList[2] = servoCur
 	itemList[3] = rate
 	
+	pwm.set_pwm(7,0,servoCur)
+	
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
 	screen.refresh()
-
-	#pwm.set_pwm(7,0,servoCur)
-
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
 def readXbox(itemList):
