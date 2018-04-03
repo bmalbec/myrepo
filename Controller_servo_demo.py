@@ -46,8 +46,8 @@ def callback(data,itemList):
 
 	if rate < 10:
 		rate = 10
-	if rate > 500:
-		rate = 500
+	if rate > 1000:
+		rate = 1000
 	
 	#	Open
 	if data.buttons[13] == 1:
