@@ -101,7 +101,7 @@ pwm.set_pwm_freq(485)
 
 servoMin = 1400
 servoMax = 3900
-mid = servoMin+(servoMax-servoMin/2)
+mid = servoMin+((servoMax-servoMin)/2)
 servoCur = mid
 rate = 100
 
