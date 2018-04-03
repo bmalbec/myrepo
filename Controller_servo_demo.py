@@ -59,11 +59,11 @@ def callback(data,itemList):
 #		servoCur += rate
 #		pwm.set_pwm(7,0,servoCur)
 
-	while (data.buttons[13] == 1) && (servoCur > servoMin):
+	while (data.buttons[13] == 1) and (servoCur > servoMin):
 		servoCur -= rate
 		pwm.set_pwm(7,0,servoCur)
 	
-	while (data.buttons[14] == 1) && (servoCur < servoMax):
+	while (data.buttons[14] == 1) and (servoCur < servoMax):
 		servoCur += rate
 		pwm.set_pwm(7,0,servoCur)
 	
