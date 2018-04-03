@@ -106,6 +106,8 @@ rate = 100
 
 itemList = [servoMin,servoMax,servoCur,rate]
 
+pwm.set_pwm(7,0,servoCur)
+
 statement="""
 Servo MINIMUM:{}
 Servo MAXIMUM:{}
