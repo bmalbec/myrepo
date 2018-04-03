@@ -40,20 +40,27 @@ def callback(data,itemList):
 #	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 
 	if data.buttons[11] == 1:
-		rate -= 1
+		rate -= 10
 	if data.buttons[12] == 1:
-		rate += 1
+		rate += 10
 
-	if rate < 1:
-		rate = 1
+	if rate < 10:
+		rate = 10
 	if rate > 200:
 		rate = 200
 	
+	#	Open
 	if data.buttons[13] == 1:
-		servoCur -= rate
-			
+		while servoCur > servoCur-rate:
+			servoCur -= 1
+			pwm.set_pwm(7,0,servoCur)
+	
+	#	Close
 	if data.buttons[14] == 1:
-		servoCur += rate
+		while servoCur < servoCur+rate:
+			servoCur += 1
+			pwm.set_pwm(7,0,servoCur)
+		
 	
 	if servoCur < servoMin:
 		servoCur = servoMin
@@ -101,7 +108,7 @@ pwm.set_pwm_freq(485)
 servoMin = 1300
 servoMax = 4100
 servoCur = 2700
-rate = 30
+rate = 100
 
 itemList = [servoMin,servoMax,servoCur,rate]
 
