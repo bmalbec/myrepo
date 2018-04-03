@@ -53,11 +53,10 @@ def servo_move(data, rate, servoCur, servoMin, servoMax):
 	return servoCur
 
 #####	Populate the two arrays with data from the Xbox 360 controller	#####
-def callback(data):
+def callback(data,itemList):
 
 	#servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
-	
-	print data.buttons[11]
+
 			
 	#####	Print both arrays to the terminal (for debugging purposes, won't be visible in standard usage)	#####
 	screen.addstr(0, 0, statement.format(servoMin, servoMax, servoCur, rate))
@@ -67,12 +66,13 @@ def callback(data):
 
 
 #####	Read the data coming from the Xbox 360 controller, located at /dev/input/js0	#####
-def readXbox():
+def readXbox(itemList):
 	#####	Create a ROS node called "readXbox", make it unique by setting anonymous to false (won't append random numbers to the end of the node name)	#####
 	rospy.init_node('readXbox',anonymous=False)
 
 	#####	Subscribe to the "joy" topic, which uses message type "Joy", and set the data to the variable "callback"	#####	
-	rospy.Subscriber("joy",Joy,callback)
+	#rospy.Subscriber("joy",Joy,callback)
+	rospy.Subscriber("joy",Joy,callback,itemList)
 
 	#####	Create a topic called "axes" for other nodes to read the custom data packet (won't be used, since no other node is talking to it)	#####
 	#pubAxes = rospy.Publisher("axes",String,queue_size=10)
@@ -97,6 +97,8 @@ servoMin = 1300
 servoMax = 4100
 servoCur = 2700
 rate = 3
+
+itemList = [servoMin,servoMax,servoCur,rate]
 
 statement="""
 Servo MINIMUM:{}
@@ -130,6 +132,6 @@ screen = curses.initscr()
 #####	Allows the script to be executed by passing it as a command to the Python interpreter (allows user to say "python Controller_solo.py" in terminal), executes at beginning	#####
 if __name__=='__main__':	
 	#####	Perform the readXbox function	#####
-	readXbox()
+	readXbox(itemList)
 
 curses.endwin()
