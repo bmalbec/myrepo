@@ -103,12 +103,34 @@ servoMin = 1400
 servoMax = 3900
 mid = servoMin+((servoMax-servoMin)/2)
 servoCur = mid
-rate = 100
+rate = 500
 
 itemList = [servoMin,servoMax,servoCur,rate]
 
 pwm.set_pwm(7,0,servoCur)
 
+#statement="""
+#Servo MINIMUM:{}
+#Servo MAXIMUM:{}
+#Servo CURRENT:{}
+#Servo RATE:{}
+#
+#Press left/right on D-pad to decrease/increase opening/closing rate
+#Press 'A' to go into set-up mode
+#
+#In set-up mode:
+#	Press 'X' to set current to new minimum
+#	Press 'Y' to set current to new maximum
+#
+#*********************************************************************
+#*********************************************************************
+#*************				*****************************
+#*************	   Controller Servo	*****************************
+#*************	    	Demo		*****************************
+#*************				*****************************
+#*********************************************************************
+#*********************************************************************
+#"""
 statement="""
 Servo MINIMUM:{}
 Servo MAXIMUM:{}
@@ -116,11 +138,7 @@ Servo CURRENT:{}
 Servo RATE:{}
 
 Press left/right on D-pad to decrease/increase opening/closing rate
-Press 'A' to go into set-up mode
-
-In set-up mode:
-	Press 'X' to set current to new minimum
-	Press 'Y' to set current to new maximum
+Press up/down on D-pad to open/close manipulator
 
 *********************************************************************
 *********************************************************************
@@ -131,7 +149,6 @@ In set-up mode:
 *********************************************************************
 *********************************************************************
 """
-
 screen = curses.initscr()
 
 #############################
