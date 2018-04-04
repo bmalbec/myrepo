@@ -41,8 +41,10 @@ def callback(data,itemList):
 
 	if data.buttons[11] == 1:
 		rate -= 100
+		print rate
 	if data.buttons[12] == 1:
 		rate += 100
+		print rate
 
 	if rate < 100:
 		rate = 100
