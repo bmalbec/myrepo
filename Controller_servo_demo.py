@@ -40,11 +40,9 @@ def callback(data,itemList):
 #	servoCur = servo_move(data, rate, servoCur, servoMin, servoMax)
 
 	if data.buttons[11] == 1:
-		rate -= 100
-		print rate
+		rate -= 10
 	if data.buttons[12] == 1:
-		rate += 100
-		print rate
+		rate += 10
 
 	if rate < 100:
 		rate = 100
