@@ -269,6 +269,9 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left
 			if d_down == 1:
 				servoGrip += 5
 
+		servoMax = 4000
+		servoMin = 1200
+		
 		if servoTurn > servoMax:
 			servoTurn = servoMax
 		if servoTurn < servoMin:
