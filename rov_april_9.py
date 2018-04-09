@@ -271,19 +271,19 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 	
 #		Rotate Left
 	if d_left == 1:
-		servo_turn -=100
+		servo_turn -=500
 	else:
 #		Rotate Right	
 		if d_right == 1:
-			servo_turn +=100
+			servo_turn +=500
 
 #		Open
 	if d_up == 1:
-		servo_grip -= 100
+		servo_grip -= 500
 	else:
 #		Close
 		if d_down == 1:
-			servo_grip += 100
+			servo_grip += 500
 
 
 ##########	Added on March 23, 2018 by Brian Malbec because without it, 
