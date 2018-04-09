@@ -304,11 +304,15 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 	if servo_grip < servo_min:
 		servo_grip = servo_min
 
+		
+	servo_turn_local = servo_turn
+	servo_grip_local = servo_grip
+	
 #		Set the PWM of each servo
-	pwm.set_pwm(6,0,servo_grip)
-	pwm.set_pwm(7,0,servo_grip)
+	pwm.set_pwm(6,0,servo_grip_local)
+	pwm.set_pwm(7,0,servo_grip_local)
 
-	return servo_turn, servo_grip
+	return servo_turn_local, servo_grip_local
 
 def new_temp_xml(raw_temp):
 
