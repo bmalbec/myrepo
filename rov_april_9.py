@@ -83,173 +83,178 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 			   d_left, d_right, d_up, d_down, 
 			   prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY):
 	
-	old_min = -1
-	old_max = 1
-	new_min = 2300
-	new_max = 3700
-	
-	max_jump = 100
-	
-	ceiling = new_max
-	floor = new_min
+	#	Added April 9th by Brian Malbec: put everything in a try statement, attempting to mitigate crashes
+	try:
+		old_min = -1
+		old_max = 1
+		new_min = 2300
+		new_max = 3700
 
-	#temp = new_min
-	new_max = (new_max - new_min) / 2
-	new_min = 0
+		max_jump = 100
 
-	old_range = old_max - old_min
-	new_range = new_max - new_min
+		ceiling = new_max
+		floor = new_min
 
-	#stopped=temp+new_max		commented out bc "temp" is redundant of "floor", and it's only used here 
-	stopped = floor + new_max
-	threshold = new_max / 2
+		#temp = new_min
+		new_max = (new_max - new_min) / 2
+		new_min = 0
 
-	new_value_LX = int(((left_x - old_min) * new_range) / old_range) + new_min
-	new_value_LY = int(((left_y - old_min) * new_range) / old_range) + new_min
-	new_value_RX = int(((right_x - old_min) * new_range) / old_range) + new_min
-	new_value_RY = int(((right_y - old_min) * new_range) / old_range) + new_min
+		old_range = old_max - old_min
+		new_range = new_max - new_min
 
-	motor1 = stopped
-	motor2 = stopped
-	motor3 = stopped
-	motor4 = stopped
-	motor5 = stopped
-	motor6 = stopped
+		#stopped=temp+new_max		commented out bc "temp" is redundant of "floor", and it's only used here 
+		stopped = floor + new_max
+		threshold = new_max / 2
 
-#	if abs(newValueLX - prevValueLX) > threshold:
-#		newValueLX = ramp_formula(prevValueLX, newValueLX)
-#	if abs(newValueLY - prevValueLY) > threshold:
-#		newValueLY = ramp_formula(prevValueLY, newValueLY)
-#	if abs(newValueRX - prevValueRX) > threshold:
-#		newValueRX = ramp_formula(prevValueRX, newValueRX)
-#	if abs(newValueRY - prevValueRY) > threshold:
-#		newValueRY = ramp_formula(prevValueRY, newValueRY)
+		new_value_LX = int(((left_x - old_min) * new_range) / old_range) + new_min
+		new_value_LY = int(((left_y - old_min) * new_range) / old_range) + new_min
+		new_value_RX = int(((right_x - old_min) * new_range) / old_range) + new_min
+		new_value_RY = int(((right_y - old_min) * new_range) / old_range) + new_min
 
-	if (new_value_LX - prev_value_LX) > max_jump:
-		new_value_LX = prev_value_LX + max_jump
-	else:
-		if (prev_value_LX - new_value_LX) > max_jump:
-			new_value_LX = prev_value_LX - max_jump
-		
-	if (new_value_LY - prev_value_LY) > max_jump:
-		new_value_LY = prev_value_LY + max_jump
-	else:
-		if (prev_value_LY - new_value_LY) > max_jump:
-			new_value_LY = prev_value_LY - max_jump
-		
-	if (new_value_RX - prev_value_RX) > max_jump:
-		new_value_RX = prev_value_RX + max_jump
-	else:
-		if (prev_value_RX - new_value_RX) > max_jump:
-			new_value_RX = prev_value_RX - max_jump		
+		motor1 = stopped
+		motor2 = stopped
+		motor3 = stopped
+		motor4 = stopped
+		motor5 = stopped
+		motor6 = stopped
 
-	if (new_value_RY - prev_value_RY) > max_jump:
-		new_value_RY = prev_value_RY + max_jump
-	else:
-		if (prev_value_RY - new_value_RY) > max_jump:
-			new_value_RY = prev_value_RY - max_jump
-		
-	prev_value_LX = new_value_LX
-	prev_value_LY = new_value_LY
-	prev_value_RX = new_value_RX
-	prev_value_RY = new_value_RY
-	
-#	LEFT
-	if new_value_LX > threshold:
-		#print "\t\tLEFT"
-		left_val = new_value_LX - threshold
-		motor1 -= left_val
-		motor2 += left_val
-		motor3 += left_val
-		motor4 -= left_val
+	#	if abs(newValueLX - prevValueLX) > threshold:
+	#		newValueLX = ramp_formula(prevValueLX, newValueLX)
+	#	if abs(newValueLY - prevValueLY) > threshold:
+	#		newValueLY = ramp_formula(prevValueLY, newValueLY)
+	#	if abs(newValueRX - prevValueRX) > threshold:
+	#		newValueRX = ramp_formula(prevValueRX, newValueRX)
+	#	if abs(newValueRY - prevValueRY) > threshold:
+	#		newValueRY = ramp_formula(prevValueRY, newValueRY)
 
-#	RIGHT
-	if new_value_LX < threshold:
-		#print "\t\tRIGHT"
-		right_val = threshold - new_value_LX
-		motor1 += right_val
-		motor2 -= right_val
-		motor3 -= right_val
-		motor4 += right_val
+		if (new_value_LX - prev_value_LX) > max_jump:
+			new_value_LX = prev_value_LX + max_jump
+		else:
+			if (prev_value_LX - new_value_LX) > max_jump:
+				new_value_LX = prev_value_LX - max_jump
 
-#	FORWARD
-	if new_value_LY > threshold:
-		#print "\t\tFORWARD"
-		fwd_val = new_value_LY - threshold
-		motor1 += fwd_val
-		motor2 += fwd_val
-		motor3 += fwd_val
-		motor4 += fwd_val
+		if (new_value_LY - prev_value_LY) > max_jump:
+			new_value_LY = prev_value_LY + max_jump
+		else:
+			if (prev_value_LY - new_value_LY) > max_jump:
+				new_value_LY = prev_value_LY - max_jump
 
-#	BACKWARD
-	if new_value_LY < threshold:
-		#print "\t\tBACKWARD"
-		back_val = threshold - new_value_LY
-		motor1 -= back_val
-		motor2 -= back_val
-		motor3 -= back_val
-		motor4 -= back_val
+		if (new_value_RX - prev_value_RX) > max_jump:
+			new_value_RX = prev_value_RX + max_jump
+		else:
+			if (prev_value_RX - new_value_RX) > max_jump:
+				new_value_RX = prev_value_RX - max_jump		
 
-#	ROTATE LEFT
-	if new_value_RX > threshold:
-		#print "\t\tROTATE LEFT"
-		rotate_left_val = new_value_RX - threshold
-		motor1 -= rotate_left_val
-		motor2 += rotate_left_val
-		motor3 -= rotate_left_val
-		motor4 += rotate_left_val
+		if (new_value_RY - prev_value_RY) > max_jump:
+			new_value_RY = prev_value_RY + max_jump
+		else:
+			if (prev_value_RY - new_value_RY) > max_jump:
+				new_value_RY = prev_value_RY - max_jump
 
-#	ROTATE RIGHT
-	if new_value_RX < threshold:
-		#print "\t\tROTATE RIGHT"
-		rotate_right_val = threshold - new_value_RX
-		motor1 += rotate_right_val
-		motor2 -= rotate_right_val
-		motor3 += rotate_right_val
-		motor4 -= rotate_right_val
+		prev_value_LX = new_value_LX
+		prev_value_LY = new_value_LY
+		prev_value_RX = new_value_RX
+		prev_value_RY = new_value_RY
 
-#	ASCEND
-	if new_value_RY > threshold:
-		#print "\t\tASCEND"
-		ascend_val = 2 * (new_value_RY - threshold)
-		motor5 -= ascend_val
-		motor6 -= ascend_val
+	#	LEFT
+		if new_value_LX > threshold:
+			#print "\t\tLEFT"
+			left_val = new_value_LX - threshold
+			motor1 -= left_val
+			motor2 += left_val
+			motor3 += left_val
+			motor4 -= left_val
 
-#	DESCEND
-	if new_value_RY < threshold:
-		#print "\t\tDESCEND"
-		descend_val = 2 * (threshold - new_value_RY)
-		motor5 += descend_val
-		motor6 += descend_val
+	#	RIGHT
+		if new_value_LX < threshold:
+			#print "\t\tRIGHT"
+			right_val = threshold - new_value_LX
+			motor1 += right_val
+			motor2 -= right_val
+			motor3 -= right_val
+			motor4 += right_val
 
-#	Restrict final motor values within the allowed bounds
-	if motor1 > ceiling:
-		motor1 = ceiling
-	if motor1 < floor:
-		motor1 = floor
-	if motor2 > ceiling:
-		motor2 = ceiling
-	if motor2 < floor:
-		motor2 = floor
-	if motor3 > ceiling:
-		motor3 = ceiling
-	if motor3 < floor:
-		motor3 = floor
-	if motor4 > ceiling:
-		motor4 = ceiling
-	if motor4 < floor:
-		motor4 = floor
-	if motor5 > ceiling:
-		motor5 = ceiling
-	if motor5 < floor:
-		motor5 = floor
-	if motor6 > ceiling:
-		motor6 = ceiling
-	if motor6 < floor:
-		motor6 = floor
+	#	FORWARD
+		if new_value_LY > threshold:
+			#print "\t\tFORWARD"
+			fwd_val = new_value_LY - threshold
+			motor1 += fwd_val
+			motor2 += fwd_val
+			motor3 += fwd_val
+			motor4 += fwd_val
 
-	return (motor1, motor2, motor3, motor4, motor5, motor6, 
-		prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
+	#	BACKWARD
+		if new_value_LY < threshold:
+			#print "\t\tBACKWARD"
+			back_val = threshold - new_value_LY
+			motor1 -= back_val
+			motor2 -= back_val
+			motor3 -= back_val
+			motor4 -= back_val
+
+	#	ROTATE LEFT
+		if new_value_RX > threshold:
+			#print "\t\tROTATE LEFT"
+			rotate_left_val = new_value_RX - threshold
+			motor1 -= rotate_left_val
+			motor2 += rotate_left_val
+			motor3 -= rotate_left_val
+			motor4 += rotate_left_val
+
+	#	ROTATE RIGHT
+		if new_value_RX < threshold:
+			#print "\t\tROTATE RIGHT"
+			rotate_right_val = threshold - new_value_RX
+			motor1 += rotate_right_val
+			motor2 -= rotate_right_val
+			motor3 += rotate_right_val
+			motor4 -= rotate_right_val
+
+	#	ASCEND
+		if new_value_RY > threshold:
+			#print "\t\tASCEND"
+			ascend_val = 2 * (new_value_RY - threshold)
+			motor5 -= ascend_val
+			motor6 -= ascend_val
+
+	#	DESCEND
+		if new_value_RY < threshold:
+			#print "\t\tDESCEND"
+			descend_val = 2 * (threshold - new_value_RY)
+			motor5 += descend_val
+			motor6 += descend_val
+
+	#	Restrict final motor values within the allowed bounds
+		if motor1 > ceiling:
+			motor1 = ceiling
+		if motor1 < floor:
+			motor1 = floor
+		if motor2 > ceiling:
+			motor2 = ceiling
+		if motor2 < floor:
+			motor2 = floor
+		if motor3 > ceiling:
+			motor3 = ceiling
+		if motor3 < floor:
+			motor3 = floor
+		if motor4 > ceiling:
+			motor4 = ceiling
+		if motor4 < floor:
+			motor4 = floor
+		if motor5 > ceiling:
+			motor5 = ceiling
+		if motor5 < floor:
+			motor5 = floor
+		if motor6 > ceiling:
+			motor6 = ceiling
+		if motor6 < floor:
+			motor6 = floor
+
+		return (motor1, motor2, motor3, motor4, motor5, motor6, 
+			prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
+
+	except ET.ParseError:
+		return (0,0,0,0,0,0,0,0,0,0)
 
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, 
 		     d_left, d_right, d_up, d_down, 
