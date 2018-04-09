@@ -253,7 +253,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, 
 		     d_left, d_right, d_up, d_down, 
-		     servo_turn, servo_grip):
+		     servo_turn, servo_grip, servo_min, servo_max):
 	
 	#time.sleep(0.1)
 	pwm.set_pwm(0,0,motor1)
@@ -269,44 +269,45 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 	pwm.set_pwm(1,0,motor6)
 	#time.sleep(0.1)
 	
-	
-	if not d_left + d_right + d_up + d_down == 0:
 #		Rotate Left
-	#	if d_left == 1:
-	#		servo_turn -=5
-	#	else:
-#			Rotate Right	
-	#		if d_right == 1:
-	#			servo_turn +=5
-#		Open
-		if d_up == 1:
-			servo_grip -= 5
-		else:
-#			Close
-			if d_down == 1:
-				servo_grip += 5
+	if d_left == 1:
+		servo_turn -=100
+	else:
+#		Rotate Right	
+		if d_right == 1:
+			servo_turn +=100
 
-				
+#		Open
+	if d_up == 1:
+		servo_grip -= 100
+	else:
+#		Close
+		if d_down == 1:
+			servo_grip += 100
+
+
 ##########	Added on March 23, 2018 by Brian Malbec because without it, 
 ##########	code may not know "servo_min" and "servo_max" to be global variables
-		servo_max = 4000
-		servo_min = 1200
+	#servo_max = 4000
+	#servo_min = 1200
+	#servo_max = 3900
+	#servo_min = 1400
 ##########################################################################
 
 #		Restrict servo values within the allowed bounds
-		if servo_turn > servo_max:
-			servo_turn = servo_max
-		if servo_turn < servo_min:
-			servo_turn = servo_min
-		if servo_grip > servo_max:
-			servo_grip = servo_max
-		if servo_grip < servo_min:
-			servo_grip = servo_min
+	if servo_turn > servo_max:
+		servo_turn = servo_max
+	if servo_turn < servo_min:
+		servo_turn = servo_min
+	if servo_grip > servo_max:
+		servo_grip = servo_max
+	if servo_grip < servo_min:
+		servo_grip = servo_min
 
 #		Set the PWM of each servo
-		pwm.set_pwm(6,0,servo_grip)
-	#	pwm.set_pwm(0,0,servo_turn)
-		
+	pwm.set_pwm(6,0,servo_grip)
+#	pwm.set_pwm(0,0,servo_turn)
+
 	return servo_turn, servo_grip
 
 def new_temp_xml(raw_temp):
@@ -351,8 +352,10 @@ prev_value_RY = 3000
 
 servo_turn = 2600
 servo_grip = 2600
-servo_max = 4000
-servo_min = 1200
+#servo_max = 4000
+#servo_min = 1200
+servo_max = 3900
+servo_min = 1400
 
 ###############################################
 ####### Call Initialization Functions #########
@@ -373,7 +376,7 @@ while True:
 
 		motor1, motor2, motor3, motor4, motor5, motor6, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY = calculate_motor_speeds(left_x, left_y, right_x, right_y, d_left, d_right, d_up, d_down, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
 
-		servo_turn, servo_grip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servo_turn, servo_grip)
+		servo_turn, servo_grip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servo_turn, servo_grip, servo_min, servo_max)
 
 		send_temp(temp_pin, ser)
 		
