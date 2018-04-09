@@ -43,19 +43,30 @@ def init_temp_xml():
 	return temp_data
 
 def read_pwm_values(pwm_init_values, pwm_xml_current_file, ser):
-	time.sleep(0.01)
-	pwm_xml = open(pwm_xml_current_file, 'w+')	#open the xml for current pwm values
-	time.sleep(0.001)
-	pwm_current_values = ser.readline()					#read the incoming values
-	time.sleep(0.001)
+	
+	#	Added "try" and "except" conditions on April 9th by brian malbec to attempt prevention of crashes
+	try:
+		time.sleep(0.01)
+		pwm_xml = open(pwm_xml_current_file, 'w+')	#open the xml for current pwm values
+		time.sleep(0.001)
+		pwm_current_values = ser.readline()					#read the incoming values
+		time.sleep(0.001)
 
-	if not pwm_current_values:							#if no incoming data
-		pwm_current_values = pwm_init_values				#set the pwm values to initial values
+		if not pwm_current_values:							#if no incoming data
+			pwm_current_values = pwm_init_values				#set the pwm values to initial values
 
-	pwm_xml.write(pwm_current_values)
-	time.sleep(0.001)
-	pwm_xml.close()							#close the xml file
-	time.sleep(0.001)
+		pwm_xml.write(pwm_current_values)
+		time.sleep(0.001)
+		pwm_xml.close()							#close the xml file
+		time.sleep(0.001)
+	
+	except ET.ParseError:
+		time.sleep(0.01)
+		pwm_xml = open(pwm_xml_current_file, 'w+')
+		time.sleep(0.01)
+		pwm_xml.write(pwm_init_values)
+		time.sleep(0.01)
+		pwm_xml.close()
 
 def parse_pwm_values(pwm_xml):
 	try:
