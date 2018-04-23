@@ -298,13 +298,13 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 
 	#		Open
 		if d_up == 1:
-		#	servo_grip -= 500
-			servo_grip = servo_min
+			servo_grip -= 500
+		#	servo_grip = servo_min
 		else:
 	#		Close
 			if d_down == 1:
-		#		servo_grip += 500
-				servo_grip = servo_max
+				servo_grip += 500
+		#		servo_grip = servo_max
 
 
 	##########	Added on March 23, 2018 by Brian Malbec because without it, 
@@ -388,7 +388,7 @@ servo_grip = 2500
 #servo_max = 4000
 #servo_min = 1200
 #	Added April 23rd by Brian, making a wider range for the servo to turn & grip
-servo_max = 4500
+servo_max = 6000
 servo_min = 0
 #servo_max = 3900
 #servo_min = 1400
