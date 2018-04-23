@@ -385,8 +385,11 @@ servo_turn = 2600
 servo_grip = 2600
 #servo_max = 4000
 #servo_min = 1200
-servo_max = 3900
-servo_min = 1400
+#	Added April 23rd by Brian, making a wider range for the servo to turn & grip
+servo_max = 4100
+servo_min = 1200
+#servo_max = 3900
+#servo_min = 1400
 
 ###############################################
 ####### Call Initialization Functions #########
