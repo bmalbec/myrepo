@@ -298,11 +298,13 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 
 	#		Open
 		if d_up == 1:
-			servo_grip -= 500
+		#	servo_grip -= 500
+			servo_grip = servo_min
 		else:
 	#		Close
 			if d_down == 1:
-				servo_grip += 500
+		#		servo_grip += 500
+				servo_grip = servo_max
 
 
 	##########	Added on March 23, 2018 by Brian Malbec because without it, 
