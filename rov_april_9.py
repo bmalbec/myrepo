@@ -290,19 +290,19 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 
 	#		Rotate Left
 		if d_left == 1:
-			servo_turn -=100
+			servo_turn -=500
 		else:
 	#		Rotate Right	
 			if d_right == 1:
-				servo_turn +=100
+				servo_turn +=500
 
 	#		Open
 		if d_up == 1:
-			servo_grip -= 100
+			servo_grip -= 500
 		else:
 	#		Close
 			if d_down == 1:
-				servo_grip += 100
+				servo_grip += 500
 
 
 	##########	Added on March 23, 2018 by Brian Malbec because without it, 
@@ -334,7 +334,7 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 		return servo_turn_local, servo_grip_local
 
 	except ET.ParseError:
-		return 2600, 2600
+		return 2500, 2500
 
 def new_temp_xml(raw_temp):
 
@@ -381,8 +381,8 @@ prev_value_LY = 3000
 prev_value_RX = 3000
 prev_value_RY = 3000
 
-servo_turn = 2600
-servo_grip = 2600
+servo_turn = 2500
+servo_grip = 2500
 #servo_max = 4000
 #servo_min = 1200
 #	Added April 23rd by Brian, making a wider range for the servo to turn & grip
