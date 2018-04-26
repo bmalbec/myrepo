@@ -270,7 +270,7 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 
 def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, 
 		     d_left, d_right, d_up, d_down, 
-		     servo_turn, servo_grip, servo_min, servo_max):
+		     servo_turn, servo_grip, servo_grip_min, servo_grip_max, servo_turn_min, servo_turn_max):
 
 #	Added April 11th by Brian Malbec to prevent crashes
 	try:
@@ -316,14 +316,14 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 	##########################################################################
 
 	#		Restrict servo values within the allowed bounds
-		if servo_turn > servo_max:
-			servo_turn = servo_max
-		if servo_turn < servo_min:
-			servo_turn = servo_min
-		if servo_grip > servo_max:
-			servo_grip = servo_max
-		if servo_grip < servo_min:
-			servo_grip = servo_min
+		if servo_turn > servo_turn_max:
+			servo_turn = servo_turn_max
+		if servo_turn < servo_turn_min:
+			servo_turn = servo_turn_min
+		if servo_grip > servo_grip_max:
+			servo_grip = servo_grip_max
+		if servo_grip < servo_grip_min:
+			servo_grip = servo_grip_min
 
 
 		servo_turn_local = servo_turn
@@ -388,8 +388,11 @@ servo_grip = 2000
 #servo_max = 4000
 #servo_min = 1200
 #	Added April 23rd by Brian, making a wider range for the servo to turn & grip
-servo_max = 5000
-servo_min = 2000
+servo_grip_max = 5000
+servo_grip_min = 2000
+
+servo_turn_max = 6000
+servo_turn_min = 0
 #servo_max = 3900
 #servo_min = 1400
 
@@ -412,7 +415,7 @@ while True:
 
 		motor1, motor2, motor3, motor4, motor5, motor6, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY = calculate_motor_speeds(left_x, left_y, right_x, right_y, d_left, d_right, d_up, d_down, prev_value_LX, prev_value_LY, prev_value_RX, prev_value_RY)
 
-		servo_turn, servo_grip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servo_turn, servo_grip, servo_min, servo_max)
+		servo_turn, servo_grip = set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6, d_left, d_right, d_up, d_down, servo_turn, servo_grip, servo_grip_min, servo_grip_max, servo_turn_min, servo_turn_max)
 
 		send_temp(temp_pin, ser)
 		
