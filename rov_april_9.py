@@ -330,8 +330,8 @@ def set_motor_speeds(pwm, motor1, motor2, motor3, motor4, motor5, motor6,
 		servo_grip_local = servo_grip
 
 	#		Set the PWM of each servo
-		pwm.set_pwm(6,0,servo_grip_local)
-		pwm.set_pwm(7,0,servo_turn_local)
+		pwm.set_pwm(7,0,servo_grip_local)
+		pwm.set_pwm(6,0,servo_turn_local)
 
 		return servo_turn_local, servo_grip_local
 
