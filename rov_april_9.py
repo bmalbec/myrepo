@@ -172,55 +172,55 @@ def calculate_motor_speeds(left_x, left_y, right_x, right_y,
 		if new_value_LX > threshold:
 			#print "\t\tLEFT"
 			left_val = new_value_LX - threshold
-			motor1 -= left_val
-			motor2 += left_val
-			motor3 += left_val
-			motor4 -= left_val
+			motor1 += left_val
+			motor2 -= left_val
+			motor3 -= left_val
+			motor4 += left_val
 
 	#	RIGHT
 		if new_value_LX < threshold:
 			#print "\t\tRIGHT"
 			right_val = threshold - new_value_LX
-			motor1 += right_val
-			motor2 -= right_val
-			motor3 -= right_val
-			motor4 += right_val
+			motor1 -= right_val
+			motor2 += right_val
+			motor3 += right_val
+			motor4 -= right_val
 
 	#	FORWARD
 		if new_value_LY > threshold:
 			#print "\t\tFORWARD"
 			fwd_val = new_value_LY - threshold
-			motor1 += fwd_val
-			motor2 += fwd_val
-			motor3 += fwd_val
-			motor4 += fwd_val
+			motor1 -= fwd_val
+			motor2 -= fwd_val
+			motor3 -= fwd_val
+			motor4 -= fwd_val
 
 	#	BACKWARD
 		if new_value_LY < threshold:
 			#print "\t\tBACKWARD"
 			back_val = threshold - new_value_LY
-			motor1 -= back_val
-			motor2 -= back_val
-			motor3 -= back_val
-			motor4 -= back_val
+			motor1 += back_val
+			motor2 += back_val
+			motor3 += back_val
+			motor4 += back_val
 
 	#	ROTATE LEFT
 		if new_value_RX > threshold:
 			#print "\t\tROTATE LEFT"
 			rotate_left_val = new_value_RX - threshold
-			motor1 -= rotate_left_val
-			motor2 += rotate_left_val
-			motor3 -= rotate_left_val
-			motor4 += rotate_left_val
+			motor1 += rotate_left_val
+			motor2 -= rotate_left_val
+			motor3 += rotate_left_val
+			motor4 -= rotate_left_val
 
 	#	ROTATE RIGHT
 		if new_value_RX < threshold:
 			#print "\t\tROTATE RIGHT"
 			rotate_right_val = threshold - new_value_RX
-			motor1 += rotate_right_val
-			motor2 -= rotate_right_val
-			motor3 += rotate_right_val
-			motor4 -= rotate_right_val
+			motor1 -= rotate_right_val
+			motor2 += rotate_right_val
+			motor3 -= rotate_right_val
+			motor4 += rotate_right_val
 
 	#	ASCEND
 		if new_value_RY > threshold:
