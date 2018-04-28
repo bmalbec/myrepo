@@ -1,6 +1,3 @@
-#!/usr/bin/env python
-import rospy
-#	^^^^	ADDED APRIL 27th TO ADD ROS SUPPORT
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
 import serial
