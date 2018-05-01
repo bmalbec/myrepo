@@ -8,7 +8,7 @@
 		<param name="autorepeat_rate" value="10" />
 	</node>
 <!-- custom node -->
-	<node respawn="true" pkg="beginner_tutorials" type="Controller_solo_dynamic.py" name="readXbox" >
+	<node respawn="true" pkg="beginner_tutorials" type="Controller_headless.py" name="readXbox" >
 	</node>
 
 </launch>
