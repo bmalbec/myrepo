@@ -119,7 +119,7 @@ bash -c "/home/ubuntu/rov_bash.sh"
 ```
 chmod +x /usr/local/bin/(bash_filename).sh
 ```
-12. In the home directory, make rov_bash.py executable:
+12. In the home directory, make rov_bash.sh executable:
 ```
 cd
 chmod +x rov_bash.sh
