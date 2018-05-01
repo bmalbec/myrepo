@@ -26,14 +26,16 @@ The following sections contain instructions to set up the controller side of the
 ```
 chmod +x Controller_headless.py
 ```
-9. In the /home/ubuntu/catkin_ws/src/beginner_tutorials directory, add a directory called "scripts":
+9. In the /home/ubuntu/catkin_ws/src/beginner_tutorials directory, add two directories called "scripts" and "launch":
 ```
 mkdir scripts
+mkdir launch
 ```
-10. Place "Controller_headless.py" and "US2066.py" in the scripts directory:
+10. Place "Controller_headless.py" and "US2066.py" in the "scripts" directory, and "launchjoy.launch" in the "launch" directory:
 ```
 cd <location of the Python files>
 cp Controller_headless.py US2066.py ~/catkin_ws/src/beginner_tutorials/scripts
+cp launchjoy.launch ~/catkin_ws/src/beginner_tutorials/launch
 ```
 11. Go back to the home directory, then create the boot .service file in the boot directory:
 ```
