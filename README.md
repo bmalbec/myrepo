@@ -76,7 +76,7 @@ The following sections contain instructions to set up the ROV side of the capsto
 ### Resources Needed
 - Ubuntu for BeagleBone
 - Python 2.7 or newer
-
+- PCA 9685 Python library
 ### Installation
 1. Using an 8GB microSD card, install Ubuntu 16.04 designed for [BeagleBone](https://elinux.org/BeagleBoardUbuntu#Method_1:_Download_a_Complete_Pre-Configured_Image)
 2. Log in to the BeagleBone using the default credentials
@@ -84,16 +84,17 @@ The following sections contain instructions to set up the ROV side of the capsto
    - Password: temppwd
 3. [Establish an internet connection](https://www.digikey.com/en/maker/blogs/how-to-connect-a-beaglebone-black-to-the-internet-using-usb)
 4. Link [this respository](https://github.com/tamucapstone/capstone-files) to the home directory ([Tutorial](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/))
-5. Make the Python script "rov_april_9.py" executable:
+5. Install the Python library for the [PCA 9685 Hardware PWM](https://github.com/adafruit/Adafruit_Python_PCA9685)
+6. Make the Python script "rov_april_9.py" executable:
 ```
 chmod +x rov_april_9.py
 ```
-6. Create the boot .service file in the boot directory:
+7. Create the boot .service file in the boot directory:
 ```
 cd
 sudo nano /etc/systemd/system/(boot_filename).service
 ```
-7. Use the following criteria for the .service file:
+8. Use the following criteria for the .service file:
 ```
 [Unit]
 Description = [NT]^2 ROV boot script
@@ -104,21 +105,21 @@ ExecStart = /usr/local/bin/(bash_filename).sh
 [Install]
 WantedBy = default.target
 ```
-8. Create the following bash script in the /usr/local/bin directory:
+9. Create the following bash script in the /usr/local/bin directory:
 ```
 cd
 sudo nano /usr/local/bin/(bash_filename).sh
 ```
-9. Use the following criteria for the bash .sh file:
+10. Use the following criteria for the bash .sh file:
 ```
 #!/usr/bin/env bash
 bash -c "/home/ubuntu/rov_bash.sh"
 ```
-10. Make the bash .sh file executable:
+11. Make the bash .sh file executable:
 ```
 chmod +x /usr/local/bin/(bash_filename).sh
 ```
-11. In the home directory, make rov_bash.py executable:
+12. In the home directory, make rov_bash.py executable:
 ```
 cd
 chmod +x rov_bash.sh
